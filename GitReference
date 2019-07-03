@@ -1,0 +1,74 @@
+Git commands (Windows):
+Create a git repository in your computer, within a given directory of your choosing (changes database)
+  1. Go to your directory and run:
+  COMMAND: git init
+  --> A .git directory which is hidden should have been created; in order to see whether this has happened we nee to run :
+  COMMAND:  dir  /a:d
+
+- In order to start controlling versions of the existing files within the directory you have to "Stage" them first as follows:
+  COMMAND: git add --all
+  -->Is used to mark all the files as staged, so that changes can be later committed to the git repository
+  COMMAND: git commit -am "<commit message>"
+
+  The files that you firstly commit to your repository will be seen as TRACKED, which essentially means that any change to them will be visible to git, marking these files as MODIFIED.
+  In order to make changes persistent, you have to mark a modified file as STAGED and then commit it.
+  To see the status of files, you can use the following command:
+  COMMAND: git status
+  or
+  COMMAND: git status -s
+  (Muestra una versión comprimida del output)
+  ??-->Untracked
+  A-->Added to stage area, will be commited as you tell the computer to do so
+  M--> Modified files with respect to previous version in the Git Repo
+  MM--> Significa que se han hecho cambios a una versión que se había marcado como stage, así que para que se subieran los cambios habría que ejacutar add de nuevo en ellos
+  Un archivo no es trackeado por git hasta que no se le indica, para ello, utilizamos el comando add
+  COMMAND: git add <nameOfTheFile_or_Directory>
+
+
+
+Para crear un archivo en Windows desde la cmd, we need to run the following command:
+  COMMAND: type nul > <NameoftheFile.ext>
+
+Para ver los cambios en concreto utilizamos git diff,
+para ver lo que se ha cambiado pero no ha sido marcado como pendiente de commit (staged).
+Básicamente compara lo que se ha modificado pero no ha sido marcado como para hacerlo definitivo.
+  COMMAND: git diff
+
+Para ver cambios que van a ser submitted en comparación con la versión previa guardada en el Git repo, utilizamos git diff --staged
+  COMMAND: git diff --staged
+
+Para guardar los cambios en el Repo, hay que usar git commit
+ COMMAND: git commit -m "Message regarding the purpose of these changes"
+
+
+Para evitar tener que añadir explícitamente archivos a la lista de staged, es posible saltarse esta fase usando commit con el argumento -a
+  COMMAND: git commit -a -m (todo lo que haya sido trackeado, es decir, forme parte de la versión anterior va a ser incluida) -a significa "incluye en el nuevo snapshot todas las modificaciones posibles".
+
+ Para quitar un archivo de la lista de staged, utilizamos:
+  COMMAND: git rm --cached <nameOfTheFile_or_Directory>
+
+Mover archivos:
+git mv <file_from> <file_to>
+
+
+Para mostrar todos los commits que se han hecho, podemos usar
+COMMAND: git log (Muestra un ID para el commit, el autor, la fecha y el comentario incluido ahí)
+
+Se puede filtrar lo que se ha cambiado, para ver la diferencia entre varias versiones usando --patch
+  COMMAND: git log --patch
+Para mostrar una serie de resúmenes de estadísticas de los archivos cambiados, usa --stat:
+  COMMAND git log --stat (Incluye una línea por archivo modificado, poniendo cuántas líneas fueron agregadas o eliminadas)
+
+
+
+  Para limitar el output del comando log, podemos usar:
+    - Para filtrar por tiempo, usamos since and until
+        COMMAND: git log --since=<timeAgo> --until=<time>
+        e.g. git log --since="20 minutes ago"
+
+
+
+  Apuntes:
+Eventos primero
+  1. Eventos y terminología (LKG->Legal knowledge graphs)
+  2. Añotador
