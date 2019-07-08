@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Frameset examples</title>
+	</head>
+	<!-- Framesets are not supported by HTML5, so one can specify a behaviour to happen otherwise with <noframes>--> 
+		<frameset rows="300px,300px">
+			<frame name="rojos" src="frames/fr1.html">
+			<frameset cols="400px,*">
+				<frame name="azules" src="frames/fr2.html">
+				<frame name="azules2" src="frames/fr2.html">
+			</frameset>
+		</frameset>
+	<noframes> 
+		<body>This is an ordinary body! Aparecerá en el caso de que tu navegador no soporte frames </body>
+	</noframes>
+</html>

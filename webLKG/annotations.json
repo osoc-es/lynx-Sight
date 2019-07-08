@@ -1,0 +1,257 @@
+[
+  {
+    "ATTRIBUTES": [
+      {
+        "TEXT": "REFERENCE for a preliminary ruling",
+        "END": 5005,
+        "BEGIN": 4962,
+        "INFO": "what"
+      }
+    ],
+    "CLASIFICATION": "event",
+    "RELEVANCE": 1,
+    "TEXT": "REFERENCE for a preliminary ruling",
+    "END": 5005,
+    "ID": "event 1",
+    "BEGIN": 4962,
+    "INFO": "what",
+    "TYPE": "procedural"
+  },
+  {
+    "ATTRIBUTES": [
+      {
+        "TEXT": "disagreement as to the scope of th",
+        "END": 24224,
+        "BEGIN": 23937,
+        "INFO": "what "
+      }
+    ],
+    "CLASIFICATION": "event",
+    "RELEVANCE": 1,
+    "TEXT": "disagreement as to the scope of th",
+    "END": 24224,
+    "ID": "event 2",
+    "BEGIN": 23937,
+    "INFO": "what ",
+    "TYPE": "facts under judgment"
+  },
+  {
+    "ATTRIBUTES": [
+      {
+        "TEXT": "the latter companies (GoYellow and",
+        "END": 24348,
+        "BEGIN": 24226,
+        "INFO": "what "
+      },
+      {
+        "TEXT": "GoYellow and Telix",
+        "END": 24224,
+        "BEGIN": 24206,
+        "INFO": "whom"
+      },
+      {
+        "TEXT": "Deutsche Telekom",
+        "END": 24167,
+        "BEGIN": 24151,
+        "INFO": "against whom"
+      },
+      {
+        "TEXT": "before the Bundesnetzagentur ",
+        "END": 24295,
+        "BEGIN": 24278,
+        "INFO": "before which court"
+      }
+    ],
+    "CLASIFICATION": "event",
+    "RELEVANCE": 1,
+    "TEXT": "the latter companies (GoYellow and",
+    "END": 24348,
+    "ID": "event 3",
+    "BEGIN": 24226,
+    "INFO": "what ",
+    "TYPE": "background procedural"
+  },
+  {
+    "ATTRIBUTES": [
+      {
+        "TEXT": "By decision of 11 September 2006, ",
+        "END": 24882,
+        "BEGIN": 24446,
+        "INFO": "what "
+      },
+      {
+        "TEXT": " 11 September 2006",
+        "END": 24483,
+        "BEGIN": 24461,
+        "INFO": "when"
+      },
+      {
+        "TEXT": "Deutsche Telekom",
+        "END": 24532,
+        "BEGIN": 24516,
+        "INFO": "against whom"
+      }
+    ],
+    "CLASIFICATION": "event",
+    "RELEVANCE": 1,
+    "TEXT": "By decision of 11 September 2006, ",
+    "END": 24882,
+    "ID": "event 4",
+    "BEGIN": 24446,
+    "INFO": "what ",
+    "TYPE": "background procedural"
+  },
+  {
+    "ATTRIBUTES": [
+      {
+        "TEXT": "Deutsche Telekom brought an action",
+        "END": 25130,
+        "BEGIN": 24980,
+        "INFO": "what "
+      },
+      {
+        "TEXT": "Deutsche Telekom",
+        "END": 24996,
+        "BEGIN": 24980,
+        "INFO": "whom"
+      },
+      {
+        "TEXT": "Verwaltungsgericht Köln (Administr",
+        "END": 25083,
+        "BEGIN": 25027,
+        "INFO": "before which court"
+      }
+    ],
+    "CLASIFICATION": "event",
+    "RELEVANCE": 1,
+    "TEXT": "Deutsche Telekom brought an action",
+    "END": 25130,
+    "ID": "event 5",
+    "BEGIN": 24980,
+    "INFO": "what ",
+    "TYPE": "background procedural"
+  },
+  {
+    "ATTRIBUTES": [
+      {
+        "TEXT": "By judgment of 14 February 2008, t",
+        "END": 25311,
+        "BEGIN": 25228,
+        "INFO": "what "
+      },
+      {
+        "TEXT": "14 February 2008",
+        "END": 25259,
+        "BEGIN": 25243,
+        "INFO": "when"
+      },
+      {
+        "TEXT": "the Verwaltungsgericht Köln",
+        "END": 25290,
+        "BEGIN": 25262,
+        "INFO": "whom"
+      },
+      {
+        "TEXT": "Deutsche Telekom",
+        "END": 24996,
+        "BEGIN": 24980,
+        "INFO": "against whom"
+      }
+    ],
+    "CLASIFICATION": "event",
+    "RELEVANCE": 1,
+    "TEXT": "By judgment of 14 February 2008, t",
+    "END": 25311,
+    "ID": "event 6",
+    "BEGIN": 25228,
+    "INFO": "what ",
+    "TYPE": "background procedural"
+  },
+  {
+    "ATTRIBUTES": [
+      {
+        "TEXT": "Deutsche Telekom then\\nappealed on ",
+        "END": 25425,
+        "BEGIN": 25313,
+        "INFO": "what "
+      },
+      {
+        "TEXT": "Deutsche Telekom ",
+        "END": 25329,
+        "BEGIN": 25313,
+        "INFO": "whom"
+      },
+      {
+        "TEXT": "Bundesverwaltungsgericht (Federal ",
+        "END": 25425,
+        "BEGIN": 25370,
+        "INFO": "before which court"
+      }
+    ],
+    "CLASIFICATION": "event",
+    "RELEVANCE": 1,
+    "TEXT": "Deutsche Telekom then\\nappealed on ",
+    "END": 25425,
+    "ID": "event 7",
+    "BEGIN": 25313,
+    "INFO": "what ",
+    "TYPE": "background procedural"
+  },
+  {
+    "ATTRIBUTES": [
+      {
+        "TEXT": "the Bundesverwaltungsgericht decid",
+        "END": 28274,
+        "BEGIN": 28138,
+        "INFO": "what "
+      },
+      {
+        "TEXT": "the Bundesverwaltungsgerich",
+        "END": 28166,
+        "BEGIN": 28138,
+        "INFO": "whom"
+      },
+      {
+        "TEXT": " to the Court",
+        "END": 28249,
+        "BEGIN": 28240,
+        "INFO": "before which court"
+      }
+    ],
+    "CLASIFICATION": "event",
+    "RELEVANCE": 1,
+    "TEXT": "the Bundesverwaltungsgericht decid",
+    "END": 28274,
+    "ID": "event 8",
+    "BEGIN": 28138,
+    "INFO": "what ",
+    "TYPE": "background procedural"
+  },
+  {
+    "ATTRIBUTES": [
+      {
+        "TEXT": "As the Advocate General observed i",
+        "END": 48773,
+        "BEGIN": 48399,
+        "INFO": "what "
+      }
+    ],
+    "CLASIFICATION": "event",
+    "RELEVANCE": 1,
+    "TEXT": "As the Advocate General observed i",
+    "END": 48773,
+    "ID": "event 9",
+    "BEGIN": 48399,
+    "INFO": "what ",
+    "TYPE": "procedural"
+  },
+  {
+    "CLASIFICATION": "event",
+    "TEXT": "On those grounds, the Court (Third",
+    "END": 54429,
+    "ID": "event 10",
+    "BEGIN": 54373,
+    "INFO": "what  (final ruling)",
+    "TYPE": "procedural"
+  }
+]

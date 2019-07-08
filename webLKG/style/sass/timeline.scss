@@ -1,0 +1,50 @@
+$graphCenter:#5A7E8E;
+$graphInfo:#9DC4D2;
+$graphTitles:#1B3D50;
+
+
+timeline{
+	text-align: center;
+	width: 100%;
+	height: 10%;
+	color:#9DC4D2;
+}
+
+
+#canvas{
+	border:#002382 thick solid;
+}
+
+
+body{
+	margin:0px;
+}
+
+
+#imageDisplayer{
+	width: 100%;
+	height:200px;
+	background-color: #962f3e;
+	boder: 2px solid #FFFFFF ;
+	
+	img{
+		float:left;
+		width: 33%;
+		height: 100px;
+	}
+}
+
+
+
+
+.svgDiv{
+	width:100%;
+	height:auto;
+	svg{
+		width:100%;
+		height:auto;
+		background-color:#82b69b ;
+		height: 700px;
+		display:block;
+	}
+}
