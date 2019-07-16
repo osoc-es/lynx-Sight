@@ -32,13 +32,22 @@ console.log("AFTER Date() protototype", Date.prototype);
 
 
 var hardcodedJSON = '{ "nombre" : "Alejandro", "apellido": "Rey"}';
-var logsOn = true;
+
 var procEventColor = "background: #c40076; color:white;" ;
 
 var backProcEventColor = "background:#7c00c4;color:white;";
 var factsUJEventColor = "background:#003bc4;color:white;";
 var white = "background:#FFFFFF;color:#000000;";
 var svgNamespaceURI ="http://www.w3.org/2000/svg" ;
+
+// Show logs 
+var logsOn = true;
+// Set to false to disable Graphic guides for development
+let auxGuidelines = false;
+// Set to false to avoid input data randomization test
+let randomizeTest = true;
+
+
 
 
 hardcodedJSON = "[ \
@@ -299,6 +308,10 @@ hardcodedJSON = "[ \
   } \
 ]"; 
 
+
+
+
+
 //ICONS to be used in timeline:
 const iconProcedural = new Image(); 
 iconProcedural.src = "img/Procedural.png";
@@ -308,7 +321,6 @@ iconBackProcedural.src="img/BackgroundProcedural.png";
 
 const factsUnderJudg = new Image();
 factsUnderJudg.src="img/FactsUnderJudgement.png";
-
 
 
 //Nos dan un array de eventos
@@ -442,8 +454,15 @@ function onPageLoad(){
 				//		For each event, I go through the attributes and search for a "when" one
 				//		then I convert the temporal info to date, in order to ease chronological ordering
 			console.log(eventArray);
+		
+		if(randomizeTest)randomizeTestData(eventArray);
+		
+			let evID = 0;
 			for(event in eventArray){ 
 				if(logsOn){console.log(`Evento ${event} del Array siendo procesado`);}
+				//Give the Object an ID attribute for latter use and reference
+				eventArray[event]._evID = `event_${evID}`;
+					
 				for(attr in eventArray[event]["ATTRIBUTES"]){
 					if(logsOn){console.log(`Atributo ${attr}: \"${eventArray[event]["ATTRIBUTES"][attr].INFO}\"  del evento ${event} siendo procesado --> ${eventArray[event]["ATTRIBUTES"][attr].INFO === "when"}`);}
 					if(eventArray[event]["ATTRIBUTES"][attr].INFO === "when"){
@@ -452,6 +471,7 @@ function onPageLoad(){
 					}
 				}
 				//if(logsOn){console.table(eventArray[event]);}
+				evID++;
 			}
 				//2.3. Order events chronologically
 			eventArray.sort(function(a,b){
@@ -484,10 +504,20 @@ function onPageLoad(){
 					}
 				}
 		
-		let margin = (totalTimedEvents%3)* 20/100 * svgDim.width; // [REVISIT]
+		let margin = ((totalTimedEvents%3)+1)* 20/100 * svgDim.width; // [REVISIT]
 		let eventTimelineConstantSeparation = (svgDim.width -2*margin)/(totalTimedEvents-1);
 		
-		//Create the group node
+		
+		//DRAWING
+		
+		//Draw Timeline
+		let centreLine = createCenterHlineSVG(0,0,svgDim.width,svgDim.height,svgElem,"myTempLine");
+		//Draw auxiliar line if tere are non-temporal events
+		let nonTempLine = createCenterHlineSVG((2/3)*svgDim.width,(2/3)*svgDim.height,svgDim.width,svgDim.height,svgElem,"myNon-TempLine");
+		
+		
+		
+		//Create the group node for every single event in the provided list
 			for(let iEv= 0; iEv < eventArray.length; iEv++){
 					if(eventArray[iEv].timeStamp != undefined){
 						console.log(`lEvent passed:`,eventArray[iEv]) ;
@@ -495,11 +525,6 @@ function onPageLoad(){
 						
 					}
 				}
-			
-		
-		
-		
-			
 		
 			function createEventNodeGroup(oSVG,_id,_cx,_cy,lEvent,radius = 10){ //HERE
 		
@@ -527,7 +552,7 @@ function onPageLoad(){
 								//Background procedural
 								return "circleBackProcedural" ;
 								break;
-						case this.eventTypes[2].toUpperCase():
+						case "facts under judgment".toUpperCase() || this.eventTypes[2].toUpperCase() :
 								return "circleUnderJudg" ;
 								break;
 					}
@@ -547,9 +572,11 @@ function onPageLoad(){
 								//Background procedural
 								return this.pathEventImages[1] ;
 								break;
-						case this.eventTypes[2].toUpperCase():
+						case "facts under judgment".toUpperCase() || this.eventTypes[2].toUpperCase():
 								return this.pathEventImages[2] ;
 								break;
+						default: 
+								return "/img.logoLynx.png";
 					}
 				}
 				
@@ -563,8 +590,60 @@ function onPageLoad(){
 				newTitle.textContent = lEvent.timeStamp.getVerboseDate();
 				
 				/* Creamos un círculo svg con que representará un evento y que tendrá un color concreto dependiendo del tipo de evento que estemos evaluando : Procedural, Background procedural o Facts under judgement */
-				let eventCircle = createSVGTag("circle", {cx:_cx,cy:_cy,r:radius,fill:"red",class:lEvent.getMainNodeStylingClass()});
+				let eventCircle = createSVGTag("circle", {cx:_cx,cy:_cy,r:radius,class:lEvent.getMainNodeStylingClass()});
 				newG.appendChild(newTitle);
+				
+				// HERE @coredamwork
+				/* GRAPH GROUP */
+				buildGraph ("graphEv"+lEvent._evID, lEvent, 30,5, newG );
+				
+				
+				function buildGraph(idGraph,lEvent, maxNodeDistance, maxNodeRadius, appendTo){
+					
+					console.groupCollapsed("%c CALL buildGraph()--> Events:","background-color:black; color:white;");
+					
+					let groupGraph = createSVGTag("g",{id:idGraph} );
+					//Creamos un nodo circular y una línea que une el centro del nodo pincipal (MAIN NODE) con el otro nodo.
+					//Creamos un objeto que representa el ángulo que separará cada nodo.
+					
+					if(lEvent["ATTRIBUTES"] == undefined){return null;}
+					let alpha = { deg: 360/(lEvent["ATTRIBUTES"].length)};
+					alpha.rad = alpha.deg  * (Math.PI/180);
+					
+					console.log(`length ${lEvent._evID} `+lEvent["ATTRIBUTES"].length);
+					console.log("alpha DEG "+alpha.deg);
+					console.log("alpha RAD "+alpha.rad);
+				
+					for(lAttr in lEvent["ATTRIBUTES"]){
+						
+						
+						console.log("cnx" ,lEvent.cnx );
+						console.log( "maxNode", maxNodeDistance  );
+						console.log( "sin", Math.sin(alpha.rad) );
+						
+						lEvent["ATTRIBUTES"][lAttr].cAx = lEvent.cnx +  maxNodeDistance * Math.sin(alpha.rad)/Math.tan(alpha.rad) ;
+							
+						lEvent["ATTRIBUTES"][lAttr].cAy = lEvent.cny +  maxNodeDistance * Math.sin(alpha.rad) ;
+						
+						console.log(`Creating Graph for ${lEvent._evID}["ATTRIBUTES"][${lAttr}] at (${lEvent["ATTRIBUTES"][lAttr].cAx,lEvent["ATTRIBUTES"][lAttr].cAy}`);
+						
+						
+						let connectLine_i = createSVGTag("path", {d:`M ${lEvent.cnx} ${lEvent.cny} L ${lEvent["ATTRIBUTES"][lAttr].cAx} ${lEvent["ATTRIBUTES"][lAttr].cAy}`,class:"interNodeLine"});
+						
+						let outerNode_i = createSVGTag("circle", {cx:lEvent["ATTRIBUTES"][lAttr].cAx ,cy:lEvent["ATTRIBUTES"][lAttr].cAy, r:maxNodeRadius, fill:"blue" });
+						
+						groupGraph.appendChild(connectLine_i);
+						groupGraph.appendChild(outerNode_i);
+					}
+					
+					console.groupEnd();
+					
+					appendTo.appendChild(groupGraph);
+					
+				}
+				
+				
+				
 				
 				
 				/* MARKER */
@@ -589,27 +668,73 @@ function onPageLoad(){
 				let _markerIcon = createSVGTag("image", {x:fitCircleCoords.fcx, y:fitCircleCoords.fcy, height:fitCircleCoords.l, width:fitCircleCoords.l ,href:`${lEvent.getAssociatedEventImgPath()}`});
 				
 				//POINTER
-				let pathConnect = createSVGTag("path", {d:`M ${lEvent.cnx-radiusMarker}, ${lEvent.cny} L ${lEvent.cnx} `})
+				let pathConnect = createSVGTag("path", {d:`M ${fitCircleCoords.fcx+8} ${fitCircleCoords.fcy+fitCircleCoords.l} L ${lEvent.cnx} ${lEvent.cny}  L ${fitCircleCoords.fcx+fitCircleCoords.l-8} ${fitCircleCoords.fcy+fitCircleCoords.l} Z`, class:"innerMarkerCircle"});
 		
-				
 				//Anchor element que ha de conducir al evento dento del texto como tal [REVISIT]
 				let anchorElem = createSVGTag("a",{href:"#footer"});
 			
 				
-				
-
-				
-				
-				
 				anchorElem.appendChild(_markerOuterCircle);
 				anchorElem.appendChild(_markerInnerCircle);
+				anchorElem.appendChild(pathConnect);
 				anchorElem.appendChild(_markerIcon);
-				_markerNewG.appendChild(anchorElem);
 				
+				//AUX ANNOTATIONS TO EASE DEBUGGING 
+				if(auxGuidelines){
+					
+					/*
+					* [ createPoinntAnnotation ]
+					* @params
+					* label: name for the point in the svg canvas to be annotated
+					* _cx: x coordinate for the point to be marked
+					* _cy: y coordinate for the point to be marked
+					* textAt: "start" | "middle" | "end"  depending on where with respect to the text we 
+					*    	  want the label
+					* color:  a string representing the color for the annotation
+					* appendTo: a svg node wher within which we want to include the annotation elems
+					* dx: a number to place the label at a point _cx+dx
+					* dy: a number to place the label at a point _cy+dy
+					* @return the svg node where the new elements were included
+					*/
+					function createPointAnnotation(label, _cx, _cy, textAt="middle", color, appendTo, _dx=0,_dy=0){
+						
+						let auxCircle = createSVGTag("circle",{cx:_cx ,cy:_cy ,r:2 ,fill:color});
+						let textNameCoords = createSVGTag("text", {x:_cx , y:_cy ,"text-anchor":textAt,fill:color,"font-size":10,dx: _dx,dy:_dy});
+						textNameCoords.textContent = label +`: (${Math.round(_cx)},${Math.round(_cy)})` ;
+						
+						appendTo.appendChild(auxCircle);
+						appendTo.appendChild(textNameCoords);
+						
+						return appendTo;
+						}
+					
+					
+					
+					
+					//Node center: cn
+					createPointAnnotation("cn",lEvent.cnx,lEvent.cny,"middle","red", anchorElem,0,30 );
+					//Marker center: cM
+					createPointAnnotation("cM",lEvent.cMx,lEvent.cMy,"end","red", anchorElem,-30,0);
+					//Circle Fit Image origin: 
+					createPointAnnotation("fc0",fitCircleCoords.fcx,fitCircleCoords.fcy,"end","red", anchorElem,-30,0);
+					//Annotate lenght of the square that fits within the circle
+					
+					
+					let auxLine = createSVGTag("path", {d:`M ${fitCircleCoords.fcx} ${fitCircleCoords.fcy} h ${fitCircleCoords.l}`,stroke:"blue"});
+					
+					let textNameCoords = createSVGTag("text", {x:(fitCircleCoords.fcx+fitCircleCoords.l)/2 , y:fitCircleCoords.fcx-5 ,"text-anchor":"middle",fill:"blue","font-size":10});
+						textNameCoords.textContent = `l=${fitCircleCoords.l}` ;
+					anchorElem.appendChild(auxLine);
+					anchorElem.appendChild(textNameCoords);
+					
+					
+					
+				}
+				
+				
+				_markerNewG.appendChild(anchorElem);
 				newG.appendChild(eventCircle);
 				newG.appendChild(_markerNewG);
-				
-				
 				
 				oSVG.appendChild(newG);
 			}
@@ -622,8 +747,6 @@ function onPageLoad(){
 			//drawTimeline(null,svgElem);
 	});
 
-	
-	
 	svgElem.addEventListener("click",  function(){ resize(svgElem)}); 
 }
 
@@ -704,7 +827,6 @@ function createCenterHlineSVG(minX=0,minY=0,maxX,maxY,appendTo,id ="temporalLine
 	return appendTo.appendChild(lineNode);
 	
 	
-	
 }
 
 
@@ -783,7 +905,7 @@ function resize(elemToResize){
 		else if(item.TYPE.toUpperCase() === "background procedural".toUpperCase()){
 			console.log("%c <Background procedural> event found at " + index, backProcEventColor, white);
 		}
-		else if(item.TYPE.toUpperCase() === "facts under judgement".toUpperCase()){
+		else if(item.TYPE.toUpperCase() === "facts under judgement".toUpperCase() || item.TYPE.toUpperCase() === "facts under judgment".toUpperCase()){
 			console.log("%c <Facts under judgement> event found at "+ index,factsUJEventColor ,white);
 		}
 		else{
@@ -1003,4 +1125,50 @@ function createSVGTag(tagType, jsonTagAttributes){
 	return newSVG_node;
 }
 
+
+
+
+
+function randomizeTestData(lEventArray){
+	
+	let max = 2, min = 0;
+	
+	console.groupCollapsed("%c CALL randomizeTestData()--> Events:","background-color:black; color:white;");
+	
+	for(ev in lEventArray){
+		console.log(`Ev[${ev}]: ${lEventArray[ev].TYPE}`);
+		
+		let randType = Math.random()* (max-min+1) + min;
+		//Randomize assignment of type of event
+		switch (randType){
+			case 0 : lEventArray[ev].TYPE = "procedural";
+			 	break;
+			case 1: lEventArray[ev].TYPE = "background procedural";
+				break;
+			case 2: lEventArray[ev].TYPE = "facts under judgement";
+				break;
+		}
+		
+		let countWhenAttr = 0;
+		if(lEventArray[ev]["ATTRIBUTES"] == undefined){ continue; }
+		console.group("Attributes:");
+		for(attr in lEventArray[ev]["ATTRIBUTES"]){
+			
+			if(lEventArray[ev]["ATTRIBUTES"][attr].INFO == "when"){
+				countWhenAttr++;
+			}
+			console.log(`Ev[${ev}][ATTRIBUTES][${attr}]:`,lEventArray[ev]["ATTRIBUTES"][attr]);
+		}
+		console.groupEnd();
+		
+		if(countWhenAttr==0){
+			lEventArray[ev]["ATTRIBUTES"][0].INFO = "when";
+				lEventArray[ev]["ATTRIBUTES"][0].TEXT = (new Date()).getTime().toString();
+		}
+	
+	}
+	
+	console.groupEnd()
+	
+}
 
