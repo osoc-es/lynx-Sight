@@ -11,8 +11,14 @@ timeline{
 }
 
 
+
+
+
+
+
 #canvas{
 	border:#002382 thick solid;
+	color:
 }
 
 
@@ -40,11 +46,12 @@ body{
 .svgDiv{
 	width:100%;
 	height:auto;
+	
 	svg{
 		width:100%;
-		height:auto;
+		height:1000px;
 		background-color:#82b69b ;
-		height: 700px;
 		display:block;
 	}
+	
 }

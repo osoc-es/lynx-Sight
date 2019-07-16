@@ -66,6 +66,15 @@ Para mostrar una serie de resúmenes de estadísticas de los archivos cambiados,
         COMMAND: git log --since=<timeAgo> --until=<time>
         e.g. git log --since="20 minutes ago"
 
+Para consultar el repositorio remoto que ha sido configurado para hacer push y pull, podemos usar el siguiente comando:
+  COMMAND: git remote -v
+
+
+Para pasar los cambios al repositorio remoto podemos usar el comando push
+  COMMAND: git push <repoName> <branchName>
+  git push origin master
+
+
 
 
   Apuntes:

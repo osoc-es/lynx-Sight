@@ -1,40 +1,17 @@
-timeline {
-  text-align: center;
-  width: 100%;
-  height: 10%;
-  color: #9DC4D2;
-}
+/* Error: Expected expression.
+ *    ,
+ * 21 |     color:
+ *    |           ^
+ *    '
+ *   sass\timeline.scss 21:8  root stylesheet */
 
-#canvas {
-  border: #002382 thick solid;
-}
-
-body {
-  margin: 0px;
-}
-
-#imageDisplayer {
-  width: 100%;
-  height: 200px;
-  background-color: #962f3e;
-  boder: 2px solid #FFFFFF;
-}
-#imageDisplayer img {
-  float: left;
-  width: 33%;
-  height: 100px;
-}
-
-.svgDiv {
-  width: 100%;
-  height: auto;
-}
-.svgDiv svg {
-  width: 100%;
-  height: auto;
-  background-color: #82b69b;
-  height: 700px;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
   display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Expected expression.\a    \2577 \a 21 \2502      color:\d\a    \2502            ^\a    \2575 \a   sass\\timeline.scss 21:8  root stylesheet";
 }
-
-/*# sourceMappingURL=timeline.css.map */

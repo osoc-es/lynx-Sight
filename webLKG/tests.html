@@ -19,19 +19,29 @@
 		<h2> SVG </h2>
 	
 		<svg xmlns="http://www.w3.org/2000/svg">  
-			<line x1="0" y1="0" x2="50" y2="50" stroke="#094f92" stroke-width="6"></line>
+			
+			<!-- Top left triangle made of lines -->
+			
+			<line x1="0" y1="0" x2="50" y2="50" stroke="#094f92" stroke-width="6" stroke-linecap="round"></line>
 			<line x1="50" y1="50" x2="100" y2="0" stroke="#094f92" stroke-width="6"></line>
 			<line x1="100" y1="0" x2="0" y2="0" stroke="#094f92" stroke-width="6"></line>
 			
 			
-			<line x1="100"  y1="100" stroke="#094f92" stroke-width="10" x2="150"   y2="50" stroke-linecap="round"></line> 
+			<!-- Dashed ellipse filled blue -->
 			
-			<line x1="100"  y1="100" stroke="#ffffff" stroke-width="5" x2="150"   y2="50"  stroke-dasharray="1,2,3"></line> 
-			
-			
-			<ellipse cx="200" cy="200"  ry="50" rx="200" stroke="blue" stroke-dasharray="1,2" fill="#5A7E8E">
+			<ellipse cx="725" cy="75"  ry="50" rx="134" stroke="blue" stroke-dasharray="1,2" fill="#5A7E8E" transform="rotate(-13,725,75)">
 			
 			</ellipse>
+			
+			
+			<!-- Dashed lines and line-cap ROUND; mixing different styles of lines -->
+			
+			<line x1="600"  y1="100" stroke="#094f92" stroke-width="10" x2="850"   y2="50" stroke-linecap="round"></line> 
+			
+			<line x1="600"  y1="100" stroke="#ffffff" stroke-width="5" x2="850"   y2="50"  stroke-dasharray="1,2,3"></line> 
+			
+			
+			
 			
 			
 		<!--<circle cx="50%" cy="100" r="5%" fill="red">
@@ -41,21 +51,152 @@
 			</circle>
 			
 			-->
-			<!-- Graph template --> 
 			
-			<circle cx="500" cy="500" r="200" fill="#5A7E8E" >
 			
-				<text x="400" y="500" font-size="20" fill="black">Event 1</text>
-			
+			<!-- Graph template  -->
+			<!-- Graph info example -->
+			<path fill="#9DC4D2" d=" M 500 500
+									 h 650
+									 l -80 -250
+									 z
+									"> </path>
+			<path fill="#9DC4D2" d=" M 500 500
+									 h 650
+									 l -80 -250
+									 z
+									" transform="rotate(25,500 500)"> </path>
+			<path fill="#9DC4D2" d=" M 500 500
+									 h 650
+									 l -80 -250
+									 z
+									" transform="rotate(50,500 500)"> </path>
+			<path fill="#9DC4D2" d=" M 500 500
+									 h 650
+									 l -80 -250
+									 z
+									" transform="rotate(200,500 500)"> </path>
+			<path fill="#9DC4D2" d=" M 500 500
+									 h 650
+									 l -80 -250
+									 z
+									" transform="rotate(175,500 500)"> </path>
+			<path fill="#9DC4D2" d=" M 500 500
+									 h 650
+									 l -80 -250
+									 z
+									" transform="rotate(150,500 500)"> </path>
+			<circle cx="500" cy="500" r="201" stroke="white" stroke-width="20" >
 			</circle>
 			
-			<text x="300" y="300" style ="font-family:arial; font:size:11;" fill="black">Event 1</text>
-			
-			<rect x="0" y="0" width="100" height="100" fill="red">
-			  <text x="0" y="10" font-family="Verdana" font-size="55" fill="blue"> Hello </text>
-			</rect>
+			<circle cx="500" cy="500" r="200" fill="#5A7E8E" >
+			</circle>
 			
 			
+			
+			<circle cx="200" cy="300" r="3"  fill="red"> </circle>
+			
+			<image href="img/Procedural.png" x="200" y="300" height="200" width="200" style="outline:1px solid red"></image>
+			
+		
+			<!-- must compute coordinates based on angle -->
+			
+			
+			<!-- TSPAN -->
+			
+			<text x="300" y="100">This is a <tspan dy="-10" style="font-style:italic">superscript</tspan>; this is a <tspan dy="10" style="font-weight:bold" rotate="45">subscript </tspan></text>
+			
+
+			<!-- LETTER SPACING, KERNING and WORD-SPACING -->
+			
+				<text x="500" y="200" style="font-weight:bold; text-decoration:underline;" > Letter-spacing (text-density), kerning y word-spacing:</text>
+				<text x="510" y="220" style="letter-spacing:1;"> Letter-spacing set to 1 </text>
+				<text x="510" y="240" style="letter-spacing:5;" > Letter-spacing set to 5 </text>
+				<text x="510" y="260" style="kerning:1;"> Kerning set to 1 </text>
+				<text x="510" y="280" style="kerning:5;" > Kerning set to 5 </text>
+				<text x="510" y="300" style="word-spacing:1;"> Word-spacing set to 1 </text>
+				<text x="510" y="320" style="word-spacing:5;" > Word-spacing set to 5 </text>
+			
+			
+	
+			<line x1="100" x2="100" y1="0" y2="100" stroke="teal" > </line>
+			
+			<line x1="0" x2="100" y1="100" y2="100" stroke="teal"> </line>
+			
+			
+			<!-- Vertical and horizontal text -->
+			
+			<!-- <text x="100" y="100" writing-mode="tb"  > Vertical text (tb) </text> --> 
+			<text x="100" y="100" > Horizontal text</text> 
+			
+			<!-- Show baseline -->
+			
+			
+			<line x1="100" y1="100" x2="200" y2="100" stroke="blue"></line>
+			<text x="150" y="110" style="font-size:9;" fill="blue">Baseline</text>
+			
+			
+			<!-- Different text-anchor points demonstrated -->
+			
+			
+			
+			
+			<text x="130" y="140" style="font-size:12;" text-anchor="start">Sample text anchor "start"</text>
+			<line x1="0" y1="140" x2="260" y2="140" stroke="blue"></line>
+			<circle cx="130" cy="140" r="2" fill="red"></circle>
+			
+			<text x="130" y="160" style="font-size:12;" text-anchor="middle">Sample text anchor "middle"</text>
+			<line x1="0" y1="160" x2="260" y2="160" stroke="blue"></line>
+			<circle cx="130" cy="160" r="2" fill="red"></circle>
+			
+			<text x="130" y="180" style="font-size:12;" text-anchor="end">Sample text anchor "end" </text>
+			<line x1="0" y1="180" x2="260" y2="180" stroke="blue"></line>
+			<circle cx="130" cy="180" r="2" fill="red"></circle>
+			
+			
+			
+			<!-- Triangles using path -->
+				<path stroke="black" d="M 500 700 
+										l -30 -60
+										M 500 700
+										l 30 -60
+										h -60
+										" ></path>
+
+				<path stroke="white" fill="white" d="M 500 630 
+										l -30 60
+										M 500 630
+										l 30 60
+										h -60
+										" ></path>
+
+			
+			
+			
+			<!--
+			<text x="120" y="120" writing-mode="lf"> Left-to-right text</text>
+			<text x="120" y="140"  glyph-orientation-horizontal="90"> Left-to-right text</text>
+			
+			<text x="120" y="160" writing-mode="tb"> Top-to-bottom text</text>
+			<text x="140" y="160" writing-mode="tb" glyph-orientation-vertical="0"> Top-to-bottom text </text>
+			
+			-->
+			<circle cx="100" cy="100" r="2" fill="teal"></circle>
+			<!--
+			
+			<text x="300" y="300" dy="10" style="font-size: 2em;" writing-mode="tb">Text writing-mode "lr"</text>
+			<text x="400" y="300" style="font-size: 2em;" writing-mode="tb">REFERENCE for a preliminary ruling</text>
+			
+
+-->
+		<!-- tspan Example 
+		<text x="500" y="200" style="font-family:arial" >
+			TSPAN Example
+			Normal text
+			<tspan style="font-style:italic">Italics </tspan>
+			<tspan style="font-weight:bold">Bold </tspan>
+			<tspan style="font-family:times">Different font-family/typeface</tspan>
+		</text>
+			-->
 			
 			
 			
