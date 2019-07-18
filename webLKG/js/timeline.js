@@ -1,17 +1,26 @@
+// Show logs 
+let logsOn = true;
+// Set to false to disable Graphic guides for development
+let auxGuidelines = false;
+// Set to false to avoid input data randomization test
+let randomizeTest = true;
+
+
 /*
 * Modificación del prototype de la clase Date() para
 * que devuelva la fecha como String formada por:
 *    " Día  Mes Año"  
 */
 
-console.log("BEFORE Date() protototype", Date.prototype);
+if(logsOn) console.groupCollapsed("%c Modification of Date prototype:", "text-weight:bold;");
+
+if(logsOn) console.log("BEFORE Date() protototype", Date.prototype);
 
 //Create array with names of the Months
 Date.prototype.MONTHNAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"] ;
 //Create array with names for every day of the week
 Date.prototype.DAYSOTW = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-
-
+//Define cusstom formatting function for Date to string
 Date.prototype.getVerboseDate = function (includeDayName = false){
 	let dayName = "" ;
 	if(includeDayName){includeDayName+= this.DAYSOTW[this.getDay()];}
@@ -19,36 +28,21 @@ Date.prototype.getVerboseDate = function (includeDayName = false){
 	return dayName+ `${this.getDate()} ${this.MONTHNAMES[this.getMonth()]} ${this.getFullYear()}` ; 
 	
 } ;
+if(logsOn) console.log("AFTER Date() protototype", Date.prototype);
+if(logsOn) console.groupEnd();
 
-console.log("AFTER Date() protototype", Date.prototype);
-
-
-
-
-
-
-
-
-
-
-var hardcodedJSON = '{ "nombre" : "Alejandro", "apellido": "Rey"}';
-
+let hardcodedJSON;
+//Event Logs formating
 var procEventColor = "background: #c40076; color:white;" ;
-
 var backProcEventColor = "background:#7c00c4;color:white;";
 var factsUJEventColor = "background:#003bc4;color:white;";
 var white = "background:#FFFFFF;color:#000000;";
+
 var svgNamespaceURI ="http://www.w3.org/2000/svg" ;
 
-// Show logs 
-var logsOn = true;
-// Set to false to disable Graphic guides for development
-let auxGuidelines = false;
-// Set to false to avoid input data randomization test
-let randomizeTest = true;
 
-
-
+let zoomFactor = 1;
+let prevDimWindow  = {width:window.innerWidth,height:window.innerHeight};
 
 hardcodedJSON = "[ \
   {    \
@@ -310,20 +304,7 @@ hardcodedJSON = "[ \
 
 
 
-
-
-//ICONS to be used in timeline:
-const iconProcedural = new Image(); 
-iconProcedural.src = "img/Procedural.png";
-
-const iconBackProcedural = new Image();
-iconBackProcedural.src="img/BackgroundProcedural.png";
-
-const factsUnderJudg = new Image();
-factsUnderJudg.src="img/FactsUnderJudgement.png";
-
-
-//Nos dan un array de eventos
+//@REVISIT (May use)
 class Levent  {
 		constructor(attributes, classification, relevance, text, end, id, begin, type){
 			this.attributes = attributes;
@@ -339,144 +320,137 @@ class Levent  {
 		
 	}
 
-var imageNodes = [];
-//console.log(iconBackProcedural);
-
-imageNodes[0] = iconBackProcedural;
-//document.getElementById("imageDisplayer").appendChild(iconBackProcedural);
-imageNodes[1] = iconProcedural;
-//document.getElementById("imageDisplayer").appendChild(iconProcedural);
-imageNodes[2] = factsUnderJudg;
-//document.getElementById("imageDisplayer").appendChild(factsUnderJudg);
-
-//console.log("%c imageNodes array: ","#ff6600",imageNodes);
 
 
-//document.getElementsByTagName("body")[0].style.backgroundColor='#ffff66';
-
-//console.log("Beginning of the project");
-
-//console.log("%c This is a number %d;'\n' this is a string  %s;\n this is a float (two decimal digits) %.2f",'color:blue', 15, "Freak", 0.77);
-
-
-//console.table(data); recibe un array o un object
-//console.table(["Hello","Goodbye","Welcome"]);
-
-//console.table({name:"Manolo",surname:"el del Bombo"});
-
-
-//Search within the HTML document to get a canvas instance  
-/*var canvas = document.querySelector('canvas');
-console.log(canvas);
-//Access the width and change it by script
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight/2;
-//Context is an object allowing "paint" onto the canvas
-var context = canvas.getContext("2d");
-
-	
-	//Drawing filled rectangles, those with color
-	context.fillStyle = 'red';
-	context.fillRect(0,0,10,10);
-	context.fillStyle = 'blue';
-	context.fillRect((window.innerWidth-100),0,100,100);
-	context.fillStyle = 'green';
-	context.fillRect((window.innerWidth/2),0,20,20);
-
-	//Draw rectangular strokes only
-	context.strokeStyle = 'black';
-	context.strokeRect(10,10,10,10);
-	context.strokeStyle = 'brown';
-	context.strokeRect((window.innerWidth-20),10,10,10);
-
-	//context.clearRect(0,0,window.innerWidth, window.innerHeight);
-
-	//1. Crear un camino (path)
-	context.beginPath();
-	//2. Especificar coordenadas donde comenzará dicho camino
-	context.moveTo((window.innerWidth/2),30);
-	//3. Crear forma:
-		context.lineTo((window.innerWidth/2)+6,50);
-		context.lineTo((window.innerWidth/2)-6,50);
-	//4. Cerrar camino
-		context.closePath();
-
-	//5.Dibujar camino
-		context.stroke();
-
-
-//1. Crear un camino (path)
-	context.beginPath();
-	//2. Especificar coordenadas donde comenzará dicho camino
-	//context.moveTo((window.innerWidth/2),60);
-	context.arc((window.innerWidth/2),60,5,0, 2*Math.PI );
-	//5.Dibujar camino
-		context.stroke();
-
-//Clear everything in the canvas
-context.clearRect(0,0,window.innerWidth,window.innerHeight);
-
-
-//Drawing images:
-
-//1.Draw image just as it is, given x,y coordinates of top left corner
-//context.drawImage(iconProcedural,(window.innerWidth/2),0);
-//2.Draw image given coordinates and width, height pair
-//context.drawImage(factsUnderJudg,0,0,30,30);
-//3.Draw images cropping part of them.
-context.drawImage(iconBackProcedural,40,40,0,0)
-
-
-console.log(iconBackProcedural);
-console.log(context);
-
-*/
-
-
-/* Function to run when the page is completely loaded*/
+/* Function to run when the page is completely loaded */
 function onPageLoad(){
 	
-	console.log("%c[X]%c Page Loaded already!","background: #078f07; color: #bada55 ", "background: #006fb0 ; color: #FFFFFF ");
-	let domSvgcontainerDiv = document.getElementById("svg");
-	let svgElem = domSvgcontainerDiv.getElementsByTagNameNS(svgNamespaceURI,"svg")[0];
+	console.log("%c[X] %c Page Loaded already!","background: #078f07; color: #bada55 ", "background: #006fb0 ; color: #FFFFFF ");
+	let domSvgcontainerDiv = document.getElementById("svg"); //<div> that contains the <svg> canvas 
+	let svgElem = domSvgcontainerDiv.querySelector("svg"); // <svg> canvas is obtained 
 	
-	console.log("About to add event listener to svgElem", svgElem);
+	//Print Timeline !
+	//printTimeline(hardcodedJSON);
 	
-	//1. Create timeline when we press the Time button ON CLICK CALLBACK
-	document.getElementById("btntimex").addEventListener("click", 
-		function(){
-			//1.Toggle timeline (show or hide depending on current state)
-			domSvgcontainerDiv.classList.toggle("hide");
-			//2. Process input events:
-				//2.1. Convert to JS object 
-			let eventArray = JSON.parse(hardcodedJSON); //Array of events 
-				//2.2. Classify them according to temporal labeling:
-				//		For each event, I go through the attributes and search for a "when" one
-				//		then I convert the temporal info to date, in order to ease chronological ordering
-			console.log(eventArray);
+	
+	console.log("\t %c [L!] %c Adding printing timeline functionality on click event", "background-color:red;color:white","text-decoration:underline;");
+	
+	document.querySelector("#btntimex").addEventListener("click", function(){ domSvgcontainerDiv.classList.toggle("hide"); printSVGLines(hardcodedJSON, null, true, true);});
+	
+	console.log("\t %c [L!] %c Adding zooming functionality on scroll event", "background-color:red;color:white","text-decoration:underline;");
+	
+	//ZOOM Functionality:
+	svgElem.addEventListener("wheel", function(event){
 		
-		if(randomizeTest)randomizeTestData(eventArray);
+		let dim = computeHTMLElemDimensions(svgElem);
 		
-			let evID = 0;
-			for(event in eventArray){ 
-				if(logsOn){console.log(`Evento ${event} del Array siendo procesado`);}
-				//Give the Object an ID attribute for latter use and reference
-				eventArray[event]._evID = `event_${evID}`;
-					
-				for(attr in eventArray[event]["ATTRIBUTES"]){
-					if(logsOn){console.log(`Atributo ${attr}: \"${eventArray[event]["ATTRIBUTES"][attr].INFO}\"  del evento ${event} siendo procesado --> ${eventArray[event]["ATTRIBUTES"][attr].INFO === "when"}`);}
-					if(eventArray[event]["ATTRIBUTES"][attr].INFO === "when"){
-						eventArray[event].timeStamp = new Date(eventArray[event]["ATTRIBUTES"][attr].TEXT);
-						if(logsOn){console.log(`new Date() involving ${event}; value:${eventArray[event].timeStamp}`);};
-					}
-				}
-				//if(logsOn){console.table(eventArray[event]);}
-				evID++;
+		console.log(event.deltaY);
+		
+		wheeldY = event.deltaY;
+		console.log(zoomFactor);
+		
+		if(zoomFactor>2.5 ) zoomFactor =2.5;
+		if(zoomFactor<1) zoomFactor =1;
+		//the greater the zoom factor, the bigger everything looks
+		if(zoomFactor<=2.5 && zoomFactor>=1){
+			event.preventDefault();
+			console.log("clientCoords:",event.clientX,event.clientY);
+			console.log("screenCoords:", event.screenX,event.screenY);
+			zoomFactor  = (zoomFactor - Math.sign(wheeldY)* 0.10);
+
+			let navElem =  document.getElementById("navadmin");
+			let dimPrevDim = computeHTMLElemDimensions(navElem);
+
+
+			if(event.clientY > dimPrevDim.height && event.clientY <= (dim.height+dimPrevDim.height)){
+			//The lower the new height and width, the bigger things become
+			this.setAttributeNS(null,"viewBox", `${event.clientX} ${event.clientY-dimPrevDim.height} ${dim.width/zoomFactor} ${dim.height/zoomFactor} `);
+		
+		} 
+		}
+	
+	});
+	
+	//@REVISIT: Set interval to execute a check for change of dimensions --> used to repaint the timeline on window dimensions change.
+	//window.setInterval(checkSizeChanges,40);
+	function checkSizeChanges(){
+		
+		
+		let lastDims = computeHTMLElemDimensions(window);
+		
+		if(lastDims.height!= prevDimWindow.height || lastDims.width != prevDimWindow.width){
+			
+		}
+		
+	prevDimWindow.height =  lastDims.height;
+	prevDimWindow.width = lastDims.width;
+	
+		console.log(`D Dimensions 	w:${prevDimWindow.height} \
+		h:${prevDimWindow.width} \n \
+		D' w:${lastDims.width} \
+		h:${lastDims.height}`);
+		
+	}
+	
+	//svgElem.addEventListener("click",  function(){ resize(svgElem)}); 
+
+	/* HERE 17/07/2019 Creating generic function to create timeline and non-timed line*/
+	function printSVGLines(lEventArray,svgInDOM, doSort=true, randomizeTest=false){
+		
+		console.groupCollapsed("%c[#] Function Call: %cprintTimeline", "color:#8c0069","font-weight:bold");
+		console.time("elapsed printTimeline");
+		
+		// - Check type of arguments, in order to make the function call more robust 
+		if(svgInDOM == undefined || svgInDOM === null){
+			svgInDOM = document.querySelector("svg");
+		}
+		if(typeof lEventArray === typeof "" ){
+			lEventArray = JSON.parse(lEventArray);
+		}
+		
+		// - Allows randomization of input data (TEST PURPOSES)  [@REVISIT]
+		if(randomizeTest)randomizeTestData(lEventArray);
+		
+		
+		if(logsOn){console.groupCollapsed("%c[MA] %c Transforming temporal data into Date()", "color: #0e4a75; font-weight:bold;", "text-decoration:underline;")};
+		
+		let evID = 0;
+		let  totalTimedEvents = 0;
+		for(event in lEventArray){ 
+			if(logsOn){console.log(`\t Processing Event ${event}`);}
+			if( typeof(lEventArray[event].timeStamp) !== 'undefined' ){
+				if(logsOn){console.log(`\t Event ${event} has timeStamp already defined: ${lEventArray[event].timeStamp}`);}
 			}
-				//2.3. Order events chronologically
-			eventArray.sort(function(a,b){
-				
-				if(a.timeStamp === undefined && b.timeStamp == undefined){
+			//Give the Object an ID attribute for latter use and reference
+			lEventArray[event]._evID = `event_${evID}`;
+			let countTemporal = 0;
+
+			/*- For each event, get whether it has got temporal attributes related to it and build Date() objects 
+				based on the provided text (e.g. 20 December 2018 --> number) */  
+			for(attr in lEventArray[event]["ATTRIBUTES"]){
+
+				if(logsOn){
+					console.log(`\t\t Event [${event}][${attr}]: \"${lEventArray[event]["ATTRIBUTES"][attr].INFO}\" is temporal? \n \t\t ${lEventArray[event]["ATTRIBUTES"][attr].INFO === "when"}`);
+				}
+
+				if(lEventArray[event]["ATTRIBUTES"][attr].INFO === "when"){
+					//Create a Date object from INFO text
+					lEventArray[event].timeStamp = new Date(lEventArray[event]["ATTRIBUTES"][attr].TEXT);
+					if(logsOn){console.log(`\t\t new Date() involving ${event}; value:${lEventArray[event].timeStamp}`);};
+					countTemporal++;
+				}
+			}
+			lEventArray[event].hasTime = countTemporal;
+			if(lEventArray[event].hasTime === 1) totalTimedEvents += countTemporal;
+			evID++;
+		}
+		if(logsOn) console.groupEnd();
+		
+		//Reorder elements of the array in the case it is necessary regarding temporality
+		if(doSort){
+			if(logsOn) console.groupCollapsed("%c[MA] %c Sorting temporal events ", "color: #0e4a75; font-weight:bold;", "text-decoration:underline;");
+			lEventArray.sort(function(a,b){
+				if(a.timeStamp === 'undefined' && b.timeStamp == 'undefined'){
 					return 0;
 				}
 				else if(a.timeStamp === undefined){
@@ -485,333 +459,316 @@ function onPageLoad(){
 				else if(b.timeStamp === undefined){
 					return -1; //b is kept after a
 				}
-				
 				return (a.timeStamp.getTime() - b.timeStamp.getTime());
 			});
 			if(logsOn){ 
-					console.log("SORTED EVENTS TABLE:");
-					console.table(eventArray,["TEXT","TYPE","timeStamp"]);
-				}
-				//2.4. Determine location for events (compute center)
-				// - Obtain the dimensions of the svg canvas
-			let svgDim = computeHTMLElemDimensions(svgElem);
-				// - Set margin for events not to appear too close to the 
-			let  totalTimedEvents = 0;
-				for(let iEv= 0; iEv < eventArray.length; iEv++){
-					if(eventArray[iEv].timeStamp != undefined){
-						totalTimedEvents += 1;
-						
-					}
-				}
-		
-		let margin = ((totalTimedEvents%3)+1)* 20/100 * svgDim.width; // [REVISIT]
-		let eventTimelineConstantSeparation = (svgDim.width -2*margin)/(totalTimedEvents-1);
-		
-		
-		//DRAWING
-		
-		//Draw Timeline
-		let centreLine = createCenterHlineSVG(0,0,svgDim.width,svgDim.height,svgElem,"myTempLine");
-		//Draw auxiliar line if tere are non-temporal events
-		let nonTempLine = createCenterHlineSVG((2/3)*svgDim.width,(2/3)*svgDim.height,svgDim.width,svgDim.height,svgElem,"myNon-TempLine");
-		
-		
-		
-		//Create the group node for every single event in the provided list
-			for(let iEv= 0; iEv < eventArray.length; iEv++){
-					if(eventArray[iEv].timeStamp != undefined){
-						console.log(`lEvent passed:`,eventArray[iEv]) ;
-						createEventNodeGroup(svgElem,"event"+iEv,/*cx*/margin+iEv*eventTimelineConstantSeparation,/*cy*/svgDim.height/2,eventArray[iEv]);
-						
-					}
-				}
-		
-			function createEventNodeGroup(oSVG,_id,_cx,_cy,lEvent,radius = 10){ //HERE
-		
-				let svgDim = computeHTMLElemDimensions(oSVG);
-				
-				//Creamos dos nuevos atributos que contienen dónde se encuentra el centro del nodo que representa al evento (cnx,cny)
-				lEvent.cnx = _cx;
-				lEvent.cny = _cy;
-				//Creamos propiedades para evento de cada tipo
-				lEvent.eventTypes = ["procedural","background procedural","facts under judgement"];
-				lEvent.pathEventImages = ["img/Procedural.png","img/BackgroundProcedural.png","img/FactsUnderJudgement.png"];
-				/* 
-				* [ getMainNodeStylingClass ]
-				* Function that returns the CSS class corresponding to different types of nodes, so that we can colour them
-				* depending on the type.
-				* @return String with the name of a matching CSS class
-				*/
-				lEvent.getMainNodeStylingClass = function(){ 
-					switch (this.TYPE.toUpperCase()){
-						case this.eventTypes[0].toUpperCase():
-								//Procedural
-								return "circleProcedural" ;
-								break;
-						case this.eventTypes[1].toUpperCase():
-								//Background procedural
-								return "circleBackProcedural" ;
-								break;
-						case "facts under judgment".toUpperCase() || this.eventTypes[2].toUpperCase() :
-								return "circleUnderJudg" ;
-								break;
-					}
-				}
-								/* 
-				* [ getAssociatedEventImgPath ]
-				* Function that filters the type of the event and extracts the path containing the icon for an event type
-				* @return String with the name of a matching icon path
-				*/
-				lEvent.getAssociatedEventImgPath = function(){ 
-					switch (this.TYPE.toUpperCase()){
-						case this.eventTypes[0].toUpperCase():
-								//Procedural
-								return this.pathEventImages[0] ;
-								break;
-						case this.eventTypes[1].toUpperCase():
-								//Background procedural
-								return this.pathEventImages[1] ;
-								break;
-						case "facts under judgment".toUpperCase() || this.eventTypes[2].toUpperCase():
-								return this.pathEventImages[2] ;
-								break;
-						default: 
-								return "/img.logoLynx.png";
-					}
-				}
-				
-				
-				
-				/* MAIN NODE */
-				//Creamos un grupo svg para contener too lo relacionado a un evento
-				let newG = createSVGTag("g", {id:_id});
-				/* Creamos un title que muestre la fecha exacta al hacer mouseover */
-				let newTitle = createSVGTag("title");
-				newTitle.textContent = lEvent.timeStamp.getVerboseDate();
-				
-				/* Creamos un círculo svg con que representará un evento y que tendrá un color concreto dependiendo del tipo de evento que estemos evaluando : Procedural, Background procedural o Facts under judgement */
-				let eventCircle = createSVGTag("circle", {cx:_cx,cy:_cy,r:radius,class:lEvent.getMainNodeStylingClass()});
-				newG.appendChild(newTitle);
-				
-				// HERE @coredamwork
-				/* GRAPH GROUP */
-				buildGraph ("graphEv"+lEvent._evID, lEvent, 30,5, newG );
-				
-				
-				function buildGraph(idGraph,lEvent, maxNodeDistance, maxNodeRadius, appendTo){
-					
-					console.groupCollapsed("%c CALL buildGraph()--> Events:","background-color:black; color:white;");
-					
-					let groupGraph = createSVGTag("g",{id:idGraph} );
-					//Creamos un nodo circular y una línea que une el centro del nodo pincipal (MAIN NODE) con el otro nodo.
-					//Creamos un objeto que representa el ángulo que separará cada nodo.
-					
-					if(lEvent["ATTRIBUTES"] == undefined){return null;}
-					let alpha = { deg: 360/(lEvent["ATTRIBUTES"].length)};
-					alpha.rad = alpha.deg  * (Math.PI/180);
-					
-					console.log(`length ${lEvent._evID} `+lEvent["ATTRIBUTES"].length);
-					console.log("alpha DEG "+alpha.deg);
-					console.log("alpha RAD "+alpha.rad);
-				
-					for(lAttr in lEvent["ATTRIBUTES"]){
-						
-						
-						console.log("cnx" ,lEvent.cnx );
-						console.log( "maxNode", maxNodeDistance  );
-						console.log( "sin", Math.sin(alpha.rad) );
-						
-						lEvent["ATTRIBUTES"][lAttr].cAx = lEvent.cnx +  maxNodeDistance * Math.sin(alpha.rad)/Math.tan(alpha.rad) ;
-							
-						lEvent["ATTRIBUTES"][lAttr].cAy = lEvent.cny +  maxNodeDistance * Math.sin(alpha.rad) ;
-						
-						console.log(`Creating Graph for ${lEvent._evID}["ATTRIBUTES"][${lAttr}] at (${lEvent["ATTRIBUTES"][lAttr].cAx,lEvent["ATTRIBUTES"][lAttr].cAy}`);
-						
-						
-						let connectLine_i = createSVGTag("path", {d:`M ${lEvent.cnx} ${lEvent.cny} L ${lEvent["ATTRIBUTES"][lAttr].cAx} ${lEvent["ATTRIBUTES"][lAttr].cAy}`,class:"interNodeLine"});
-						
-						let outerNode_i = createSVGTag("circle", {cx:lEvent["ATTRIBUTES"][lAttr].cAx ,cy:lEvent["ATTRIBUTES"][lAttr].cAy, r:maxNodeRadius, fill:"blue" });
-						
-						groupGraph.appendChild(connectLine_i);
-						groupGraph.appendChild(outerNode_i);
-					}
-					
-					console.groupEnd();
-					
-					appendTo.appendChild(groupGraph);
-					
-				}
-				
-				
-				
-				
-				
-				/* MARKER */
-				let _markerNewG = createSVGTag("g", {id:`${lEvent.timeStamp.getTime()}` }); //Crea un grupo que va a contener los markers que corresponden a cada evento, mostrando el tipo de evento que es.
-				
-				let heightOfMarkers = (svgDim.height/2)/2 ;
-				let radiusMarker = 3*radius;
-				//Coordinates of Marker
-				lEvent.cMx = lEvent.cnx;
-				lEvent.cMy = lEvent.cny-heightOfMarkers;
-				
-				
-				let _markerInnerCircle = createSVGTag("circle", {cx:lEvent.cMx ,cy:lEvent.cMy,r:radiusMarker ,class:"innerMarkerCircle"});
-				
-				let _markerOuterCircle= createSVGTag("circle", {cx:lEvent.cMx ,cy:lEvent.cMy,r:radiusMarker+10,class:lEvent.getMainNodeStylingClass()});
-				
-				let fitCircleCoords = { fcx:lEvent.cMx-(Math.sqrt(Math.pow(radiusMarker,2)/2)),
-									  	fcy: lEvent.cMy-(Math.sqrt(Math.pow(radiusMarker,2)/2)),
-									   	l:  (Math.sqrt(Math.pow(radiusMarker,2)/2)) *2
-									  }
-				
-				let _markerIcon = createSVGTag("image", {x:fitCircleCoords.fcx, y:fitCircleCoords.fcy, height:fitCircleCoords.l, width:fitCircleCoords.l ,href:`${lEvent.getAssociatedEventImgPath()}`});
-				
-				//POINTER
-				let pathConnect = createSVGTag("path", {d:`M ${fitCircleCoords.fcx+8} ${fitCircleCoords.fcy+fitCircleCoords.l} L ${lEvent.cnx} ${lEvent.cny}  L ${fitCircleCoords.fcx+fitCircleCoords.l-8} ${fitCircleCoords.fcy+fitCircleCoords.l} Z`, class:"innerMarkerCircle"});
-		
-				//Anchor element que ha de conducir al evento dento del texto como tal [REVISIT]
-				let anchorElem = createSVGTag("a",{href:"#footer"});
-			
-				
-				anchorElem.appendChild(_markerOuterCircle);
-				anchorElem.appendChild(_markerInnerCircle);
-				anchorElem.appendChild(pathConnect);
-				anchorElem.appendChild(_markerIcon);
-				
-				//AUX ANNOTATIONS TO EASE DEBUGGING 
-				if(auxGuidelines){
-					
-					/*
-					* [ createPoinntAnnotation ]
-					* @params
-					* label: name for the point in the svg canvas to be annotated
-					* _cx: x coordinate for the point to be marked
-					* _cy: y coordinate for the point to be marked
-					* textAt: "start" | "middle" | "end"  depending on where with respect to the text we 
-					*    	  want the label
-					* color:  a string representing the color for the annotation
-					* appendTo: a svg node wher within which we want to include the annotation elems
-					* dx: a number to place the label at a point _cx+dx
-					* dy: a number to place the label at a point _cy+dy
-					* @return the svg node where the new elements were included
-					*/
-					function createPointAnnotation(label, _cx, _cy, textAt="middle", color, appendTo, _dx=0,_dy=0){
-						
-						let auxCircle = createSVGTag("circle",{cx:_cx ,cy:_cy ,r:2 ,fill:color});
-						let textNameCoords = createSVGTag("text", {x:_cx , y:_cy ,"text-anchor":textAt,fill:color,"font-size":10,dx: _dx,dy:_dy});
-						textNameCoords.textContent = label +`: (${Math.round(_cx)},${Math.round(_cy)})` ;
-						
-						appendTo.appendChild(auxCircle);
-						appendTo.appendChild(textNameCoords);
-						
-						return appendTo;
-						}
-					
-					
-					
-					
-					//Node center: cn
-					createPointAnnotation("cn",lEvent.cnx,lEvent.cny,"middle","red", anchorElem,0,30 );
-					//Marker center: cM
-					createPointAnnotation("cM",lEvent.cMx,lEvent.cMy,"end","red", anchorElem,-30,0);
-					//Circle Fit Image origin: 
-					createPointAnnotation("fc0",fitCircleCoords.fcx,fitCircleCoords.fcy,"end","red", anchorElem,-30,0);
-					//Annotate lenght of the square that fits within the circle
-					
-					
-					let auxLine = createSVGTag("path", {d:`M ${fitCircleCoords.fcx} ${fitCircleCoords.fcy} h ${fitCircleCoords.l}`,stroke:"blue"});
-					
-					let textNameCoords = createSVGTag("text", {x:(fitCircleCoords.fcx+fitCircleCoords.l)/2 , y:fitCircleCoords.fcx-5 ,"text-anchor":"middle",fill:"blue","font-size":10});
-						textNameCoords.textContent = `l=${fitCircleCoords.l}` ;
-					anchorElem.appendChild(auxLine);
-					anchorElem.appendChild(textNameCoords);
-					
-					
-					
-				}
-				
-				
-				_markerNewG.appendChild(anchorElem);
-				newG.appendChild(eventCircle);
-				newG.appendChild(_markerNewG);
-				
-				oSVG.appendChild(newG);
+					console.log("%c SORTED EVENTS TABLE:","text-decoration:underline;");
+					console.table(lEventArray,["TEXT","TYPE","hasTime","timeStamp"]);
+					console.groupEnd()
 			}
+		}
 		
+		let svgDim = computeHTMLElemDimensions(svgInDOM);
+		/* Distance made among elements displayed in the screen */
+		let marginTime_line = ((totalTimedEvents%3)+1)* 20/100 * svgDim.width; // @REVISIT --> to be handled better
+		let eventTimelineConstantSeparation = (svgDim.width -2*marginTime_line)/(totalTimedEvents-1);
 		
+		if(logsOn) console.groupCollapsed("%c[MA] %c Creating lines ", "color: #0e4a75; font-weight:bold;", "text-decoration:underline;");
 		
+		//- Draw Timeline
+		let centreLine = createCenterHlineSVG(0,0,svgDim.width,svgDim.height,svgInDOM,"tmpLine");
+		//- Draw auxiliar line if tere are non-temporal events
+		let nonTempLine = createCenterHlineSVG((2/3)*svgDim.width,(2/3)*svgDim.height,svgDim.width,svgDim.height,svgInDOM,"nonTmpLine");
+		
+		if(logsOn) console.groupEnd();
+		
+		console.log(lEventArray);
+		
+		if(logsOn)console.groupCollapsed("%c[MA] %c Creating event nodes ", "color: #0e4a75; font-weight:bold;", "text-decoration:underline;");
+		//- Create a group of <g> nodes to contain all the graphical elements associated to an event 
+			for(let iEv= 0; iEv < lEventArray.length; iEv++){
+					// a) -CREATE TIMED EVENTS GRAPHICALLY 
+					if( lEventArray[iEv].hasTime >0 && typeof lEventArray[iEv].timeStamp !== 'undefined' ){
+						console.log(`\t Processing Event ${iEv}:`,lEventArray[iEv]) ;
+						createEventNodeGroup("event_"+iEv,/*cx!*/marginTime_line+iEv*eventTimelineConstantSeparation,/*cy!*/svgDim.height/2,lEventArray[iEv],10,svgInDOM);
+						
+					}
+					else{// b) -CREATE NON-TIMED EVENTS GRAPHICALLY 
+						//@complete
+					}
+				}
+		
+		if(logsOn) console.groupEnd();
+		
+		/* Creates outermost <g>  */
+		function createEventNodeGroup(_id,_cx,_cy,lEvent,radius = 10, oSVG){
+		
+			if(typeof oSVG === 'undefined' && oSVG === null){
+				oSVG = document.querySelector("svg");
+			}
+			let svgDim = computeHTMLElemDimensions(oSVG);
+
+			//Creamos dos nuevos atributos que contienen dónde se encuentra el centro del nodo que representa al evento (cnx,cny)
+			lEvent.cnx = _cx;
+			lEvent.cny = _cy;
 			
+			//Creamos propiedades para evento de cada tipo @REVISIT --> incluir en protoype
+			lEvent.eventTypes = ["procedural","background procedural","facts under judgement"];
+			lEvent.pathEventImages = ["img/Procedural.png","img/BackgroundProcedural.png","img/FactsUnderJudgement.png"];
+			
+			/* HELPER FUNCTIONS */
+			/* 
+			* [ getMainNodeStylingClass ]
+			* Function that returns the CSS class corresponding to different types of nodes, so that we can colour them
+			* depending on the type.
+			* @return String with the name of a matching CSS class
+			*/
+			lEvent.getMainNodeStylingClass = function(){ 
+				switch (this.TYPE.toUpperCase()){
+					case this.eventTypes[0].toUpperCase():
+							//Procedural
+							return "circleProcedural" ;
+							break;
+					case this.eventTypes[1].toUpperCase():
+							//Background procedural
+							return "circleBackProcedural" ;
+							break;
+					case "facts under judgment".toUpperCase() || this.eventTypes[2].toUpperCase() :
+							return "circleUnderJudg" ;
+							break;
+				}
+			}
+							/* 
+			* [ getAssociatedEventImgPath ]
+			* Function that filters the type of the event and extracts the path containing the icon for an event type
+			* @return String with the name of a matching icon path
+			*/
+			lEvent.getAssociatedEventImgPath = function(){ 
+				switch (this.TYPE.toUpperCase()){
+					case this.eventTypes[0].toUpperCase():
+							//Procedural
+							return this.pathEventImages[0] ;
+							break;
+					case this.eventTypes[1].toUpperCase():
+							//Background procedural
+							return this.pathEventImages[1] ;
+							break;
+					case "facts under judgment".toUpperCase() || this.eventTypes[2].toUpperCase():
+							return this.pathEventImages[2] ;
+							break;
+					default: 
+							return "/img.logoLynx.png";
+				}
+			}
+
+			/* MAIN GROUP CREATION*/
+			//-------------------- OPEN console group #1
+			if(logsOn) console.groupCollapsed(`%c[MA] %c Main group creation ${_id}`, "color: #0e4a75; font-weight:bold;", "text-decoration:underline;");
+			// Creamos un grupo <svg> para contener too lo relacionado a un evento (e.g. <svg id="event_1" ...>) 
+			let newG = createSVGTag("g", {id:_id});
+			buildGraph ("graphEv_"+lEvent._evID, lEvent, 30,5, newG, radius );
+			//-------------------- CLOSE console group #2
+			if(logsOn) console.groupEnd();
+			
+			oSVG.append(newG);
+			//creamos los markers para cada evento
+			//createMarker(lEvent);
 		
-			//3.Draw everything on the svg element
-			//drawTimeline(null,svgElem);
-	});
+		}
+		
+		
+		/*@REVISIST*/
+		function createMarker(lEvent){
+		/* CREATE MARKERS */
+			let _markerNewG = createSVGTag("g", {id:`${lEvent.timeStamp.getTime()}` }); //Crea un grupo que va a contener los componentes de un marker que corresponde a cada evento, mostrando el tipo de evento que es.
 
-	svgElem.addEventListener("click",  function(){ resize(svgElem)}); 
+			let heightOfMarkers = (svgDim.height/2)/2 ;
+			let radiusMarker = 3*radius;
+			//Coordinates of Marker
+			lEvent.cMx = lEvent.cnx;
+			lEvent.cMy = lEvent.cny-heightOfMarkers;
+
+			let _markerInnerCircle = createSVGTag("circle", {cx:lEvent.cMx ,cy:lEvent.cMy,r:radiusMarker ,class:"innerMarkerCircle"});
+
+			let _markerOuterCircle= createSVGTag("circle", {cx:lEvent.cMx ,cy:lEvent.cMy,r:radiusMarker+10,class:lEvent.getMainNodeStylingClass()});
+
+			let fitCircleCoords = { fcx:lEvent.cMx-(Math.sqrt(Math.pow(radiusMarker,2)/2)),
+									fcy: lEvent.cMy-(Math.sqrt(Math.pow(radiusMarker,2)/2)),
+									l:  (Math.sqrt(Math.pow(radiusMarker,2)/2)) *2
+								  }
+
+			let _markerIcon = createSVGTag("image", {x:fitCircleCoords.fcx, y:fitCircleCoords.fcy, height:fitCircleCoords.l, width:fitCircleCoords.l ,href:`${lEvent.getAssociatedEventImgPath()}`});
+
+			//POINTER
+			let pathConnect = createSVGTag("path", {d:`M ${fitCircleCoords.fcx+8} ${fitCircleCoords.fcy+fitCircleCoords.l} L ${lEvent.cnx} ${lEvent.cny}  L ${fitCircleCoords.fcx+fitCircleCoords.l-8} ${fitCircleCoords.fcy+fitCircleCoords.l} Z`, class:"innerMarkerCircle"});
+
+			//Anchor element que ha de conducir al evento dento del texto como tal [REVISIT]
+			let anchorElem = createSVGTag("a",{href:"#footer"});
+
+
+			anchorElem.appendChild(_markerOuterCircle);
+			anchorElem.appendChild(_markerInnerCircle);
+			anchorElem.appendChild(pathConnect);
+			anchorElem.appendChild(_markerIcon);
+
+			//AUX ANNOTATIONS TO EASE DEBUGGING 
+			if(auxGuidelines){
+
+				/*
+				* [ createPoinntAnnotation ]
+				* @params
+				* label: name for the point in the svg canvas to be annotated
+				* _cx: x coordinate for the point to be marked
+				* _cy: y coordinate for the point to be marked
+				* textAt: "start" | "middle" | "end"  depending on where with respect to the text we 
+				*    	  want the label
+				* color:  a string representing the color for the annotation
+				* appendTo: a svg node wher within which we want to include the annotation elems
+				* dx: a number to place the label at a point _cx+dx
+				* dy: a number to place the label at a point _cy+dy
+				* @return the svg node where the new elements were included
+				*/
+				function createPointAnnotation(label, _cx, _cy, textAt="middle", color, appendTo, _dx=0,_dy=0){
+
+					let auxCircle = createSVGTag("circle",{cx:_cx ,cy:_cy ,r:2 ,fill:color});
+					let textNameCoords = createSVGTag("text", {x:_cx , y:_cy ,"text-anchor":textAt,fill:color,"font-size":10,dx: _dx,dy:_dy});
+					textNameCoords.textContent = label +`: (${Math.round(_cx)},${Math.round(_cy)})` ;
+
+					appendTo.appendChild(auxCircle);
+					appendTo.appendChild(textNameCoords);
+
+					return appendTo;
+					}
+
+
+
+
+				//Node center: cn
+				createPointAnnotation("cn",lEvent.cnx,lEvent.cny,"middle","red", anchorElem,0,30 );
+				//Marker center: cM
+				createPointAnnotation("cM",lEvent.cMx,lEvent.cMy,"end","red", anchorElem,-30,0);
+				//Circle Fit Image origin: 
+				createPointAnnotation("fc0",fitCircleCoords.fcx,fitCircleCoords.fcy,"end","red", anchorElem,-30,0);
+				//Annotate lenght of the square that fits within the circle
+
+
+				let auxLine = createSVGTag("path", {d:`M ${fitCircleCoords.fcx} ${fitCircleCoords.fcy} h ${fitCircleCoords.l}`,stroke:"blue"});
+
+				let textNameCoords = createSVGTag("text", {x:(fitCircleCoords.fcx+fitCircleCoords.l)/2 , y:fitCircleCoords.fcx-5 ,"text-anchor":"middle",fill:"blue","font-size":10});
+					textNameCoords.textContent = `l=${fitCircleCoords.l}` ;
+				anchorElem.appendChild(auxLine);
+				anchorElem.appendChild(textNameCoords);
+
+
+
+			}
+
+
+			_markerNewG.appendChild(anchorElem);
+			newG.appendChild(eventCircle);
+			newG.appendChild(_markerNewG);
+
+			oSVG.appendChild(newG);
+		}
+		
+
+		/* [PENDING DESCRIPTION] Creamos todos los componentes internos a un grupo <g id="graphEv_X" ...>  y los  añadimos al grupo del evento (appentTo obj)*/
+		function buildGraph(idGraph, lEvent, maxNodeDistance, maxNodeRadius, appendTo, radius =10){
+
+			// Creamos un grupo que contiene al grafo completo <g id="graphEv_X" ...>
+			let groupGraph = createSVGTag("g",{id:idGraph} );
+
+			/* Creamos un círculo svg con que representará un evento y que tendrá un color concreto dependiendo del tipo de evento que estemos evaluando : Procedural, Background procedural o Facts under judgement */
+			let eventCircle = createSVGTag("circle", {cx:lEvent.cnx,cy:lEvent.cny,r:radius, class:lEvent.getMainNodeStylingClass()});
+			if(logsOn) console.log(`\t Creating main node ${idGraph}`);
+			/* Creamos un nodo de texto con los datos del grafo*/
+			let textNodeMain = createSVGTag("text", {x:lEvent.cnx,y:lEvent.cny,class:"mainNodeText"});
+			textNodeMain.textContent = lEvent.TEXT;
+
+			/* Creamos un title que muestre la fecha exacta al hacer mouseover (Only temporal events) */
+			let newTitle;
+			if(lEvent.hasTime === 1){
+				newTitle = createSVGTag("title");
+				newTitle.textContent = lEvent.timeStamp.getVerboseDate();
+			}
+
+			if(logsOn) console.log("\t %c [L!] %c Addinng annotation functionality on click event", "background-color:red;color:white","text-decoration:underline;");
+			eventCircle.addEventListener("click", function(){alert("on click event properly added");}/*annotateInText*/); // @Pending
+
+
+			// Añadimos los nodos dentro del anterior <g>, el grupo que engloba al grafo
+			if(lEvent.hasTime === 1) appendTo.appendChild(newTitle);
+			groupGraph.appendChild(eventCircle);
+			groupGraph.appendChild(textNodeMain);
+
+			/* CREATION OF BRANCHES */
+			if(logsOn) console.groupCollapsed(`%c[MA] %c Creation of branches ${idGraph}`, "color: #0e4a75; font-weight:bold;", "text-decoration:underline;");
+
+			//Creamos un objeto que representa el ángulo que separará cada nodo.
+			//  - Si no hay atributos, no generamos nodos;  añadimos el grupo al grupo padre "event_X"
+			if(lEvent["ATTRIBUTES"] === undefined){ appendTo.append(groupGraph); return groupGraph;}
+			let alpha = { deg: 360/(lEvent["ATTRIBUTES"].length)};
+			alpha.rad = alpha.deg  * (Math.PI/180);
+
+			if(logsOn) console.log(`\t ${idGraph} #Attributes: length ${lEvent._evID} `+lEvent["ATTRIBUTES"].length);
+			if(logsOn) console.log("\t\t alpha separation DEG: "+alpha.deg);
+			if(logsOn) console.log("\t\t alpha separation RAD: "+alpha.rad);
+
+
+			// - For each attribute, we create a circular node and a connecting line from the center of the main node towards
+			//	 the center of the new circular node, with a length given by the provided radius
+			let evCount = 1 ;
+			// - Create new group of svg branches for the graph
+			let groupBranches = createSVGTag("g",{id:idGraph+`${lEvent._evID}`+"_Braches"});
+			for(lAttr in lEvent["ATTRIBUTES"]){
+
+				/*console.log("cnx" ,lEvent.cnx );
+				console.log( "maxNode", maxNodeDistance  );
+				console.log( "sin", Math.sin(alpha.rad) );*/
+
+				// -Create coordinates as attributes for each event attribute that will require a node
+				lEvent["ATTRIBUTES"][lAttr].cAx = lEvent.cnx +  maxNodeDistance * Math.sin(evCount*alpha.rad)/Math.tan(evCount*alpha.rad) ;
+				lEvent["ATTRIBUTES"][lAttr].cAy = lEvent.cny +  maxNodeDistance * Math.sin(evCount*alpha.rad) ;
+
+				if(logsOn) console.log(`\t Creating Graph for ${lEvent._evID}["ATTRIBUTES"][${lAttr}] at (${lEvent["ATTRIBUTES"][lAttr].cAx,lEvent["ATTRIBUTES"][lAttr].cAy}`);
+
+				let connectLine_i = createSVGTag("path", {d:`M ${lEvent.cnx} ${lEvent.cny} L ${lEvent["ATTRIBUTES"][lAttr].cAx} ${lEvent["ATTRIBUTES"][lAttr].cAy}`,class:"interNodeLine"});
+
+				let outerNode_i = createSVGTag("circle", {cx:lEvent["ATTRIBUTES"][lAttr].cAx ,cy:lEvent["ATTRIBUTES"][lAttr].cAy, r:maxNodeRadius, class:"outerNodegraph"});
+
+
+				let textOuterNode = createSVGTag("text",{x:lEvent["ATTRIBUTES"][lAttr].cAx,y:lEvent["ATTRIBUTES"][lAttr].cAy,dy:radius+3,class:"outerNodeTextLabel"});
+				textOuterNode.textContent =  lEvent["ATTRIBUTES"][lAttr].INFO;
+				let textOuterNodeDesc = createSVGTag("text",{x:lEvent["ATTRIBUTES"][lAttr].cAx,y:lEvent["ATTRIBUTES"][lAttr].cAy,dy:radius+3,class:"outerNodeTextDesc"});
+				textOuterNodeDesc.textContent = lEvent["ATTRIBUTES"][lAttr].TEXT;
+
+				groupBranches.appendChild(connectLine_i);
+				groupBranches.appendChild(outerNode_i);
+				groupBranches.appendChild(textOuterNode);
+				groupBranches.appendChild(textOuterNodeDesc);
+				evCount++;
+			}
+			if(appendTo !== 'undefined')
+			appendTo.prepend(groupBranches);
+
+			if(logsOn) console.groupEnd();
+
+			return appendTo.appendChild(groupGraph);
+
+		}
+
+		
+		
+		if(logsOn)console.groupEnd();
+		if(logsOn) console.timeEnd("elapsed printTimeline");
+		return lEventArray;
+		
+	}
+	
+	
+
+
 }
-
-
-
-function drawTimeline(eventList,svgElem){
-	
-	
-	//Get dimensions of element
-	let svgDimObj = computeHTMLElemDimensions(svgElem);
-	if(logsOn) console.log(`<svg> dimensions : W:${svgDimObj.width} x H:${svgDimObj.height}`); //print dimensions of the <svg> elem
-	//Draw middle line
-	let centreLine = createCenterHlineSVG(0,0,svgDimObj.width,svgDimObj.height,svgElem,"myTempLine");
-	//Draw auxiliar line if tere are non-temporal events
-	let nonTempLine = createCenterHlineSVG((2/3)*svgDimObj.width,(2/3)*svgDimObj.height,svgDimObj.width,svgDimObj.height,svgElem,"myNon-TempLine");
-	
-	
-	
-	//Draw legend at the top
-	//1.Create a group to contain all info
-	let legendGroup = document.createElementNS(svgNamespaceURI,"g");
-	//2.Create rectangle
-	legendGroup.setAttributeNS(null,"id","legendGroup")
-	let legendRect = document.createElementNS(svgNamespaceURI,"rect");
-	legendRect.setAttributeNS(null,"id","legendRect");
-	legendRect.setAttributeNS(null,"height", Math.round(1/16*svgDimObj.height) );
-	legendRect.setAttributeNS(null,"width",svgDimObj.width );
-	legendRect.setAttributeNS(null,"class", "legendRect" );
-	//Create text at beggining and end
-	//Beggining
-	let textOldestNode = document.createElementNS(svgNamespaceURI,"text");
-	textOldestNode.setAttributeNS(null,"id","oldestText");
-	textOldestNode.setAttributeNS(null,"x",0);
-	textOldestNode.setAttributeNS(null,"y",Math.round(1/16*svgDimObj.height));	
-	//textOldestNode.setAttributeNS(null,"dx",1/4*svgDimObj.width);
-	//textOldestNode.setAttributeNS(null,"dy",Math.round(1/16*svgDimObj.height));
-	textOldestNode.setAttributeNS(null,"text-anchor","start");
-	textOldestNode.setAttributeNS(null,"class","textLegend");
-	textOldestNode.textContent = "FECHA OLD";
-	//End
-	let textNewestNode = textOldestNode.cloneNode();//{};
-  	//Object.assign(textNewestNode, textOldestNode);
-	//textNewestNode = JSON.parse(JSON.stringify(textOldestNode));
-	textNewestNode.setAttributeNS(null,"text-anchor","end");
-	textNewestNode.setAttributeNS(null,"id","newestText");
-	textNewestNode.setAttributeNS(null,"x",svgDimObj.width);
-	textNewestNode.setAttributeNS(null,"y",Math.round(1/16*svgDimObj.height));
-	//textNewestNode.setAttributeNS(null,"dx",1/4*svgDimObj.width);
-	//textNewestNode.setAttributeNS(null,"dy",Math.round(1/16*svgDimObj.height));
-	textNewestNode.textContent = "FECHA NEW";
-	//Append everything
-	legendGroup.appendChild(legendRect);
-	legendGroup.appendChild(textOldestNode);
-	legendGroup.appendChild(textNewestNode);
-	svgElem.prepend(legendGroup);
-	
-	
-	
-	//Draw events
-	
-	
-	
-	
-}
-
 
 function createCenterHlineSVG(minX=0,minY=0,maxX,maxY,appendTo,id ="temporalLine",namespace="http://www.w3.org/2000/svg"){
 	
@@ -823,7 +780,7 @@ function createCenterHlineSVG(minX=0,minY=0,maxX,maxY,appendTo,id ="temporalLine
 	lineNode.setAttributeNS(null,"d", "M "+Math.round(minX)+"  "+ Math.round(((maxY-minY)/2)+minY) + " h " + Math.round(maxX-minX));
 	lineNode.classList.add("centerLineColor");
 	lineNode.setAttributeNS(null,"stroke-width", "10");
-	lineNode.setAttributeNS(null,"stroke","#000000");
+	//lineNode.setAttributeNS(null,"stroke","#000000");
 	return appendTo.appendChild(lineNode);
 	
 	
@@ -833,6 +790,9 @@ function createCenterHlineSVG(minX=0,minY=0,maxX,maxY,appendTo,id ="temporalLine
 
 
 function zoom(svgNode,x,y,width,height){
+	
+	
+	
 	
 	svgNode.setAttribute("viewBox",`${x} ${y} ${width} ${height}`);
 	
@@ -1129,6 +1089,10 @@ function createSVGTag(tagType, jsonTagAttributes){
 
 
 
+
+
+
+
 function randomizeTestData(lEventArray){
 	
 	let max = 2, min = 0;
@@ -1172,3 +1136,67 @@ function randomizeTestData(lEventArray){
 	
 }
 
+
+
+
+/* LEGEND CODE @REVISIT 
+function drawTimeline(eventList,svgElem){
+	
+	
+	//Get dimensions of element
+	let svgDimObj = computeHTMLElemDimensions(svgElem);
+	if(logsOn) console.log(`<svg> dimensions : W:${svgDimObj.width} x H:${svgDimObj.height}`); //print dimensions of the <svg> elem
+	//Draw middle line
+	let centreLine = createCenterHlineSVG(0,0,svgDimObj.width,svgDimObj.height,svgElem,"myTempLine");
+	//Draw auxiliar line if tere are non-temporal events
+	let nonTempLine = createCenterHlineSVG((2/3)*svgDimObj.width,(2/3)*svgDimObj.height,svgDimObj.width,svgDimObj.height,svgElem,"myNon-TempLine");
+	
+	
+	
+	//Draw legend at the top
+	//1.Create a group to contain all info
+	let legendGroup = document.createElementNS(svgNamespaceURI,"g");
+	//2.Create rectangle
+	legendGroup.setAttributeNS(null,"id","legendGroup")
+	let legendRect = document.createElementNS(svgNamespaceURI,"rect");
+	legendRect.setAttributeNS(null,"id","legendRect");
+	legendRect.setAttributeNS(null,"height", Math.round(1/16*svgDimObj.height) );
+	legendRect.setAttributeNS(null,"width",svgDimObj.width );
+	legendRect.setAttributeNS(null,"class", "legendRect" );
+	//Create text at beggining and end
+	//Beggining
+	let textOldestNode = document.createElementNS(svgNamespaceURI,"text");
+	textOldestNode.setAttributeNS(null,"id","oldestText");
+	textOldestNode.setAttributeNS(null,"x",0);
+	textOldestNode.setAttributeNS(null,"y",Math.round(1/16*svgDimObj.height));	
+	//textOldestNode.setAttributeNS(null,"dx",1/4*svgDimObj.width);
+	//textOldestNode.setAttributeNS(null,"dy",Math.round(1/16*svgDimObj.height));
+	textOldestNode.setAttributeNS(null,"text-anchor","start");
+	textOldestNode.setAttributeNS(null,"class","textLegend");
+	textOldestNode.textContent = "FECHA OLD";
+	//End
+	let textNewestNode = textOldestNode.cloneNode();//{};
+  	//Object.assign(textNewestNode, textOldestNode);
+	//textNewestNode = JSON.parse(JSON.stringify(textOldestNode));
+	textNewestNode.setAttributeNS(null,"text-anchor","end");
+	textNewestNode.setAttributeNS(null,"id","newestText");
+	textNewestNode.setAttributeNS(null,"x",svgDimObj.width);
+	textNewestNode.setAttributeNS(null,"y",Math.round(1/16*svgDimObj.height));
+	//textNewestNode.setAttributeNS(null,"dx",1/4*svgDimObj.width);
+	//textNewestNode.setAttributeNS(null,"dy",Math.round(1/16*svgDimObj.height));
+	textNewestNode.textContent = "FECHA NEW";
+	//Append everything
+	legendGroup.appendChild(legendRect);
+	legendGroup.appendChild(textOldestNode);
+	legendGroup.appendChild(textNewestNode);
+	svgElem.prepend(legendGroup);
+	
+	
+	
+	//Draw events
+	
+	
+	
+	
+}
+*/
