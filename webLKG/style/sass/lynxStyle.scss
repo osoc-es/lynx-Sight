@@ -19,72 +19,84 @@ $underJudgementEvent:#82b69b;
 
 $heightTopContainer:50px;
 
-/*Top div style*/
+
+
+%flexRow{
+	display:flex;
+	flex-direction: row;
+}
+
+%flexCol{
+	display:flex;
+	flex-direction: column;
+}
+
+
+
+/*Top div style [WORKS]*/
 #topContentContainer{
 	
+	background-color: #094f92;
 	height: $heightTopContainer; 
+	
 	width: 100%;
 	margin: 0;
+	padding: 5px 0px;
+	@extend %flexRow;
 	
-	position:fixed; 
-	top:0; right: 0; left: 0;
-}
-
-/*nav icons*/
-nav{
+	// UNSURE
+	align-items: center;
 	
-	display:flex; 
-	flex-direction: row;
-	//display:flex;
-	background-color: #094f92;
-	height: 100%;
+	//position:fixed; 
+	//top:0; right: 0; left: 0;
 	
-	a{
-		flex: 0 0 5%;
-		.icon_h{
-			vertical-align: middle;
-			overflow:hidden;
+	#flex2ColHeader{
+		@extend %flexCol;
+		flex-basis: 100%;
+	}
+	
+	/* Navigation menu */
+	nav{
+		@extend %flexRow;
+		flex-basis: 100%;
+		a{
+			font-size: 9px;
+			flex: 1 1 5%;
 			img{
-				max-height: $heightTopContainer;
-				//width: 30px;
-				//height:30px;
-				margin-right: 5px;
+				//max-height:$heightTopContainer;
+				width: 20px;
+				height:20px;
 			}
+			margin: 10px;
 		}
+		.buttonsCustomColor{
+				background-color: #9a9457;
+		}
+		#lynxLogoTop{
+			flex: 0 0 10%;
+				max-height:$heightTopContainer;
+				img{
+					margin: 3px;
+					width:90%; 
+                	height:90%; 
+					max-width:100%;
+					max-height:100%;
+				}
+		}
+			
 	}
 	
-	a #lynxLogoTop{
-		flex: 1 0 15%;
+	#svg{
+		flex-basis: 100%;
 	}
-	
 	
 }
-
-#svg{
-		
-	display:flex;
 	
-		svg{
-			flex:0 0 100%;
-		}
-	
-	}
-	
-
-
 
 //Set to have main content of the page below nav header
 #mainContent{
 	padding-top: $heightTopContainer;
 }
-
-
-
-
-
-
-
-
 
 
 .mainNodeText{

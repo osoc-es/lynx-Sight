@@ -1,42 +1,55 @@
 /* TIMELINE CIRCLE COLORS*/
-/*Top div style*/
+#topContentContainer nav, #topContentContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+#topContentContainer #flex2ColHeader {
+  display: flex;
+  flex-direction: column;
+}
+
+/*Top div style [WORKS]*/
 #topContentContainer {
+  background-color: #094f92;
   height: 50px;
   width: 100%;
   margin: 0;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
+  padding: 5px 0px;
+  align-items: center;
+  /* Navigation menu */
 }
-
-/*nav icons*/
-nav {
-  display: flex;
-  flex-direction: row;
-  background-color: #094f92;
-  height: 100%;
+#topContentContainer #flex2ColHeader {
+  flex-basis: 100%;
 }
-nav a {
-  flex: 0 0 5%;
+#topContentContainer nav {
+  flex-basis: 100%;
 }
-nav a .icon_h {
-  vertical-align: middle;
-  overflow: hidden;
+#topContentContainer nav a {
+  font-size: 9px;
+  flex: 1 1 5%;
+  margin: 10px;
 }
-nav a .icon_h img {
+#topContentContainer nav a img {
+  width: 20px;
+  height: 20px;
+}
+#topContentContainer nav .buttonsCustomColor {
+  background-color: #9a9457;
+}
+#topContentContainer nav #lynxLogoTop {
+  flex: 0 0 10%;
   max-height: 50px;
-  margin-right: 5px;
 }
-nav a #lynxLogoTop {
-  flex: 1 0 15%;
+#topContentContainer nav #lynxLogoTop img {
+  margin: 3px;
+  width: 90%;
+  height: 90%;
+  max-width: 100%;
+  max-height: 100%;
 }
-
-#svg {
-  display: flex;
-}
-#svg svg {
-  flex: 0 0 100%;
+#topContentContainer #svg {
+  flex-basis: 100%;
 }
 
 #mainContent {
