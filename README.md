@@ -1,9 +1,14 @@
-![LynxSight Logo](/webLKG/img/LogoLynxSight)
-LynxSight is a web-based visualisation tool that allows to organise legal information (more specifically legal events) in a way that it makes sense for the user, targeted at both specialised and non-specialised public.
-Legal events can be defined as actions of certain relevance from the legal point of view (e.g. an incident, a )
-![LynxSight Logo](/webLKG/img/Example1_LndF)
+![LynxSight Logo](/webLKG/img/LogoLynxSight.png)
+# LynxSight
+> LynxSight is a web-based visualisation tool that allows to organise legal information (more specifically legal events) in a way that it makes sense for the user, targeted at both specialised and non-specialised public.
 
-It is used to analyse legal sentences and provides with:
+Legal events can be defined as actions of certain relevance from the legal point of view (e.g. an incident, a decision, etc). Reading long documents all day can be frustrating and synthesizing or just locating important infomation often requires a lot of time. LynxSight aims to make this process so much simpler by providing with visual guidance along the legal sentences you may be going through at th moment.
+
+## Look and Feel
+![Example Look and Feel](/webLKG/img/Example1_LndF.png)
+
+## What it does
+LynxSight is used to analyse legal sentences and provides with:
   - Inline highlighting.
   - Temporal analysis and sorting.
   - Graph-based visualisation of legal events, answering at a glance to common questions like: Who, Against Whom, When...
