@@ -16,6 +16,7 @@ LynxSight is used to analyse legal sentences and provides with:
   - Hierarchical sizing according to degree of importance according to professional lawyers.
   - Zooming functionality to enable exploring events as in a natural way.
 
+## About the project
 The LynxSight project is part of a European project called Lynx whose purpose is to build a LKG (Legal Knowledge Graph). This work, focused on front-end development and UX, assisted in the progress of such project, in which researchers of the OEG department at UPM University (Madrid) were involved.
 
 The project involved 4 weeks of work, and working with external code and a bad design, which used Bootstrap and nested pages in odd ways, providing a relatively "default page" look but was still functional.
