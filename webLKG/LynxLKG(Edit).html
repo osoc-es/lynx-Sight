@@ -255,536 +255,477 @@
 <body onload="init(); onPageLoad()" data-gr-c-s-loaded="true">
 
 	<!-- https://stackoverflow.com/questions/17054381/placing-4-html-elements-in-every-corner-of-a-div-->
-	<div class="container-fluid rounded" style="position: fixed; top:0; right: 0; left: 0;" id="topContentContainer">
+	<div id="topContentContainer" class="rounded" >
 		<!-- Button holder (Includes all the buttons) -->
-		<div id="navadmin">
+			<nav>
+				<!-- Lynx logo (may change redirection to Home page) -->
+				<a id="lynxLogoTop" href="#" target="_self" >
+					<span class="icon_h">
+						<img  src="img/logoLynx.png" alt="logoLynx" />
+					</span>
+				</a>
 
-			<!-- Lynx logo (may change redirection to Home page) -->
-			<a href="#" target="_self" style="margin-right:35%;margin-left:5%;">
-				<img style="width:80px; height=50px" src="img/logoLynx.png" alt="logoLynx" />
-			</a>
+				
+				 <a href="http://lkg.lynx-project.eu/" class="btn btn-primary btn-sm" role="button" >
+					<span class="icon_h">
+						<img src="img/Home.png" alt="HomeIcon" /> Home
+					</span>
+				</a>
 
-			<!--<center> -->
-			<!-- <a href="http://lkg.lynx-project.eu/" class="btn btn-primary btn-sm" role="button" style="margin: 8px;"><span class="glyphicon glyphicon-home" style="margin: 3px;"></span> home</a> -->
+				 <a onclick="testdelete();" class="btn btn-primary btn-sm" role="button" >
+					 <span class="icon_h">
+					 	<img alt="DeleteIcon" src="img/Delete.png"/> Delete
+					 </span>
+				</a> 
+				
+				<!-- "New" icon -->
+				<a href="http://lkg.lynx-project.eu/new.html" class="btn btn-primary btn-sm" role="button">
+					<span class="ladda-label icon_h" > 
+						<img src="img/New.png" alt="NewIcon" /> New
+					</span>
+				</a> 
 
-			<!-- <a onclick="testdelete();" class="btn btn-primary btn-sm" role="button" style="margin: 8px;"><span class="glyphicon glyphicon-remove" style="margin: 3px;"></span> delete</a> -->
+				<!-- Timeline functionality button -->
 
-			<!-- <a href="http://lkg.lynx-project.eu/new.html" class="btn btn-primary btn-sm" role="button" style="margin: 8px;"><span class="glyphicon glyphicon-plus" style=t"margin: 3px;"></span> new</a> -->
+				<a id="btntimex" class="btn btn-primary btn-sm ladda-button"  data-style="zoom-in" role="button" >
+					<!--Prev functionality onclick="testtimex();" -->
+					<span class="ladda-label icon_h" onclick="testtimex();" > 
+						<img src="img/Time.png" alt="timeIcon" />  Time 
+					</span>
+				</a>
 
-			<!-- Timeline functionality button -->
-			 
-			<a id="btntimex" class="btn btn-primary btn-sm ladda-button" data-style="zoom-in" role="button" style="margin: 8px;" >
-				<!--Prev functionality onclick="testtimex();" --><span class="ladda-label"> <img src="img/Time.png" alt="timeIcon" style="width:20px;height:20px;" /> Time </span>
-			</a>
-			<!-- Terminology functionality button -->
-			<a class="btn btn-primary btn-sm ladda-button" data-style="zoom-in" role="button" style="margin: 8px;">
-				<span class="ladda-label"> <img src="img/Terminologia.png" alt="termIcon" style="width:20px;height:20px;" /> Terminology </span>
-			</a>
+				<!-- Terminology functionality button -->
 
-			<!-- <a id="btnannotate" onclick="testannotate();" class="btn btn-primary btn-sm ladda-button" data-style="zoom-in" role="button" style="margin: 8px;"><span class="ladda-label"><span class="glyphicon glyphicon-tags" style="margin: 3px;"> </span> annotate</span></a>
+				<a class="btn btn-primary btn-sm ladda-button" onclick="testannotate();" data-style="zoom-in" role="button" >
+					<span class="ladda-label icon_h"> 
+						<img src="img/Terminologia.png" alt="termIcon" /> Annotate 
+					</span>
+				</a>
 
-					<a id="btnrecommend" onclick="testrecommend();" class="btn btn-primary btn-sm ladda-button" data-style="zoom-in" role="button" style="margin: 8px;"><span class="ladda-label"><span class="glyphicon glyphicon-duplicate" style="margin: 3px;"> </span> recomm.</span></a>
+				<a id="btnrecommend" onclick="testrecommend();" class="btn btn-primary btn-sm ladda-button" data-style="zoom-in" role="button" >
+					<span class="ladda-label icon_h">
+						<img src="img/Recommend.png" alt="recommendIcon"/>Recommend 
+					</span>
+				</a>
 
-					<a id="btntranslate" onclick="testtranslate();" class="btn btn-primary btn-sm ladda-button" data-style="zoom-in" role="button" style="margin: 8px;"><span class="ladda-label"><span class="glyphicon glyphicon-text-color" style="margin: 3px;"></span> translate</span></a>
-					<a href="http://lkg.lynx-project.eu/status" class="btn btn-primary btn-sm" role="button" style="margin: 8px;"><span class="glyphicon glyphicon-wrench" style="margin: 3px;"></span> admin</a>
-					<a onclick="testlogout();" class="btn btn-primary btn-sm" role="button" style="margin: 8px;"><span class="glyphicon glyphicon-log-out" style="margin: 3px;"></span> logout</a>
-					-->
+				<a id="btntranslate" onclick="testtranslate();" class="btn btn-primary btn-sm ladda-button" data-style="zoom-in" role="button">
+					<span class="ladda-label icon_h">
+						<img src="img/Translate.png" alt="translateIcon"/>Translate
+					</span> 
+				</a>
 
-			<!--</center> -->
+				<a href="http://lkg.lynx-project.eu/status" class="btn btn-primary btn-sm" role="button" >
+					<span class="icon_h" >
+						<img src="img/Admin.png" alt="adminIcon"/> Admin
+					</span>
+				</a>
 
-		</div>
+				<a onclick="testlogout();" class="btn btn-primary btn-sm" role="button" >
+					<span class="icon_h" >
+						<img src="img/LogIn.png" alt="logInIcon">Log out
+					</span>
+				</a>
+			</nav>
 
 		<div id="svg" width="100%" class="hide" >
 			<svg id="svgCanvas"  width="100%" height="300px" class="timelineBackground" >
 
-				
-				<defs> <!-- DEFINITIONS: Definition of paths and graphics that won't be directly rendered unless, they are used -->
-					<!-- Straight line approximately sloped 25 degrees (to be used in graph visualisation [TITLES]) -->
-					<!--<path id="angledLine25deg" d="M 100 100 
-												 L 280 16 " stroke="black" fill="none" stroke-width="5" /> -->
-				</defs>
-				
-				
-				
-				
-				
-				<!--
-			
-				<path d="M 0 50
-				   h 5000
-					" stroke="#9DC4D2" stroke-width="10" stroke-linecap="round" pathLength="5000"></path>
-				
--->
-				<!-- Example Procedural node in timeline -->
-				<!--
-				<circle cy="50" cx="50" r="10" class="circleProcedural" ></circle>
-				-->
-				
-			<!--	<g class="infoUpwards" >
-					<circle cy="10" cx="50" r="45" class="outerCircleZoomProcedural" ></circle>
-					<circle cy="10" cx="50" r="35" fill="white" > </circle>
-					<path d="M 10 50
-							 h 10
-							 L 50 50
-							 M 10 50
-							 h -10
-							 L 50 50
-							  " fill="white"></path>
-					<image x="20" y="140" height="60" width="60" href="./img/Procedural.png"></image>
-				</g>
-				-->
-				
-				
-				<!-- Show info node DOWNWARDS -->
-				<!--
-				<g class="infoDownwards">
-					<circle cy="170" cx="50" r="45" class="outerCircleZoomProcedural" ></circle>
-					<circle cy="170" cx="50" r="35" fill="white" > </circle>
-					<path d="M 50 170
-							 h 10
-							 L 50 50
-							 M 50 170
-							 h -10
-							 L 50 50
-							  " fill="white"></path>
-					<image x="20" y="140" height="60" width="60" href="./img/Procedural.png"></image>
-				</g>
-				-->
-				
-				<!-- Example Background procedural --> 
-				
-				<!-- <circle cy="50" cx="74" r="10" class="circleBackProcedural" ></circle>  -->
-				
-				
-				<!-- Example Facts Under Jugement -->
-				<!--<circle cy="50" cx="100" r="10" class="circleUnderJudg" ></circle> -->
-				
-				
-				
-				
-				
-				<!--<text  style="font-family:ariel;font-size:16">
-
-					<textpath xlink:href="#angledLine25deg">Hello, here is some text lying along an angled line</textpath>
-
-				</text>
-				-->
-				
-				
-				
-				
-				
 			</svg>
 		</div>
-
-		<!--<div style="float:right;">
-				<form id="signin" class="navbar-form navbar-right" role="form" style="display: none;">
-					<div class="input-group input-group-sm col-xs-3">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input id="email" class="form-control" name="username" value="" placeholder="User">   
-					</div>
-					<div class="input-group input-group-sm col-xs-3">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input id="password" type="password" class="form-control" name="userpass" value="" placeholder="Password">                                        
-					</div>
-				   <button type="submit" class="btn btn-primary btn-sm">login</button> 
-					<a onclick="testlogin();" class="btn btn-primary btn-sm" role="button" style="margin: 8px;"><span class="glyphicon glyphicon-log-in"></span> login</a>
-				</form>       
-		   </div>
-
-			-->
-
 	</div>
 
-	<!--	
-			<div class="container" id="idcontenedor" style="position:relative;">
-			<div class="row">
-			<div class="offset-md-1  col-md-10">
-			<!--<div class="page-header"></div>-->
-	<div class="panel-body">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h4>Real Decreto 1390/2011, de 14 de octubre, por el que se regula la indicación del consumo de energía y otros recursos por parte de los productos relacionados con la energía, mediante el etiquetado y una información normalizada.</h4>
-			</div>
-			<div class="panel-body">
-				<p align="right"><a data-toggle="tooltip" title="" href="http://lkg.lynx-project.eu/res/BOE-A-2011-16175.json" data-original-title="See JSON data"><img src="./LynxLKG_files/docjson.png" width="32"></a><a data-toggle="tooltip" title=""
-						href="http://lkg.lynx-project.eu/res/BOE-A-2011-16175.rdf" data-original-title="See RDF data"><img src="./LynxLKG_files/docrdf.png" width="32"></a><a data-toggle="tooltip" title=""
-						href="http://lkg.lynx-project.eu/res/BOE-A-2011-16175.txt" data-original-title="See text only"><img src="./LynxLKG_files/doctxt.png" width="32"></a><a data-toggle="tooltip" title=""
-						href="http://lkg.lynx-project.eu/res/BOE-A-2011-16175.src" data-original-title="See annotations"><img src="./LynxLKG_files/docsrc.png" width="32"></a></p>
-				<div id="metadata" style="border:dotted;width:100%;background-color:aliceblue;padding:10px;font-family:Times;"><span>
-						<table cellpadding="5" style="border-width:0px;padding: 20px">
-							<tbody>
-								<tr>
-									<td>Type</td>
-									<td><img src="./LynxLKG_files/legislation.png" width="24" data-toggle="tooltip" title="" data-original-title="Legislation"> Real Decreto</td>
-								</tr>
-								<tr>
-									<td>Validity:</td>
-									<td>Published: 15-10-2011 - <font color="green">In force: 16-10-2011</font>
-									</td>
-								</tr>
-								<tr>
-									<td>Language:</td>
-									<td>es</td>
-								</tr>
-								<tr>
-									<td>Jurisdiction:</td>
-									<td><img src="./LynxLKG_files/es.png" width="16" data-toggle="tooltip" title="" data-original-title="es"></td>
-								</tr>
-							</tbody>
-						</table>
-						<p>Keywords: <span class="badge badge-secondary">Ministerio de Sanidad, Política Social e Igualdad</span> <span class="badge badge-secondary">Etiquetas</span> <span class="badge badge-secondary">Aparatos de uso doméstico</span> <span
-								class="badge badge-secondary">Consumidores y usuarios</span> <span class="badge badge-secondary">Electrodomésticos</span> <span class="badge badge-secondary">Ministerio de Industria, Turismo y Comercio</span> <span
-								class="badge badge-secondary">Consumo de energía</span> <span class="badge badge-secondary">Contratación administrativa</span> <span class="badge badge-secondary">Energía eléctrica</span> <span
-								class="badge badge-secondary">Comercialización</span> </p>
-					</span></div>
-				<div id="texto">
-					<html>
+			<!--
+			<div style="float:right;">
+					<form id="signin" class="navbar-form navbar-right" role="form" style="display: none;">
+						<div class="input-group input-group-sm col-xs-3">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							<input id="email" class="form-control" name="username" value="" placeholder="User">   
+						</div>
+						<div class="input-group input-group-sm col-xs-3">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input id="password" type="password" class="form-control" name="userpass" value="" placeholder="Password">                                        
+						</div>
+					   <button type="submit" class="btn btn-primary btn-sm">login</button> 
+						<a onclick="testlogin();" class="btn btn-primary btn-sm" role="button" style="margin: 8px;"><span class="glyphicon glyphicon-log-in"></span> login</a>
+					</form>       
+			   </div>
+			-->
+		
+	<div id="mainContent">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h4>Real Decreto 1390/2011, de 14 de octubre, por el que se regula la indicación del consumo de energía y otros recursos por parte de los productos relacionados con la energía, mediante el etiquetado y una información normalizada.</h4>
+				</div>
+				<div class="panel-body">
+					<p align="right"><a data-toggle="tooltip" title="" href="http://lkg.lynx-project.eu/res/BOE-A-2011-16175.json" data-original-title="See JSON data"><img src="./LynxLKG_files/docjson.png" width="32"></a><a data-toggle="tooltip" title=""
+							href="http://lkg.lynx-project.eu/res/BOE-A-2011-16175.rdf" data-original-title="See RDF data"><img src="./LynxLKG_files/docrdf.png" width="32"></a><a data-toggle="tooltip" title=""
+							href="http://lkg.lynx-project.eu/res/BOE-A-2011-16175.txt" data-original-title="See text only"><img src="./LynxLKG_files/doctxt.png" width="32"></a><a data-toggle="tooltip" title=""
+							href="http://lkg.lynx-project.eu/res/BOE-A-2011-16175.src" data-original-title="See annotations"><img src="./LynxLKG_files/docsrc.png" width="32"></a></p>
+					<div id="metadata" style="border:dotted;width:100%;background-color:aliceblue;padding:10px;font-family:Times;"><span>
+							<table cellpadding="5" style="border-width:0px;padding: 20px">
+								<tbody>
+									<tr>
+										<td>Type</td>
+										<td><img src="./LynxLKG_files/legislation.png" width="24" data-toggle="tooltip" title="" data-original-title="Legislation"> Real Decreto</td>
+									</tr>
+									<tr>
+										<td>Validity:</td>
+										<td>Published: 15-10-2011 - <font color="green">In force: 16-10-2011</font>
+										</td>
+									</tr>
+									<tr>
+										<td>Language:</td>
+										<td>es</td>
+									</tr>
+									<tr>
+										<td>Jurisdiction:</td>
+										<td><img src="./LynxLKG_files/es.png" width="16" data-toggle="tooltip" title="" data-original-title="es"></td>
+									</tr>
+								</tbody>
+							</table>
+							<p>Keywords: <span class="badge badge-secondary">Ministerio de Sanidad, Política Social e Igualdad</span> <span class="badge badge-secondary">Etiquetas</span> <span class="badge badge-secondary">Aparatos de uso doméstico</span> <span
+									class="badge badge-secondary">Consumidores y usuarios</span> <span class="badge badge-secondary">Electrodomésticos</span> <span class="badge badge-secondary">Ministerio de Industria, Turismo y Comercio</span> <span
+									class="badge badge-secondary">Consumo de energía</span> <span class="badge badge-secondary">Contratación administrativa</span> <span class="badge badge-secondary">Energía eléctrica</span> <span
+									class="badge badge-secondary">Comercialización</span> </p>
+						</span></div>
+					<div id="texto">
+						<html>
 
-					<HEAD>
-						<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-						<!--Filename : BDU@TRA-DOC-EN-ARRET-C-0543-2009-201102591-06_00-->
-						<!-- Feuille de style -->
-						<LINK HREF="http://curia.europa.eu/juris/html/css/Style_ARR_C_FR.css" REL="stylesheet" TYPE="text/css">
-						<LINK HREF="http://curia.europa.eu/juris/html/css/Style_ARR_C_EN.css" REL="stylesheet" TYPE="text/css">
-						<!-- Titre du document -->
-						<TITLE></TITLE>
-					</HEAD>
+						<HEAD>
+							<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+							<!--Filename : BDU@TRA-DOC-EN-ARRET-C-0543-2009-201102591-06_00-->
+							<!-- Feuille de style -->
+							<LINK HREF="http://curia.europa.eu/juris/html/css/Style_ARR_C_FR.css" REL="stylesheet" TYPE="text/css">
+							<LINK HREF="http://curia.europa.eu/juris/html/css/Style_ARR_C_EN.css" REL="stylesheet" TYPE="text/css">
+							<!-- Titre du document -->
+							<TITLE></TITLE>
+						</HEAD>
 
-					<BODY>
-						<P class="C19Centre">JUDGMENT OF THE COURT (Third Chamber)</P>
-						<P class="C19Centre">5 May 2011 (<A HREF="#Footnote*" NAME="Footref*">*</A>)</P>
-						<P class="C71Indicateur">(Electronic communications – Directive 2002/22/EC – Article 25(2) – Directive 2002/58/EC – Article 12 – Provision of directory enquiry services and directories – Obligation placed on an undertaking assigning
-							telephone numbers to pass to other undertakings data in its possession relating to the subscribers of third-party undertakings)</P>
-						<P class="C02AlineaAltA">In Case C-543/09,</P>
-						<P class="C02AlineaAltA">REFERENCE for a preliminary ruling under Article 267 TFEU from the Bundesverwaltungsgericht (Germany), made by decision of 28 October 2009, received at the Court on 22 December 2009, in the proceedings</P>
-						<P class="C02AlineaAltA"><B>Deutsche Telekom AG</B></P>
-						<P class="C19Centre">v</P>
-						<P class="C02AlineaAltA"><B>Bundesrepublik Deutschland,</B></P>
-						<P class="C02AlineaAltA">intervening parties:</P>
-						<P class="C02AlineaAltA"><B>GoYellow GmbH,</B></P>
-						<P class="C02AlineaAltA"><B>Telix AG,</B></P>
-						<P class="C19Centre">THE COURT (Third Chamber),</P>
-						<P class="C02AlineaAltA">composed of K. Lenaerts (Rapporteur), President of the Chamber, R. Silva de Lapuerta, G. Arestis, J. Malenovský and T. von Danwitz, Judges,</P>
-						<P class="C02AlineaAltA">Advocate General: V. Trstenjak,</P>
-						<P class="C02AlineaAltA">Registrar: K. Malacek, Administrator,</P>
-						<P class="C02AlineaAltA">having regard to the written procedure and further to the hearing on 2 December 2010,</P>
-						<P class="C02AlineaAltA">after considering the observations submitted on behalf of:</P>
-						<P class="C03Tiretlong">– Deutsche Telekom AG, by W. Roth, Rechtsanwalt, and I. Fink, Justitiarin,</P>
-						<P class="C03Tiretlong">– the Bundesrepublik Deutschland, by E. Greiwe, acting as Agent,</P>
-						<P class="C03Tiretlong">– GoYellow GmbH, by G. Jochum, Rechtsanwalt,</P>
-						<P class="C03Tiretlong">– the Italian Government, by G. Palmieri, acting as Agent, and by P. Gentili, avvocato dello Stato,</P>
-						<P class="C03Tiretlong">– the United Kingdom Government, by F. Penlington and C. Murrell, acting as Agents, and by T. Ward, Barrister,</P>
-						<P class="C03Tiretlong">– the European Commission, by A. Nijenhuis and G. Braun, acting as Agents,</P>
-						<P class="C02AlineaAltA">after hearing the Opinion of the Advocate General at the sitting on 17 February 2011,</P>
-						<P class="C02AlineaAltA">gives the following</P>
-						<P class="C75Debutdesmotifs"><B>Judgment</B></P>
-						<P class="C01PointnumeroteAltN"><A NAME="point1">1</A> This reference for a preliminary ruling concerns the interpretation of Article 25(2) of Directive 2002/22/EC of the European Parliament and of the Council of 7 March 2002 on universal
-							service and users’ rights relating to electronic communications networks and services (Universal Service Directive) (OJ 2002 L 108, p. 51) and of Article 12 of Directive 2002/58/EC of the European Parliament and of the Council of 12
-							July
-							2002 concerning the processing of personal data and the protection of privacy in the electronic communications sector (Directive on privacy and electronic communications) (OJ 2002 L 201, p. 37).</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point2">2</A> The reference has been made in proceedings between, on the one hand, Deutsche Telekom AG (‘Deutsche Telekom’) and, on the other, the Federal Republic of Germany, represented by the
-							Bundesnetzagentur für Elektrizität, Gas, Telekommunikation, Post und Eisenbahnen (Federal Agency for Electricity, Gas, Telecommunications, Post and Rail Networks) (‘the Bundesnetzagentur’) concerning the obligation, imposed by the
-							Telekommunikationsgesetz (German Law on Telecommunications) (‘TKG’), on undertakings which assign telephone numbers to make available, to other undertakings whose activity consists in providing publicly available directory enquiry
-							services and directories, data in their possession relating to subscribers of third-party undertakings.</P>
-						<P class="C04Titre1"> <B>Legal context</B></P>
-						<P class="C05Titre2"> <I>European Union (‘EU’) legislation</I></P>
-						<P class="C06Titre3"> Directive 95/46/EC</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point3">3</A> Article 1(1) of Directive 95/46/EC of the European Parliament and of the Council of 24 October 1995 on the protection of individuals with regard to the processing of personal data and
-							on the free movement of such data (OJ 1995 L 281, p. 31) states that that directive is aimed at protecting the fundamental rights and freedoms of natural persons and, in particular, their right to privacy with respect to the processing
-							of
-							personal data.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point4">4</A> Article 2(h) of Directive 95/46 defines ‘the data subject’s consent’ as being ‘any freely given specific and informed indication of his wishes by which the data subject signifies his
-							agreement to personal data relating to him being processed’.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point5">5</A> Article 7(a) of that directive provides that personal data may be processed if ‘the data subject has unambiguously given his consent’.</P>
-						<P class="C06Titre3"> The ONP Directive</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point6">6</A> As from 1 January 1998, the provision of telecommunications services and infrastructures was liberalised in the European Union. That liberalisation coincided with the establishment of
-							a
-							harmonised regulatory framework which included Directive 98/10/EC of the European Parliament and of the Council of 26 February 1998 on the application of open network provision (ONP) to voice telephony and on universal service for
-							telecommunications in a competitive environment (OJ 1998 L 101, p. 24; ‘the ONP Directive’).</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point7">7</A> The ONP Directive was repealed by Article 26 of Directive 2002/21/EC of the European Parliament and of the Council of 7 March 2002 on a common regulatory framework for electronic
-							communications networks and services (Framework Directive) (OJ 2002 L 108, p. 33). Article 6(3) of the ONP Directive provided:</P>
-						<P class="C02AlineaAltA">‘In order to ensure provision of [directory and directory enquiry services], Member States shall ensure that all organisations which assign telephone numbers to subscribers meet all reasonable requests to make
-							available the relevant information in an agreed format on terms which are fair, cost oriented and non-discriminatory.’</P>
-						<P class="C06Titre3"> The common regulatory framework</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point8">8</A> As is stated in recital 1 in the preamble to the Framework Directive, a few years after the liberalisation of the telecommunications markets, the conditions for effective competition
-							had been created and a common regulatory framework (‘CRF’) had been adopted. The CRF includes the Framework Directive, the Universal Service Directive and also the Directive on privacy and electronic communications.</P>
-						<P class="C07Titre4">– The Framework Directive</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point9">9</A> Article 1(1) of the Framework Directive states:</P>
-						<P class="C02AlineaAltA">‘This Directive establishes a harmonised framework for the regulation of electronic communications services … It lays down tasks of national regulatory authorities and establishes a set of procedures to ensure the
-							harmonised application of the regulatory framework throughout the Community.’</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point10">10</A> The Framework Directive gives national regulatory authorities (‘NRAs’) specific tasks for regulating electronic communications markets. Thus, under Article 16 of that directive, the
-							NRAs are to carry out an analysis of the relevant markets in the electronic communications sector and to determine whether those markets are effectively competitive. If a market is not effectively competitive, the competent NRA is to
-							impose specific regulatory obligations on undertakings with significant power on that market.</P>
-						<P class="C07Titre4">– The Universal Service Directive</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point11">11</A> Recitals 11 and 35 to the Universal Service Directive state:</P>
-						<P class="C09Marge0avecretrait">‘(11) Directory information and a directory enquiry service constitute an essential access tool for publicly available telephone services and form part of the universal service obligation. Users and
-							consumers
-							desire comprehensive directories and a directory enquiry service covering all listed telephone subscribers and their numbers (including fixed and mobile numbers) and want this information to be presented in a non-preferential fashion.
-							Directive 97/66/EC of the European Parliament and of the Council of 15 December 1997 concerning the processing of personal data and the protection of privacy in the telecommunications sector [OJ 1998 L 24, p. 1] ensures the subscribers’
-							right to privacy with regard to the inclusion of their personal information in a public directory. </P>
-						<P class="C09Marge0avecretrait">…</P>
-						<P class="C09Marge0avecretrait">(35) The provision of directory enquiry services and directories is already open to competition. The provisions of this Directive complement the provisions of Directive 97/66/EC by giving subscribers a
-							right
-							to have their personal data included in a printed or electronic directory. All service providers which assign telephone numbers to their subscribers are obliged to make relevant information available in a fair, cost-oriented and
-							non-discriminatory manner.’</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point12">12</A> Article 5 of the Universal Service Directive, which is entitled ‘Directory enquiry services and directories’, provided, in the version in force at the material time:</P>
-						<P class="C09Marge0avecretrait">‘1. Member States shall ensure that:</P>
-						<P class="C09Marge0avecretrait">(a) at least one comprehensive directory is available to end-users in a form approved by the relevant authority, whether printed or electronic, or both, and is updated on a regular basis, and at least once
-							a
-							year;</P>
-						<P class="C09Marge0avecretrait">(b) at least one comprehensive telephone directory enquiry service is available to all end-users, including users of public pay telephones.</P>
-						<P class="C09Marge0avecretrait">2. The directories in paragraph 1 shall comprise, subject to the provisions of Article 11 of Directive 97/66/EC, all subscribers of publicly available telephone services.</P>
-						<P class="C02AlineaAltA">…’</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point13">13</A> Under Article 17 of the Universal Service Directive, the NRAs – after carrying out a retail market analysis and after determining that the relevant market is not effectively
-							competitive – are to impose appropriate regulatory obligations on undertakings identified as having significant market power.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point14">14</A> Article 25 of the Universal Service Directive, which is entitled ‘Operator assistance and directory enquiry services’, provided, in the version in force at the material time:</P>
-						<P class="C02AlineaAltA">‘1. Member States shall ensure that subscribers to publicly available telephone services have the right to have an entry in the publicly available directory referred to in Article 5(1)(a).</P>
-						<P class="C02AlineaAltA">2. Member States shall ensure that all undertakings which assign telephone numbers to subscribers meet all reasonable requests to make available, for the purposes of the provision of publicly available directory
-							enquiry services and directories, the relevant information in an agreed format on terms which are fair, objective, cost-oriented and non-discriminatory.</P>
-						<P class="C02AlineaAltA">…</P>
-						<P class="C02AlineaAltA">5. Paragraphs 1, 2 … apply subject to the requirements of Community legislation on the protection of personal data and privacy and, in particular, Article 11 of Directive 97/66/EC.’</P>
-						<P class="C07Titre4">– The Directive on privacy and electronic communications</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point15">15</A> Recitals 38 and 39 to the Directive on privacy and electronic communications state:</P>
-						<P class="C09Marge0avecretrait">‘(38) Directories of subscribers to electronic communications services are widely distributed and public. The right to privacy of natural persons and the legitimate interest of legal persons require that
-							subscribers are able to determine whether their personal data are published in a directory and if so, which. Providers of public directories should inform the subscribers to be included in such directories of the purposes of the
-							directory
-							and of any particular usage which may be made of electronic versions of public directories especially through search functions embedded in the software, such as reverse search functions enabling users of the directory to discover the
-							name
-							and address of the subscriber on the basis of a telephone number only.</P>
-						<P class="C09Marge0avecretrait">(39) The obligation to inform subscribers of the purpose(s) of public directories in which their personal data are to be included should be imposed on the party collecting the data for such inclusion. Where
-							the data may be transmitted to one or more third parties, the subscriber should be informed of this possibility and of the recipient or the categories of possible recipients. Any transmission should be subject to the condition that the
-							data may not be used for other purposes than those for which they were collected. If the party collecting the data from the subscriber or any third party to whom the data have been transmitted wishes to use the data for an additional
-							purpose, the renewed consent of the subscriber is to be obtained either by the initial party collecting the data or by the third party to whom the data have been transmitted.’</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point16">16</A> Under paragraphs 1 to 3 of Article 12 of the Directive on privacy and electronic communications, which is entitled ‘Directories of subscribers’:</P>
-						<P class="C09Marge0avecretrait">‘1. Member States shall ensure that subscribers are informed, free of charge and before they are included in the directory, about the purpose(s) of a printed or electronic directory of subscribers available
-							to the public or obtainable through directory enquiry services, in which their personal data can be included and of any further usage possibilities based on search functions embedded in electronic versions of the directory. </P>
-						<P class="C09Marge0avecretrait">2. Member States shall ensure that subscribers are given the opportunity to determine whether their personal data are included in a public directory, and if so, which, to the extent that such data are
-							relevant for the purpose of the directory as determined by the provider of the directory, and to verify, correct or withdraw such data. Not being included in a public subscriber directory, verifying, correcting or withdrawing personal
-							data from it shall be free of charge.</P>
-						<P class="C09Marge0avecretrait">3. Member States may require that for any purpose of a public directory other than the search of contact details of persons on the basis of their name and, where necessary, a minimum of other identifiers,
-							additional consent be asked of the subscribers.’</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point17">17</A> Article 19 of the Directive on privacy and electronic communications repealed Directive 97/66 with effect from 31 October 2003 and provided that ‘[r]eferences made to the repealed
-							Directive shall be construed as being made to this Directive’. References to Article 11 of Directive 97/66 must therefore be construed as being references to Article 12 of the Directive on privacy and electronic communications.</P>
-						<P class="C05Titre2"> <I>National legislation</I></P>
-						<P class="C01PointnumeroteAltN"><A NAME="point18">18</A> According to the Bundesverwaltungsgericht, under Paragraphs 47(1), 104 and 105 of the TKG, read in conjunction, any undertaking which assigns telephone numbers to end-users is under
-							an obligation to pass on to providers of publicly available directory enquiry services and directories who so request not only data relating to its own subscribers, but also data in its possession relating to subscribers of third-party
-							service providers. The passing on of such data is not conditional on the consent, or lack of objection, of the subscribers concerned or their telephone service providers.</P>
-						<P class="C04Titre1"> <B>Facts and the questions referred for a preliminary ruling</B></P>
-						<P class="C01PointnumeroteAltN"><A NAME="point19">19</A> In its capacity as a telecommunications network operator in Germany, Deutsche Telekom assigns telephone numbers to its subscribers. It operates a nationwide telephone directory
-							enquiry service. It also publishes printed and electronic directories containing data relating not only to its own customers, but also to subscribers of other undertakings. Deutsche Telekom acquires the data necessary for those purposes
-							from the telephone service providers which assigned the telephone numbers to the subscribers concerned. In this way, it has concluded contracts for the acquisition of subscriber data with approximately 100 undertakings.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point20">20</A> GoYellow GmbH (‘GoYellow’) and Telix AG (‘Telix’) – the interveners in the main proceedings – operate an internet enquiry service and a telephone directory enquiry service,
-							respectively. They use data made available to them by Deutsche Telekom in return for payment. Following a disagreement as to the scope of the data which Deutsche Telekom was under an obligation to pass on to GoYellow and Telix, the
-							latter
-							companies brought the matter before the Bundesnetzagentur pursuant to Paragraphs 47(1), 104 and 105 of the TKG.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point21">21</A> By decision of 11 September 2006, the Bundesnetzagentur ordered Deutsche Telekom to make available to GoYellow and Telix not only the data relating to Deutsche Telekom’s own
-							subscribers but also the data in its possession relating to the subscribers of third-party telephone service providers (‘the external data’), even where those providers or their subscribers wished those data to be published only by
-							Deutsche Telekom.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point22">22</A> Deutsche Telekom brought an action before the Verwaltungsgericht Köln (Administrative Court, Cologne) against that decision of the Bundesnetzagentur.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point23">23</A> By judgment of 14 February 2008, the Verwaltungsgericht Köln dismissed the action. Deutsche Telekom then appealed on a point of law to the Bundesverwaltungsgericht (Federal
-							Administrative Court), submitting inter alia that an obligation to pass on data which encompasses external data infringes the Universal Service Directive.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point24">24</A> In the order for reference, the Bundesverwaltungsgericht explains that the dispute in the main proceedings is limited, on the one hand, to the obligation imposed on Deutsche Telekom
-							to pass external data on to GoYellow and Telix and, on the other, to the data which the subscriber or his provider wishes to see published only by Deutsche Telekom. The Bundesverwaltungsgericht states that, on the basis of national law
-							alone, the appeal on a point of law falls to be dismissed. It wonders, however, whether the obligation imposed by the national law applicable to the dispute before it is in conformity with EU law.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point25">25</A> The Bundesverwaltungsgericht observes, first, that the judgment in Case C-109/03 <I>KPN Telecom</I> [2004] ECR I-11273 confirms that Article 25(2) of the Universal Service Directive
-							requires an undertaking which assigns telephone numbers to pass on only data relating to its own subscribers. Secondly, accordingly to the Bundesverwaltungsgericht, the possibility cannot be ruled put that – in the light, inter alia, of
-							the general purpose of the Framework Directive, which is to promote competition – EU law allows the national legislature to extend the obligation so as to make external data available. According to the Bundesverwaltungsgericht,
-							gathering
-							data from a single party is likely to forestall the significant impediments normally associated with procuring data from each individual undertaking which assigns telephone numbers when lists of data necessary for the provision of
-							directory and directory enquiry services are established and especially when they are regularly updated; it is also likely to promote, on a lasting basis, strong competitive structures.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point26">26</A> If it should transpire that the national legislature is justified in extending the scope of the obligation to make data available so that it covers external data held by the
-							undertaking subject to that obligation, the Bundesverwaltungsgericht is uncertain as to whether Article 12 of the Universal Service Directive makes the passing on of that external data conditional on the consent of the subscribers
-							concerned and of their telephone service provider.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point27">27</A> In those circumstances, the Bundesverwaltungsgericht decided to stay the proceedings and to refer the following questions to the Court for a preliminary ruling:</P>
-						<P class="C09Marge0avecretrait">‘1. Must Article 25(2) of Directive 2002/22/EC of [the Universal Service Directive] be interpreted as meaning that Member States may require undertakings which assign telephone numbers to subscribers to
-							make
-							available data relating to subscribers to whom the undertaking in question has not itself assigned telephone numbers for the purpose of the provision of publicly available directory enquiry services and directories, in so far as that
-							undertaking has such data in its possession? </P>
-						<P class="C09Marge0avecretrait">2. If the answer to the previous question is in the affirmative:</P>
-						<P class="C09Marge0avecretrait">Must Article 12 of Directive 2002/58/EC of the [Directive on privacy and electronic communications] be interpreted as meaning that the imposition of the abovementioned obligation by the national legislature
-							is conditional upon the consent of, or at least the lack of any objection by, the other telephone service provider or its subscribers to the passing on of the data?’</P>
-						<P class="C04Titre1"> <B>Consideration of the questions referred</B></P>
-						<P class="C05Titre2"> <I>The first question</I></P>
-						<P class="C01PointnumeroteAltN"><A NAME="point28">28</A> By its first question, the Bundesverwaltungsgericht asks, in essence, whether Article 25(2) of the Universal Service Directive must be interpreted as precluding national legislation
-							which places undertakings assigning telephone numbers to end-users under an obligation to make available, to undertakings whose activity consists in providing publicly available directory enquiry services and directories, data in their
-							possession relating to subscribers of third-party undertakings.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point29">29</A> In order to answer that question, it is appropriate first to consider whether the external data at issue in the dispute in the main proceedings is ‘relevant information’ for the
-							purposes of Article 25(2) of the Universal Service Directive, which undertakings assigning telephone numbers are required, under that provision, to pass on to undertakings whose activity consists in providing publicly available
-							directory
-							enquiry services and directories.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point30">30</A> In that regard, it should be noted that, under Article 25(2) of the Universal Service Directive, an obligation to pass on data is imposed only on ‘undertakings which assign
-							telephone
-							numbers to subscribers’. Given the link thus established between, on the one hand, that obligation to pass on data and, on the other, the assignment of a telephone number to a subscriber, it must be held that the ‘relevant information’
-							the communication of which is required under Article 25(2) of the Universal Service Directive concerns solely the data relating to the subscribers of the undertakings concerned: such a provision imposes an obligation on an undertaking,
-							such as Deutsche Telekom, in its capacity as an undertaking which assigns telephone numbers and not in its capacity as a provider of directory enquiry services and directories.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point31">31</A> That interpretation is borne out by the objective pursued by Article 25(2) of the Universal Service Directive, which is to ensure compliance with the obligation of universal service
-							as laid down in Article 5(1) of that directive, under which Member States are to ensure that at least one comprehensive directory or one comprehensive telephone directory enquiry service is made available to end-users. An obligation
-							imposed on each undertaking which assigns telephone numbers to pass on data relating to its own subscribers enables the undertaking designated to provide the universal service in question to establish an exhaustive data base and,
-							therefore, to ensure compliance with the obligation under Article 5(1).</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point32">32</A> In support of their argument that the obligation under Article 25(2) of the Universal Service Directive to pass on data also encompasses external data, the Bundesnetzagentur and the
-							Italian Government refer to recital 11 to that directive and to the CRF’s general objective of promoting competition.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point33">33</A> In that regard, it should be borne in mind that recital 11 to the Universal Service Directive states that ‘[u]sers and consumers desire comprehensive directories and a directory
-							enquiry service covering all listed telephone subscribers and their numbers …’. That recital must, however, be read in conjunction with the universal service obligation laid down in Article 5(1) of that directive, which does not require
-							the Member States to ensure that all directories and telephone directory enquiry services are comprehensive. Under that provision, the Member States must ensure only that at least one comprehensive directory or one comprehensive
-							telephone
-							directory enquiry service is made available to end-users. As is apparent from paragraph 31 above, an obligation to pass on data which applies to undertakings assigning telephone numbers and which covers only data relating to their own
-							subscribers is sufficient to ensure compliance with the universal service obligation under Article 5(1).</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point34">34</A> Nor does the CRF’s general objective, which is to promote competition, support the view that an undertaking assigning telephone numbers to subscribers, such as Deutsche Telekom, is
-							required under Article 25(2) of the Universal Service Directive to pass on to third-party undertakings data other than data relating to its own subscribers.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point35">35</A> Article 25(2) of the Universal Service Directive must be interpreted in the light of its specific objective, which is to ensure compliance with the universal service obligation laid
-							down in Article 5(1) of that directive.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point36">36</A> Moreover, recital 35 to the Universal Service Directive states that the provision of directory enquiry services and directories is already open to competition. In a competitive
-							market, the obligation under Article 25(2) of that directive for undertakings which assign telephone numbers to pass on data relating to their own subscribers in principle not only enables the designated undertaking to ensure compliance
-							with the universal service obligation laid down in Article 5(1) of that directive, but also enables any provider of telephone services to establish an exhaustive data base and to become active in the market for telephone directory
-							enquiry
-							services and directories. In that connection, it is sufficient that the provider concerned ask each undertaking assigning telephone numbers for the relevant data relating to its subscribers.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point37">37</A> It follows from the foregoing that the ‘relevant information’ for the purposes of Article 25(2) of the Universal Service Directive, the communication of which is required under that
-							provision, encompasses only information which relates to the subscribers of the undertakings assigning telephone numbers.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point38">38</A> Secondly, it must be determined whether Article 25(2) of the Universal Service Directive undertakes full harmonisation or whether, on the contrary, that provision allows the Member
-							States to impose on undertakings assigning telephone numbers an obligation to pass on to undertakings which intend to provide publicly available directory enquiry services and directories not only ‘relevant information’ for the purposes
-							of that provision, but also external data.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point39">39</A> In that regard, it should be borne in mind from the outset that, in paragraph 35 of its judgment in <I>KPN Telecom</I>, concerning the interpretation of Article 6(3) of the ONP
-							Directive, the content of which is similar to that of Article 25(2) of the Universal Service Directive, the Court held that Article 6(3) did not seek to effect full harmonisation and that the Member States retained competence for
-							determining whether in a specific national context certain additional data ought to be made available to third parties.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point40">40</A> Deutsche Telekom maintains, however, as do the United Kingdom Government and the European Commission, that Article 25(2) of the Universal Service Directive cannot be interpreted in
-							that way, since it is part of the CRF, which – as is stated in Article 1(1) of the Framework Directive – is a harmonised framework for the regulation of electronic communications services. Accordingly, the national legislature may not
-							impose on the undertakings concerned obligations which go beyond those laid down in Article 25(2).</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point41">41</A> In that regard, it should first be observed that Article 25(2) of the Universal Service Directive is part of Chapter IV of that directive, which concerns end-user interests and
-							rights. Yet the Court has held that the Framework Directive and the Universal Service Directive do not provide for full harmonisation of consumer-protection aspects (Case C-522/08 <I>Telekomunikacja Polska </I>[2010] ECR I-0000,
-							paragraph
-							29).</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point42">42</A> Secondly, it should be borne in mind that Article 25(2) of the Universal Service Directive is aimed at ensuring compliance with the obligation, placed on the Member States under
-							Article 5(1) of that directive, to ensure that at least one comprehensive directory or one comprehensive telephone directory enquiry service is made available to end-users. Since that marks a minimum requirement which the Member States
-							must satisfy, in principle they remain free to adopt more stringent provisions in order to facilitate the entry of new traders on the market for publicly available telephone and directory services.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point43">43</A> Thus, the CRF does not preclude national legislation such as that at issue in the main proceedings, which, being directed at any undertaking which assigns telephone numbers to
-							end-users, affects electronic communications undertakings in a general and non-discriminatory manner – provided, however, that such legislation does not encroach upon the powers which the NRAs derive directly from the provisions of the
-							CRF (<I>Telekomunikacja Polska</I>, paragraphs 27 and 28; see also Case C-424/07 <I>Commission</I> v <I>Germany</I> [2009] ECR I-11431, paragraphs 78 and 91 to 99).</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point44">44</A> In the present case, it must be held that national legislation such as that at issue in the main proceedings does not affect any of the powers expressly conferred by the CRF on the
-							NRA concerned.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point45">45</A> First, Article 25(2) of the Universal Service Directive does not confer any specific powers or impose any specific obligations on the NRAs. That provision imposes obligations only
-							on
-							the Member States as such.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point46">46</A> Secondly, national legislation such as that at issue in the main proceedings does not in any way affect the powers of the NRA concerned, arising under Article 16 of the Framework
-							Directive and Article 17 of the Universal Service Directive, relating to the analysis of the various electronic communications markets and the imposition of regulatory obligations on undertakings with significant market power on markets
-							which are not effectively competitive. None the less, the mere fact that, if the undertakings concerned comply with the national legislation at issue in the main proceedings, the NRA will no longer need, after any analysis it may carry
-							out of the retail market concerned, to take any specific measures – that is to say, to require undertakings with significant market power to pass on external data to third-party undertakings – does not support the inference that the
-							powers which the NRA concerned derives from Article 17 of the Universal Service Directive are directly affected (see, by analogy, as regards a general prohibition of tied sales, <I>Telekomunikacja Polska</I>, paragraph 28).</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point47">47</A> It follows from all the foregoing that the answer to the first question is that Article 25(2) of the Universal Service Directive must be interpreted as not precluding national
-							legislation under which undertakings assigning telephone numbers to end-users must make available to undertakings whose activity consists in providing publicly available directory enquiry services and directories not only data relating
-							to
-							their own subscribers but also data in their possession relating to subscribers of third-party undertakings.</P>
-						<P class="C05Titre2"> <I>The second question</I></P>
-						<P class="C01PointnumeroteAltN"><A NAME="point48">48</A> By its second question, the Bundesverwaltungsgericht asks, in essence, whether Article 12 of the Directive on privacy and electronic communications makes the passing on, to an
-							undertaking whose activity consists in providing publicly available directory enquiry services and directories, by an undertaking which assigns telephone numbers, of data in its possession relating to subscribers of a third-party
-							undertaking conditional on the consent, or lack of objection, of that undertaking or its subscribers.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point49">49</A> In that regard, it should be noted that Article 8(1) of the Charter of Fundamental Rights of the European Union (‘the Charter’) states that ‘[e]veryone has the right to the
-							protection
-							of personal data concerning him or her’.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point50">50</A> Directive 95/46 is designed to ensure, in the Member States, observance of the right to protection of personal data. As is clear from Article 1(2) thereof, the Directive on privacy
-							and electronic communications clarifies and supplements Directive 95/46 in the electronic communications sector.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point51">51</A> However, the right to the protection of personal data is not an absolute right, but must be considered in relation to its function in society (Joined Cases C-92/09 and C-93/09
-							<I>Volker und Markus Schecke and Eifert</I> [2010] ECR I-0000, paragraph 48 and the case-law cited).</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point52">52</A> Article 8(2) of the Charter thus authorises the processing of personal data if certain conditions are satisfied. It provides that personal data ‘must be processed fairly for
-							specified
-							purposes and on the basis of the consent of the person concerned or some other legitimate basis laid down by law’.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point53">53</A> The passing of subscribers’ personal data to a third-party undertaking which intends to provide publicly available directory enquiry services and directories constitutes processing
-							of
-							personal data for the purposes of Article 8(2) of the Charter, which may be undertaken only ‘on the basis of the consent of the person concerned or some other legitimate basis laid down by law’.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point54">54</A> Moreover, the Directive on privacy and electronic communications makes it clear that that directive makes the publication, in printed or electronic directories, of personal data
-							concerning subscribers conditional on the consent of those subscribers.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point55">55</A> Thus, Article 12(2) of that directive provides that subscribers are to be free to decide whether their personal data is to be included in a public directory and, if so, which
-							personal
-							data.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point56">56</A> On the other hand, there is no provision in the Directive on privacy and electronic communications which makes the publication of personal data relating to subscribers conditional
-							on
-							any consent from the undertaking which assigned the telephone numbers concerned or which has external data in its possession. Such an undertaking cannot, in its own right, rely on the right of prior consent, which is conferred solely on
-							subscribers.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point57">57</A> By its second question, the Bundesverwaltungsgericht also asks whether Article 12 of the Directive on privacy and electronic communications makes the passing of personal data to a
-							third-party undertaking whose activity consists in providing publicly available directory enquiry services and directories conditional on renewed consent from the subscriber, where the subscriber has consented to the publication of his
-							personal data in one directory only, in this case the directory drawn up by Deutsche Telekom.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point58">58</A> In that regard, it should be borne in mind from the outset that it is clear from Article 12(1) of the Directive on privacy and electronic communications and from recital 38 thereto
-							that, before being included in public directories, subscribers are to be informed of the purposes of the directory and of any particular usage which may be made of it, in particular through search functions embedded in the software of
-							the
-							electronic versions of the directories. Such prior information gives the subscriber concerned the opportunity to give free, specific and informed consent, for the purposes of Articles 2(h) and 7(a) of Directive 95/46, to the publication
-							of his personal data in public directories.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point59">59</A> Recital 39 to the Directive on privacy and electronic communications states, with respect to the obligation of prior information for subscribers under Article 12(1) of that
-							directive:
-							‘[w]here the [personal] data may be transmitted to one or more third parties, the subscriber should be informed of this possibility and of the recipient or the categories of possible recipients’.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point60">60</A> However, after obtaining the information referred to in Article 12(1) of that directive, the subscriber may – as is clear from Article 12(2) – decide only whether his personal data
-							may be included in a public directory and, if so, which personal data.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point61">61</A> As the Advocate General observed in point 122 of her Opinion, it follows from a contextual and systematic interpretation of Article 12 of the Directive on privacy and electronic
-							communications that the consent under Article 12(2) relates to the purpose of the publication of personal data in a public directory and not to the identity of any particular directory provider.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point62">62</A> First, the wording of Article 12(2) of the Directive on privacy and electronic communications does not support the inference that the subscriber has a selective right to decide in
-							favour of certain providers of publicly available directory enquiry services and directories. It should be noted in that regard that it is the publication itself of the personal data in a public directory with a specific purpose which
-							may
-							turn out to be detrimental for a subscriber. Where, however, the subscriber has consented to his data being published in a directory with a specific purpose, he will generally not have standing to object to the publication of the same
-							data in another, similar directory.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point63">63</A> Secondly, recital 39 to that directive confirms that the passing of subscribers’ personal data to third parties is ‘subject to the condition that the data may not be used for other
-							purposes than those for which they were collected’.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point64">64</A> Thirdly, the Directive on privacy and electronic communications refers to a situation in which provision can be made for the subscriber’s renewed or specific consent. Thus, under
-							Article 12(3) of that directive, Member States may require that, for any purpose of a public directory other than the search of contact details of persons on the basis of their name and, where necessary, a minimum of other identifiers,
-							additional consent be asked of the subscribers. Recital 39 to that directive states that renewed consent should be obtained from the subscriber ‘[i]f the party collecting the data from the subscriber or any third party to whom the data
-							have been transmitted wishes to use the data for an additional purpose’.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point65">65</A> It follows that, where a subscriber has been informed by the undertaking which assigned him a telephone number of the possibility that his personal data may be passed to a
-							third-party
-							undertaking, such as Deutsche Telekom, with a view to being published in a public directory, and where he has consented to the publication of those data in such a directory (in the present case, Deutsche Telekom’s directory), renewed
-							consent is not needed from the subscriber for the passing of those same data to another undertaking which intends to publish a printed or electronic public directory, or to make such directories available for consultation through
-							directory enquiry services, if it is guaranteed that the data in question will not be used for purposes other than those for which the data were collected with a view to their first publication. The consent given under Article 12(2) of
-							the Directive on privacy and electronic communications, by a subscriber who has been duly informed, to the publication of his personal data in a public directory relates to the purpose of that publication and thus extends to any
-							subsequent processing of those data by third-party undertakings active in the market for publicly available directory enquiry services and directories, provided that such processing pursues that same purpose.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point66">66</A> Moreover, where a subscriber has consented to the passing of his personal data to a given undertaking with a view to their publication in a public directory of that undertaking, the
-							passing of the same data to another undertaking intending to publish a public directory without renewed consent having been obtained from that subscriber is not capable of substantively impairing the right to protection of personal
-							data,
-							as recognised in Article 8 of the Charter.</P>
-						<P class="C01PointnumeroteAltN"><A NAME="point67">67</A> Consequently, the answer to the second question is that Article 12 of the Directive on privacy and electronic communications must be interpreted as not precluding national
-							legislation
-							under which an undertaking publishing public directories must pass personal data in its possession relating to subscribers of other telephone service providers to a third-party undertaking whose activity consists in publishing a printed
-							or electronic public directory or making such directories obtainable through directory enquiry services and which does not make the passing on of those data conditional on renewed consent from the subscribers, provided, however, that
-							those subscribers have been informed, before the first inclusion of their data in a public directory, of the purpose of that directory and of the fact that those data may be communicated to another telephone service provider and that it
-							is guaranteed that those data will not, once passed on, be used for purposes other than those for which they were collected with a view to their first publication.</P>
-						<P class="C04Titre1"> <B>Costs</B></P>
-						<P class="C01PointnumeroteAltN"><A NAME="point68">68</A> Since these proceedings are, for the parties to the main proceedings, a step in the action pending before the national court, the decision on costs is a matter for that court. Costs
-							incurred in submitting observations to the Court, other than the costs of those parties, are not recoverable.</P>
-						<P class="C41DispositifIntroduction">On those grounds, the Court (Third Chamber) hereby rules:</P>
-						<P class="C08Dispositif">1. <B>Article 25(2) of Directive 2002/22/EC of the European Parliament and of the Council of 7 March 2002 on universal service and users’ rights relating to electronic communications networks and services
-								(Universal
-								Service Directive) must be interpreted as not precluding national legislation under which undertakings assigning telephone numbers to end-users must make available to undertakings whose activity consists in providing publicly
-								available
-								directory enquiry services and directories not only data relating to their own subscribers but also data in their possession relating to subscribers of third-party undertakings.</B></P>
-						<P class="C08Dispositif">2. <B>Article 12 of Directive 2002/58/EC of the European Parliament and of the Council of 12 July 2002 concerning the processing of personal data and the protection of privacy in the electronic communications
-								sector
-								(Directive on privacy and electronic communications) must be interpreted as not precluding national legislation under which an undertaking publishing public directories must pass personal data in its possession relating to subscribers
-								of other telephone service providers to a third-party undertaking whose activity consists in publishing a printed or electronic public directory or making such directories obtainable through directory enquiry services, and under which
-								the passing on of those data is not conditional on renewed consent from the subscribers, provided, however, that those subscribers have been informed, before the first inclusion of their data in a public directory, of the purpose of
-								that directory and of the fact that those data could be communicated to another telephone service provider and that it is guaranteed that those data will not, once passed on, be used for purposes other than those for which they were
-								collected with a view to their first publication.</B></P>
-						<P class="C77Signatures">[Signatures]</P>
-						<HR>
-						<P class="C42FootnoteLangue"><A HREF="#Footref*" NAME="Footnote*">*</A> Language of the case: German.</P>
-					</BODY>
+						<BODY>
+							<P class="C19Centre">JUDGMENT OF THE COURT (Third Chamber)</P>
+							<P class="C19Centre">5 May 2011 (<A HREF="#Footnote*" NAME="Footref*">*</A>)</P>
+							<P class="C71Indicateur">(Electronic communications – Directive 2002/22/EC – Article 25(2) – Directive 2002/58/EC – Article 12 – Provision of directory enquiry services and directories – Obligation placed on an undertaking assigning
+								telephone numbers to pass to other undertakings data in its possession relating to the subscribers of third-party undertakings)</P>
+							<P class="C02AlineaAltA">In Case C-543/09,</P>
+							<P class="C02AlineaAltA">REFERENCE for a preliminary ruling under Article 267 TFEU from the Bundesverwaltungsgericht (Germany), made by decision of 28 October 2009, received at the Court on 22 December 2009, in the proceedings</P>
+							<P class="C02AlineaAltA"><B>Deutsche Telekom AG</B></P>
+							<P class="C19Centre">v</P>
+							<P class="C02AlineaAltA"><B>Bundesrepublik Deutschland,</B></P>
+							<P class="C02AlineaAltA">intervening parties:</P>
+							<P class="C02AlineaAltA"><B>GoYellow GmbH,</B></P>
+							<P class="C02AlineaAltA"><B>Telix AG,</B></P>
+							<P class="C19Centre">THE COURT (Third Chamber),</P>
+							<P class="C02AlineaAltA">composed of K. Lenaerts (Rapporteur), President of the Chamber, R. Silva de Lapuerta, G. Arestis, J. Malenovský and T. von Danwitz, Judges,</P>
+							<P class="C02AlineaAltA">Advocate General: V. Trstenjak,</P>
+							<P class="C02AlineaAltA">Registrar: K. Malacek, Administrator,</P>
+							<P class="C02AlineaAltA">having regard to the written procedure and further to the hearing on 2 December 2010,</P>
+							<P class="C02AlineaAltA">after considering the observations submitted on behalf of:</P>
+							<P class="C03Tiretlong">– Deutsche Telekom AG, by W. Roth, Rechtsanwalt, and I. Fink, Justitiarin,</P>
+							<P class="C03Tiretlong">– the Bundesrepublik Deutschland, by E. Greiwe, acting as Agent,</P>
+							<P class="C03Tiretlong">– GoYellow GmbH, by G. Jochum, Rechtsanwalt,</P>
+							<P class="C03Tiretlong">– the Italian Government, by G. Palmieri, acting as Agent, and by P. Gentili, avvocato dello Stato,</P>
+							<P class="C03Tiretlong">– the United Kingdom Government, by F. Penlington and C. Murrell, acting as Agents, and by T. Ward, Barrister,</P>
+							<P class="C03Tiretlong">– the European Commission, by A. Nijenhuis and G. Braun, acting as Agents,</P>
+							<P class="C02AlineaAltA">after hearing the Opinion of the Advocate General at the sitting on 17 February 2011,</P>
+							<P class="C02AlineaAltA">gives the following</P>
+							<P class="C75Debutdesmotifs"><B>Judgment</B></P>
+							<P class="C01PointnumeroteAltN"><A NAME="point1">1</A> This reference for a preliminary ruling concerns the interpretation of Article 25(2) of Directive 2002/22/EC of the European Parliament and of the Council of 7 March 2002 on universal
+								service and users’ rights relating to electronic communications networks and services (Universal Service Directive) (OJ 2002 L 108, p. 51) and of Article 12 of Directive 2002/58/EC of the European Parliament and of the Council of 12
+								July
+								2002 concerning the processing of personal data and the protection of privacy in the electronic communications sector (Directive on privacy and electronic communications) (OJ 2002 L 201, p. 37).</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point2">2</A> The reference has been made in proceedings between, on the one hand, Deutsche Telekom AG (‘Deutsche Telekom’) and, on the other, the Federal Republic of Germany, represented by the
+								Bundesnetzagentur für Elektrizität, Gas, Telekommunikation, Post und Eisenbahnen (Federal Agency for Electricity, Gas, Telecommunications, Post and Rail Networks) (‘the Bundesnetzagentur’) concerning the obligation, imposed by the
+								Telekommunikationsgesetz (German Law on Telecommunications) (‘TKG’), on undertakings which assign telephone numbers to make available, to other undertakings whose activity consists in providing publicly available directory enquiry
+								services and directories, data in their possession relating to subscribers of third-party undertakings.</P>
+							<P class="C04Titre1"> <B>Legal context</B></P>
+							<P class="C05Titre2"> <I>European Union (‘EU’) legislation</I></P>
+							<P class="C06Titre3"> Directive 95/46/EC</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point3">3</A> Article 1(1) of Directive 95/46/EC of the European Parliament and of the Council of 24 October 1995 on the protection of individuals with regard to the processing of personal data and
+								on the free movement of such data (OJ 1995 L 281, p. 31) states that that directive is aimed at protecting the fundamental rights and freedoms of natural persons and, in particular, their right to privacy with respect to the processing
+								of
+								personal data.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point4">4</A> Article 2(h) of Directive 95/46 defines ‘the data subject’s consent’ as being ‘any freely given specific and informed indication of his wishes by which the data subject signifies his
+								agreement to personal data relating to him being processed’.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point5">5</A> Article 7(a) of that directive provides that personal data may be processed if ‘the data subject has unambiguously given his consent’.</P>
+							<P class="C06Titre3"> The ONP Directive</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point6">6</A> As from 1 January 1998, the provision of telecommunications services and infrastructures was liberalised in the European Union. That liberalisation coincided with the establishment of
+								a
+								harmonised regulatory framework which included Directive 98/10/EC of the European Parliament and of the Council of 26 February 1998 on the application of open network provision (ONP) to voice telephony and on universal service for
+								telecommunications in a competitive environment (OJ 1998 L 101, p. 24; ‘the ONP Directive’).</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point7">7</A> The ONP Directive was repealed by Article 26 of Directive 2002/21/EC of the European Parliament and of the Council of 7 March 2002 on a common regulatory framework for electronic
+								communications networks and services (Framework Directive) (OJ 2002 L 108, p. 33). Article 6(3) of the ONP Directive provided:</P>
+							<P class="C02AlineaAltA">‘In order to ensure provision of [directory and directory enquiry services], Member States shall ensure that all organisations which assign telephone numbers to subscribers meet all reasonable requests to make
+								available the relevant information in an agreed format on terms which are fair, cost oriented and non-discriminatory.’</P>
+							<P class="C06Titre3"> The common regulatory framework</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point8">8</A> As is stated in recital 1 in the preamble to the Framework Directive, a few years after the liberalisation of the telecommunications markets, the conditions for effective competition
+								had been created and a common regulatory framework (‘CRF’) had been adopted. The CRF includes the Framework Directive, the Universal Service Directive and also the Directive on privacy and electronic communications.</P>
+							<P class="C07Titre4">– The Framework Directive</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point9">9</A> Article 1(1) of the Framework Directive states:</P>
+							<P class="C02AlineaAltA">‘This Directive establishes a harmonised framework for the regulation of electronic communications services … It lays down tasks of national regulatory authorities and establishes a set of procedures to ensure the
+								harmonised application of the regulatory framework throughout the Community.’</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point10">10</A> The Framework Directive gives national regulatory authorities (‘NRAs’) specific tasks for regulating electronic communications markets. Thus, under Article 16 of that directive, the
+								NRAs are to carry out an analysis of the relevant markets in the electronic communications sector and to determine whether those markets are effectively competitive. If a market is not effectively competitive, the competent NRA is to
+								impose specific regulatory obligations on undertakings with significant power on that market.</P>
+							<P class="C07Titre4">– The Universal Service Directive</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point11">11</A> Recitals 11 and 35 to the Universal Service Directive state:</P>
+							<P class="C09Marge0avecretrait">‘(11) Directory information and a directory enquiry service constitute an essential access tool for publicly available telephone services and form part of the universal service obligation. Users and
+								consumers
+								desire comprehensive directories and a directory enquiry service covering all listed telephone subscribers and their numbers (including fixed and mobile numbers) and want this information to be presented in a non-preferential fashion.
+								Directive 97/66/EC of the European Parliament and of the Council of 15 December 1997 concerning the processing of personal data and the protection of privacy in the telecommunications sector [OJ 1998 L 24, p. 1] ensures the subscribers’
+								right to privacy with regard to the inclusion of their personal information in a public directory. </P>
+							<P class="C09Marge0avecretrait">…</P>
+							<P class="C09Marge0avecretrait">(35) The provision of directory enquiry services and directories is already open to competition. The provisions of this Directive complement the provisions of Directive 97/66/EC by giving subscribers a
+								right
+								to have their personal data included in a printed or electronic directory. All service providers which assign telephone numbers to their subscribers are obliged to make relevant information available in a fair, cost-oriented and
+								non-discriminatory manner.’</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point12">12</A> Article 5 of the Universal Service Directive, which is entitled ‘Directory enquiry services and directories’, provided, in the version in force at the material time:</P>
+							<P class="C09Marge0avecretrait">‘1. Member States shall ensure that:</P>
+							<P class="C09Marge0avecretrait">(a) at least one comprehensive directory is available to end-users in a form approved by the relevant authority, whether printed or electronic, or both, and is updated on a regular basis, and at least once
+								a
+								year;</P>
+							<P class="C09Marge0avecretrait">(b) at least one comprehensive telephone directory enquiry service is available to all end-users, including users of public pay telephones.</P>
+							<P class="C09Marge0avecretrait">2. The directories in paragraph 1 shall comprise, subject to the provisions of Article 11 of Directive 97/66/EC, all subscribers of publicly available telephone services.</P>
+							<P class="C02AlineaAltA">…’</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point13">13</A> Under Article 17 of the Universal Service Directive, the NRAs – after carrying out a retail market analysis and after determining that the relevant market is not effectively
+								competitive – are to impose appropriate regulatory obligations on undertakings identified as having significant market power.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point14">14</A> Article 25 of the Universal Service Directive, which is entitled ‘Operator assistance and directory enquiry services’, provided, in the version in force at the material time:</P>
+							<P class="C02AlineaAltA">‘1. Member States shall ensure that subscribers to publicly available telephone services have the right to have an entry in the publicly available directory referred to in Article 5(1)(a).</P>
+							<P class="C02AlineaAltA">2. Member States shall ensure that all undertakings which assign telephone numbers to subscribers meet all reasonable requests to make available, for the purposes of the provision of publicly available directory
+								enquiry services and directories, the relevant information in an agreed format on terms which are fair, objective, cost-oriented and non-discriminatory.</P>
+							<P class="C02AlineaAltA">…</P>
+							<P class="C02AlineaAltA">5. Paragraphs 1, 2 … apply subject to the requirements of Community legislation on the protection of personal data and privacy and, in particular, Article 11 of Directive 97/66/EC.’</P>
+							<P class="C07Titre4">– The Directive on privacy and electronic communications</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point15">15</A> Recitals 38 and 39 to the Directive on privacy and electronic communications state:</P>
+							<P class="C09Marge0avecretrait">‘(38) Directories of subscribers to electronic communications services are widely distributed and public. The right to privacy of natural persons and the legitimate interest of legal persons require that
+								subscribers are able to determine whether their personal data are published in a directory and if so, which. Providers of public directories should inform the subscribers to be included in such directories of the purposes of the
+								directory
+								and of any particular usage which may be made of electronic versions of public directories especially through search functions embedded in the software, such as reverse search functions enabling users of the directory to discover the
+								name
+								and address of the subscriber on the basis of a telephone number only.</P>
+							<P class="C09Marge0avecretrait">(39) The obligation to inform subscribers of the purpose(s) of public directories in which their personal data are to be included should be imposed on the party collecting the data for such inclusion. Where
+								the data may be transmitted to one or more third parties, the subscriber should be informed of this possibility and of the recipient or the categories of possible recipients. Any transmission should be subject to the condition that the
+								data may not be used for other purposes than those for which they were collected. If the party collecting the data from the subscriber or any third party to whom the data have been transmitted wishes to use the data for an additional
+								purpose, the renewed consent of the subscriber is to be obtained either by the initial party collecting the data or by the third party to whom the data have been transmitted.’</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point16">16</A> Under paragraphs 1 to 3 of Article 12 of the Directive on privacy and electronic communications, which is entitled ‘Directories of subscribers’:</P>
+							<P class="C09Marge0avecretrait">‘1. Member States shall ensure that subscribers are informed, free of charge and before they are included in the directory, about the purpose(s) of a printed or electronic directory of subscribers available
+								to the public or obtainable through directory enquiry services, in which their personal data can be included and of any further usage possibilities based on search functions embedded in electronic versions of the directory. </P>
+							<P class="C09Marge0avecretrait">2. Member States shall ensure that subscribers are given the opportunity to determine whether their personal data are included in a public directory, and if so, which, to the extent that such data are
+								relevant for the purpose of the directory as determined by the provider of the directory, and to verify, correct or withdraw such data. Not being included in a public subscriber directory, verifying, correcting or withdrawing personal
+								data from it shall be free of charge.</P>
+							<P class="C09Marge0avecretrait">3. Member States may require that for any purpose of a public directory other than the search of contact details of persons on the basis of their name and, where necessary, a minimum of other identifiers,
+								additional consent be asked of the subscribers.’</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point17">17</A> Article 19 of the Directive on privacy and electronic communications repealed Directive 97/66 with effect from 31 October 2003 and provided that ‘[r]eferences made to the repealed
+								Directive shall be construed as being made to this Directive’. References to Article 11 of Directive 97/66 must therefore be construed as being references to Article 12 of the Directive on privacy and electronic communications.</P>
+							<P class="C05Titre2"> <I>National legislation</I></P>
+							<P class="C01PointnumeroteAltN"><A NAME="point18">18</A> According to the Bundesverwaltungsgericht, under Paragraphs 47(1), 104 and 105 of the TKG, read in conjunction, any undertaking which assigns telephone numbers to end-users is under
+								an obligation to pass on to providers of publicly available directory enquiry services and directories who so request not only data relating to its own subscribers, but also data in its possession relating to subscribers of third-party
+								service providers. The passing on of such data is not conditional on the consent, or lack of objection, of the subscribers concerned or their telephone service providers.</P>
+							<P class="C04Titre1"> <B>Facts and the questions referred for a preliminary ruling</B></P>
+							<P class="C01PointnumeroteAltN"><A NAME="point19">19</A> In its capacity as a telecommunications network operator in Germany, Deutsche Telekom assigns telephone numbers to its subscribers. It operates a nationwide telephone directory
+								enquiry service. It also publishes printed and electronic directories containing data relating not only to its own customers, but also to subscribers of other undertakings. Deutsche Telekom acquires the data necessary for those purposes
+								from the telephone service providers which assigned the telephone numbers to the subscribers concerned. In this way, it has concluded contracts for the acquisition of subscriber data with approximately 100 undertakings.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point20">20</A> GoYellow GmbH (‘GoYellow’) and Telix AG (‘Telix’) – the interveners in the main proceedings – operate an internet enquiry service and a telephone directory enquiry service,
+								respectively. They use data made available to them by Deutsche Telekom in return for payment. Following a disagreement as to the scope of the data which Deutsche Telekom was under an obligation to pass on to GoYellow and Telix, the
+								latter
+								companies brought the matter before the Bundesnetzagentur pursuant to Paragraphs 47(1), 104 and 105 of the TKG.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point21">21</A> By decision of 11 September 2006, the Bundesnetzagentur ordered Deutsche Telekom to make available to GoYellow and Telix not only the data relating to Deutsche Telekom’s own
+								subscribers but also the data in its possession relating to the subscribers of third-party telephone service providers (‘the external data’), even where those providers or their subscribers wished those data to be published only by
+								Deutsche Telekom.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point22">22</A> Deutsche Telekom brought an action before the Verwaltungsgericht Köln (Administrative Court, Cologne) against that decision of the Bundesnetzagentur.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point23">23</A> By judgment of 14 February 2008, the Verwaltungsgericht Köln dismissed the action. Deutsche Telekom then appealed on a point of law to the Bundesverwaltungsgericht (Federal
+								Administrative Court), submitting inter alia that an obligation to pass on data which encompasses external data infringes the Universal Service Directive.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point24">24</A> In the order for reference, the Bundesverwaltungsgericht explains that the dispute in the main proceedings is limited, on the one hand, to the obligation imposed on Deutsche Telekom
+								to pass external data on to GoYellow and Telix and, on the other, to the data which the subscriber or his provider wishes to see published only by Deutsche Telekom. The Bundesverwaltungsgericht states that, on the basis of national law
+								alone, the appeal on a point of law falls to be dismissed. It wonders, however, whether the obligation imposed by the national law applicable to the dispute before it is in conformity with EU law.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point25">25</A> The Bundesverwaltungsgericht observes, first, that the judgment in Case C-109/03 <I>KPN Telecom</I> [2004] ECR I-11273 confirms that Article 25(2) of the Universal Service Directive
+								requires an undertaking which assigns telephone numbers to pass on only data relating to its own subscribers. Secondly, accordingly to the Bundesverwaltungsgericht, the possibility cannot be ruled put that – in the light, inter alia, of
+								the general purpose of the Framework Directive, which is to promote competition – EU law allows the national legislature to extend the obligation so as to make external data available. According to the Bundesverwaltungsgericht,
+								gathering
+								data from a single party is likely to forestall the significant impediments normally associated with procuring data from each individual undertaking which assigns telephone numbers when lists of data necessary for the provision of
+								directory and directory enquiry services are established and especially when they are regularly updated; it is also likely to promote, on a lasting basis, strong competitive structures.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point26">26</A> If it should transpire that the national legislature is justified in extending the scope of the obligation to make data available so that it covers external data held by the
+								undertaking subject to that obligation, the Bundesverwaltungsgericht is uncertain as to whether Article 12 of the Universal Service Directive makes the passing on of that external data conditional on the consent of the subscribers
+								concerned and of their telephone service provider.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point27">27</A> In those circumstances, the Bundesverwaltungsgericht decided to stay the proceedings and to refer the following questions to the Court for a preliminary ruling:</P>
+							<P class="C09Marge0avecretrait">‘1. Must Article 25(2) of Directive 2002/22/EC of [the Universal Service Directive] be interpreted as meaning that Member States may require undertakings which assign telephone numbers to subscribers to
+								make
+								available data relating to subscribers to whom the undertaking in question has not itself assigned telephone numbers for the purpose of the provision of publicly available directory enquiry services and directories, in so far as that
+								undertaking has such data in its possession? </P>
+							<P class="C09Marge0avecretrait">2. If the answer to the previous question is in the affirmative:</P>
+							<P class="C09Marge0avecretrait">Must Article 12 of Directive 2002/58/EC of the [Directive on privacy and electronic communications] be interpreted as meaning that the imposition of the abovementioned obligation by the national legislature
+								is conditional upon the consent of, or at least the lack of any objection by, the other telephone service provider or its subscribers to the passing on of the data?’</P>
+							<P class="C04Titre1"> <B>Consideration of the questions referred</B></P>
+							<P class="C05Titre2"> <I>The first question</I></P>
+							<P class="C01PointnumeroteAltN"><A NAME="point28">28</A> By its first question, the Bundesverwaltungsgericht asks, in essence, whether Article 25(2) of the Universal Service Directive must be interpreted as precluding national legislation
+								which places undertakings assigning telephone numbers to end-users under an obligation to make available, to undertakings whose activity consists in providing publicly available directory enquiry services and directories, data in their
+								possession relating to subscribers of third-party undertakings.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point29">29</A> In order to answer that question, it is appropriate first to consider whether the external data at issue in the dispute in the main proceedings is ‘relevant information’ for the
+								purposes of Article 25(2) of the Universal Service Directive, which undertakings assigning telephone numbers are required, under that provision, to pass on to undertakings whose activity consists in providing publicly available
+								directory
+								enquiry services and directories.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point30">30</A> In that regard, it should be noted that, under Article 25(2) of the Universal Service Directive, an obligation to pass on data is imposed only on ‘undertakings which assign
+								telephone
+								numbers to subscribers’. Given the link thus established between, on the one hand, that obligation to pass on data and, on the other, the assignment of a telephone number to a subscriber, it must be held that the ‘relevant information’
+								the communication of which is required under Article 25(2) of the Universal Service Directive concerns solely the data relating to the subscribers of the undertakings concerned: such a provision imposes an obligation on an undertaking,
+								such as Deutsche Telekom, in its capacity as an undertaking which assigns telephone numbers and not in its capacity as a provider of directory enquiry services and directories.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point31">31</A> That interpretation is borne out by the objective pursued by Article 25(2) of the Universal Service Directive, which is to ensure compliance with the obligation of universal service
+								as laid down in Article 5(1) of that directive, under which Member States are to ensure that at least one comprehensive directory or one comprehensive telephone directory enquiry service is made available to end-users. An obligation
+								imposed on each undertaking which assigns telephone numbers to pass on data relating to its own subscribers enables the undertaking designated to provide the universal service in question to establish an exhaustive data base and,
+								therefore, to ensure compliance with the obligation under Article 5(1).</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point32">32</A> In support of their argument that the obligation under Article 25(2) of the Universal Service Directive to pass on data also encompasses external data, the Bundesnetzagentur and the
+								Italian Government refer to recital 11 to that directive and to the CRF’s general objective of promoting competition.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point33">33</A> In that regard, it should be borne in mind that recital 11 to the Universal Service Directive states that ‘[u]sers and consumers desire comprehensive directories and a directory
+								enquiry service covering all listed telephone subscribers and their numbers …’. That recital must, however, be read in conjunction with the universal service obligation laid down in Article 5(1) of that directive, which does not require
+								the Member States to ensure that all directories and telephone directory enquiry services are comprehensive. Under that provision, the Member States must ensure only that at least one comprehensive directory or one comprehensive
+								telephone
+								directory enquiry service is made available to end-users. As is apparent from paragraph 31 above, an obligation to pass on data which applies to undertakings assigning telephone numbers and which covers only data relating to their own
+								subscribers is sufficient to ensure compliance with the universal service obligation under Article 5(1).</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point34">34</A> Nor does the CRF’s general objective, which is to promote competition, support the view that an undertaking assigning telephone numbers to subscribers, such as Deutsche Telekom, is
+								required under Article 25(2) of the Universal Service Directive to pass on to third-party undertakings data other than data relating to its own subscribers.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point35">35</A> Article 25(2) of the Universal Service Directive must be interpreted in the light of its specific objective, which is to ensure compliance with the universal service obligation laid
+								down in Article 5(1) of that directive.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point36">36</A> Moreover, recital 35 to the Universal Service Directive states that the provision of directory enquiry services and directories is already open to competition. In a competitive
+								market, the obligation under Article 25(2) of that directive for undertakings which assign telephone numbers to pass on data relating to their own subscribers in principle not only enables the designated undertaking to ensure compliance
+								with the universal service obligation laid down in Article 5(1) of that directive, but also enables any provider of telephone services to establish an exhaustive data base and to become active in the market for telephone directory
+								enquiry
+								services and directories. In that connection, it is sufficient that the provider concerned ask each undertaking assigning telephone numbers for the relevant data relating to its subscribers.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point37">37</A> It follows from the foregoing that the ‘relevant information’ for the purposes of Article 25(2) of the Universal Service Directive, the communication of which is required under that
+								provision, encompasses only information which relates to the subscribers of the undertakings assigning telephone numbers.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point38">38</A> Secondly, it must be determined whether Article 25(2) of the Universal Service Directive undertakes full harmonisation or whether, on the contrary, that provision allows the Member
+								States to impose on undertakings assigning telephone numbers an obligation to pass on to undertakings which intend to provide publicly available directory enquiry services and directories not only ‘relevant information’ for the purposes
+								of that provision, but also external data.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point39">39</A> In that regard, it should be borne in mind from the outset that, in paragraph 35 of its judgment in <I>KPN Telecom</I>, concerning the interpretation of Article 6(3) of the ONP
+								Directive, the content of which is similar to that of Article 25(2) of the Universal Service Directive, the Court held that Article 6(3) did not seek to effect full harmonisation and that the Member States retained competence for
+								determining whether in a specific national context certain additional data ought to be made available to third parties.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point40">40</A> Deutsche Telekom maintains, however, as do the United Kingdom Government and the European Commission, that Article 25(2) of the Universal Service Directive cannot be interpreted in
+								that way, since it is part of the CRF, which – as is stated in Article 1(1) of the Framework Directive – is a harmonised framework for the regulation of electronic communications services. Accordingly, the national legislature may not
+								impose on the undertakings concerned obligations which go beyond those laid down in Article 25(2).</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point41">41</A> In that regard, it should first be observed that Article 25(2) of the Universal Service Directive is part of Chapter IV of that directive, which concerns end-user interests and
+								rights. Yet the Court has held that the Framework Directive and the Universal Service Directive do not provide for full harmonisation of consumer-protection aspects (Case C-522/08 <I>Telekomunikacja Polska </I>[2010] ECR I-0000,
+								paragraph
+								29).</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point42">42</A> Secondly, it should be borne in mind that Article 25(2) of the Universal Service Directive is aimed at ensuring compliance with the obligation, placed on the Member States under
+								Article 5(1) of that directive, to ensure that at least one comprehensive directory or one comprehensive telephone directory enquiry service is made available to end-users. Since that marks a minimum requirement which the Member States
+								must satisfy, in principle they remain free to adopt more stringent provisions in order to facilitate the entry of new traders on the market for publicly available telephone and directory services.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point43">43</A> Thus, the CRF does not preclude national legislation such as that at issue in the main proceedings, which, being directed at any undertaking which assigns telephone numbers to
+								end-users, affects electronic communications undertakings in a general and non-discriminatory manner – provided, however, that such legislation does not encroach upon the powers which the NRAs derive directly from the provisions of the
+								CRF (<I>Telekomunikacja Polska</I>, paragraphs 27 and 28; see also Case C-424/07 <I>Commission</I> v <I>Germany</I> [2009] ECR I-11431, paragraphs 78 and 91 to 99).</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point44">44</A> In the present case, it must be held that national legislation such as that at issue in the main proceedings does not affect any of the powers expressly conferred by the CRF on the
+								NRA concerned.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point45">45</A> First, Article 25(2) of the Universal Service Directive does not confer any specific powers or impose any specific obligations on the NRAs. That provision imposes obligations only
+								on
+								the Member States as such.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point46">46</A> Secondly, national legislation such as that at issue in the main proceedings does not in any way affect the powers of the NRA concerned, arising under Article 16 of the Framework
+								Directive and Article 17 of the Universal Service Directive, relating to the analysis of the various electronic communications markets and the imposition of regulatory obligations on undertakings with significant market power on markets
+								which are not effectively competitive. None the less, the mere fact that, if the undertakings concerned comply with the national legislation at issue in the main proceedings, the NRA will no longer need, after any analysis it may carry
+								out of the retail market concerned, to take any specific measures – that is to say, to require undertakings with significant market power to pass on external data to third-party undertakings – does not support the inference that the
+								powers which the NRA concerned derives from Article 17 of the Universal Service Directive are directly affected (see, by analogy, as regards a general prohibition of tied sales, <I>Telekomunikacja Polska</I>, paragraph 28).</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point47">47</A> It follows from all the foregoing that the answer to the first question is that Article 25(2) of the Universal Service Directive must be interpreted as not precluding national
+								legislation under which undertakings assigning telephone numbers to end-users must make available to undertakings whose activity consists in providing publicly available directory enquiry services and directories not only data relating
+								to
+								their own subscribers but also data in their possession relating to subscribers of third-party undertakings.</P>
+							<P class="C05Titre2"> <I>The second question</I></P>
+							<P class="C01PointnumeroteAltN"><A NAME="point48">48</A> By its second question, the Bundesverwaltungsgericht asks, in essence, whether Article 12 of the Directive on privacy and electronic communications makes the passing on, to an
+								undertaking whose activity consists in providing publicly available directory enquiry services and directories, by an undertaking which assigns telephone numbers, of data in its possession relating to subscribers of a third-party
+								undertaking conditional on the consent, or lack of objection, of that undertaking or its subscribers.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point49">49</A> In that regard, it should be noted that Article 8(1) of the Charter of Fundamental Rights of the European Union (‘the Charter’) states that ‘[e]veryone has the right to the
+								protection
+								of personal data concerning him or her’.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point50">50</A> Directive 95/46 is designed to ensure, in the Member States, observance of the right to protection of personal data. As is clear from Article 1(2) thereof, the Directive on privacy
+								and electronic communications clarifies and supplements Directive 95/46 in the electronic communications sector.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point51">51</A> However, the right to the protection of personal data is not an absolute right, but must be considered in relation to its function in society (Joined Cases C-92/09 and C-93/09
+								<I>Volker und Markus Schecke and Eifert</I> [2010] ECR I-0000, paragraph 48 and the case-law cited).</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point52">52</A> Article 8(2) of the Charter thus authorises the processing of personal data if certain conditions are satisfied. It provides that personal data ‘must be processed fairly for
+								specified
+								purposes and on the basis of the consent of the person concerned or some other legitimate basis laid down by law’.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point53">53</A> The passing of subscribers’ personal data to a third-party undertaking which intends to provide publicly available directory enquiry services and directories constitutes processing
+								of
+								personal data for the purposes of Article 8(2) of the Charter, which may be undertaken only ‘on the basis of the consent of the person concerned or some other legitimate basis laid down by law’.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point54">54</A> Moreover, the Directive on privacy and electronic communications makes it clear that that directive makes the publication, in printed or electronic directories, of personal data
+								concerning subscribers conditional on the consent of those subscribers.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point55">55</A> Thus, Article 12(2) of that directive provides that subscribers are to be free to decide whether their personal data is to be included in a public directory and, if so, which
+								personal
+								data.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point56">56</A> On the other hand, there is no provision in the Directive on privacy and electronic communications which makes the publication of personal data relating to subscribers conditional
+								on
+								any consent from the undertaking which assigned the telephone numbers concerned or which has external data in its possession. Such an undertaking cannot, in its own right, rely on the right of prior consent, which is conferred solely on
+								subscribers.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point57">57</A> By its second question, the Bundesverwaltungsgericht also asks whether Article 12 of the Directive on privacy and electronic communications makes the passing of personal data to a
+								third-party undertaking whose activity consists in providing publicly available directory enquiry services and directories conditional on renewed consent from the subscriber, where the subscriber has consented to the publication of his
+								personal data in one directory only, in this case the directory drawn up by Deutsche Telekom.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point58">58</A> In that regard, it should be borne in mind from the outset that it is clear from Article 12(1) of the Directive on privacy and electronic communications and from recital 38 thereto
+								that, before being included in public directories, subscribers are to be informed of the purposes of the directory and of any particular usage which may be made of it, in particular through search functions embedded in the software of
+								the
+								electronic versions of the directories. Such prior information gives the subscriber concerned the opportunity to give free, specific and informed consent, for the purposes of Articles 2(h) and 7(a) of Directive 95/46, to the publication
+								of his personal data in public directories.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point59">59</A> Recital 39 to the Directive on privacy and electronic communications states, with respect to the obligation of prior information for subscribers under Article 12(1) of that
+								directive:
+								‘[w]here the [personal] data may be transmitted to one or more third parties, the subscriber should be informed of this possibility and of the recipient or the categories of possible recipients’.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point60">60</A> However, after obtaining the information referred to in Article 12(1) of that directive, the subscriber may – as is clear from Article 12(2) – decide only whether his personal data
+								may be included in a public directory and, if so, which personal data.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point61">61</A> As the Advocate General observed in point 122 of her Opinion, it follows from a contextual and systematic interpretation of Article 12 of the Directive on privacy and electronic
+								communications that the consent under Article 12(2) relates to the purpose of the publication of personal data in a public directory and not to the identity of any particular directory provider.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point62">62</A> First, the wording of Article 12(2) of the Directive on privacy and electronic communications does not support the inference that the subscriber has a selective right to decide in
+								favour of certain providers of publicly available directory enquiry services and directories. It should be noted in that regard that it is the publication itself of the personal data in a public directory with a specific purpose which
+								may
+								turn out to be detrimental for a subscriber. Where, however, the subscriber has consented to his data being published in a directory with a specific purpose, he will generally not have standing to object to the publication of the same
+								data in another, similar directory.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point63">63</A> Secondly, recital 39 to that directive confirms that the passing of subscribers’ personal data to third parties is ‘subject to the condition that the data may not be used for other
+								purposes than those for which they were collected’.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point64">64</A> Thirdly, the Directive on privacy and electronic communications refers to a situation in which provision can be made for the subscriber’s renewed or specific consent. Thus, under
+								Article 12(3) of that directive, Member States may require that, for any purpose of a public directory other than the search of contact details of persons on the basis of their name and, where necessary, a minimum of other identifiers,
+								additional consent be asked of the subscribers. Recital 39 to that directive states that renewed consent should be obtained from the subscriber ‘[i]f the party collecting the data from the subscriber or any third party to whom the data
+								have been transmitted wishes to use the data for an additional purpose’.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point65">65</A> It follows that, where a subscriber has been informed by the undertaking which assigned him a telephone number of the possibility that his personal data may be passed to a
+								third-party
+								undertaking, such as Deutsche Telekom, with a view to being published in a public directory, and where he has consented to the publication of those data in such a directory (in the present case, Deutsche Telekom’s directory), renewed
+								consent is not needed from the subscriber for the passing of those same data to another undertaking which intends to publish a printed or electronic public directory, or to make such directories available for consultation through
+								directory enquiry services, if it is guaranteed that the data in question will not be used for purposes other than those for which the data were collected with a view to their first publication. The consent given under Article 12(2) of
+								the Directive on privacy and electronic communications, by a subscriber who has been duly informed, to the publication of his personal data in a public directory relates to the purpose of that publication and thus extends to any
+								subsequent processing of those data by third-party undertakings active in the market for publicly available directory enquiry services and directories, provided that such processing pursues that same purpose.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point66">66</A> Moreover, where a subscriber has consented to the passing of his personal data to a given undertaking with a view to their publication in a public directory of that undertaking, the
+								passing of the same data to another undertaking intending to publish a public directory without renewed consent having been obtained from that subscriber is not capable of substantively impairing the right to protection of personal
+								data,
+								as recognised in Article 8 of the Charter.</P>
+							<P class="C01PointnumeroteAltN"><A NAME="point67">67</A> Consequently, the answer to the second question is that Article 12 of the Directive on privacy and electronic communications must be interpreted as not precluding national
+								legislation
+								under which an undertaking publishing public directories must pass personal data in its possession relating to subscribers of other telephone service providers to a third-party undertaking whose activity consists in publishing a printed
+								or electronic public directory or making such directories obtainable through directory enquiry services and which does not make the passing on of those data conditional on renewed consent from the subscribers, provided, however, that
+								those subscribers have been informed, before the first inclusion of their data in a public directory, of the purpose of that directory and of the fact that those data may be communicated to another telephone service provider and that it
+								is guaranteed that those data will not, once passed on, be used for purposes other than those for which they were collected with a view to their first publication.</P>
+							<P class="C04Titre1"> <B>Costs</B></P>
+							<P class="C01PointnumeroteAltN"><A NAME="point68">68</A> Since these proceedings are, for the parties to the main proceedings, a step in the action pending before the national court, the decision on costs is a matter for that court. Costs
+								incurred in submitting observations to the Court, other than the costs of those parties, are not recoverable.</P>
+							<P class="C41DispositifIntroduction">On those grounds, the Court (Third Chamber) hereby rules:</P>
+							<P class="C08Dispositif">1. <B>Article 25(2) of Directive 2002/22/EC of the European Parliament and of the Council of 7 March 2002 on universal service and users’ rights relating to electronic communications networks and services
+									(Universal
+									Service Directive) must be interpreted as not precluding national legislation under which undertakings assigning telephone numbers to end-users must make available to undertakings whose activity consists in providing publicly
+									available
+									directory enquiry services and directories not only data relating to their own subscribers but also data in their possession relating to subscribers of third-party undertakings.</B></P>
+							<P class="C08Dispositif">2. <B>Article 12 of Directive 2002/58/EC of the European Parliament and of the Council of 12 July 2002 concerning the processing of personal data and the protection of privacy in the electronic communications
+									sector
+									(Directive on privacy and electronic communications) must be interpreted as not precluding national legislation under which an undertaking publishing public directories must pass personal data in its possession relating to subscribers
+									of other telephone service providers to a third-party undertaking whose activity consists in publishing a printed or electronic public directory or making such directories obtainable through directory enquiry services, and under which
+									the passing on of those data is not conditional on renewed consent from the subscribers, provided, however, that those subscribers have been informed, before the first inclusion of their data in a public directory, of the purpose of
+									that directory and of the fact that those data could be communicated to another telephone service provider and that it is guaranteed that those data will not, once passed on, be used for purposes other than those for which they were
+									collected with a view to their first publication.</B></P>
+							<P class="C77Signatures">[Signatures]</P>
+							<HR>
+							<P class="C42FootnoteLangue"><A HREF="#Footref*" NAME="Footnote*">*</A> Language of the case: German.</P>
+						</BODY>
 
-					</HTML>
+						</HTML>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div id="recommend">
-			<!--TEMPLATE_RECOMMENDER-->
-		</div>
+			<div id="recommend">
+				<!--TEMPLATE_RECOMMENDER-->
+			</div>
 	</div>
-	</div>
-	<div class="col-md-1"></div>
-	</div>
-	</div>
-
-	-->
-
-
-
-
+					
 	<div id="footer">
 		<div class="container">
-			<hr>
+			<hr />
 			<center id="idfooter">
 				<p><small>This website has been made by researchers of the <a href="http://lynx-project.eu/">Lynx</a> project with the sole purpose of demonstrating Lynx capabilities. This website shows legislation scrapped, transformed and enriched from
 						open legislation sources. We decline any responsibility on the information published on this web, which is incomplete and might be subject to errors.</small></p>

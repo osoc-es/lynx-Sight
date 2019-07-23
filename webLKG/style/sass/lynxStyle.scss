@@ -1,0 +1,287 @@
+/* TIMELINE CIRCLE COLORS*/
+
+
+//Graph Color Codes:
+$graphCenter:#5A7E8E;
+$graphInfo:#9DC4D2;
+$graphTitles:#1B3D50;
+
+//Timeline Color Codes
+$lineStroke: #FFFFFF ;//CBD9EF
+$svgBackground:#999999;
+
+//Main nodes colors by typology
+$proceduralEvent:#4d6ba7;
+$backgroundProceduralEvent:#9a9457;
+$underJudgementEvent:#82b69b;
+
+
+
+$heightTopContainer:50px;
+
+/*Top div style*/
+#topContentContainer{
+	
+	height: $heightTopContainer; 
+	width: 100%;
+	margin: 0;
+	
+	position:fixed; 
+	top:0; right: 0; left: 0;
+}
+
+/*nav icons*/
+nav{
+	
+	display:flex; 
+	flex-direction: row;
+	//display:flex;
+	background-color: #094f92;
+	height: 100%;
+	
+	a{
+		flex: 0 0 5%;
+		.icon_h{
+			vertical-align: middle;
+			overflow:hidden;
+			img{
+				max-height: $heightTopContainer;
+				//width: 30px;
+				//height:30px;
+				margin-right: 5px;
+			}
+		}
+	}
+	
+	a #lynxLogoTop{
+		flex: 1 0 15%;
+	}
+	
+	
+}
+
+#svg{
+		
+	display:flex;
+	
+		svg{
+			flex:0 0 100%;
+		}
+	
+	}
+	
+
+
+
+//Set to have main content of the page below nav header
+#mainContent{
+	padding-top: $heightTopContainer;
+}
+
+
+
+
+
+
+
+
+
+
+.mainNodeText{
+	text-anchor:middle;
+	text-weight:bold;
+	fill: #FFFFFF;
+	font-size: 6px;
+}
+
+.outerNodeTextLabel{
+	
+	text-anchor:middle;
+	text-weight:bold;
+	fill: white;
+	font-size: 5px;
+	text-decoration: underline;
+}
+
+.outerNodeTextDesc{
+	text-anchor:middle;
+		fill: #FFFFFF;
+	font-size: 4px;
+}
+
+
+
+
+
+//Timeline's actual line holding events
+.centerLineColor {
+  stroke: $lineStroke;
+}
+
+.circleProcedural{
+  fill: $proceduralEvent;
+}
+
+.circleBackProcedural {
+  fill: $backgroundProceduralEvent;
+}
+
+.circleUnderJudg{
+  fill: $underJudgementEvent;
+}
+
+.outerNodeGraph{
+	fill:$graphInfo;
+	stroke:white;
+	r:20 ;
+	-webkit-transition: r 2s; /* For Safari 3.1 to 6.0 */
+  	transition: r 2s;
+}
+
+.outerNodeGraph:hover{
+	fill:#962f3e;
+	stroke:white;
+	r:40;
+	
+}
+/*.zoomOuterNode{
+	r:30;
+}*/
+
+
+
+.flexbox-container{
+	display:flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+.outerNodeLabel{
+	fill:$graphTitles;
+	font-weight: bold;
+
+}
+
+
+.interNodeLine{
+	stroke:  darkslategrey;
+	stroke-width:2;
+}
+
+
+.timelineBackground{
+	background-color: $svgBackground;
+}
+
+
+.innerMarkerCircle{
+	fill: white;
+}
+
+.outerCircleZoomProcedural{
+	/*fill:#3F3F3F; */
+	fill: darkslategrey;
+}
+
+
+
+
+
+.highlighter_def{
+	background-color: #009AA7;
+	color:#FFFFFF;
+	
+}
+
+
+
+
+
+
+body{
+	height: 100%;
+}
+
+
+%takeFullHeight{
+	height: 100%;
+}
+.takeFullHeight{
+	height: 100%;
+}
+
+%takeFullWidth{
+	width: 100%;
+}
+.takeFullWidth{
+	width: 100%;
+}
+
+
+
+.fillParentBlock{
+	display: block;
+	@extend %takeFullWidth;
+	@extend %takeFullHeight;
+}
+
+.fixedToTop{
+	position:fixed;
+	top: 0;
+	left: 0;
+	clear:both;
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+.hide{
+	visibility: hidden;
+}
+
+//LEGEND STYLING
+.legendRect{
+	fill: #FFE060;
+}
+
+
+.textLegend{
+	font-size:9;
+	fill: black;
+}
+
+
+
+
+
+/*Prev style */
+	.metadatos div {
+			border: dotted;
+			width: 100%;
+			background-color: aliceblue;
+		}
+		h3 {
+			display: block;
+			font-size: 1.17em;
+			margin-top: 1em;
+			margin-bottom: 1em;
+			margin-left: 0;
+			margin-right: 0;
+			font-weight: bold;
+		}
