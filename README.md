@@ -1,4 +1,4 @@
-<img src="(/webLKG/img/LogoLynxSight.png" alt="LynxSightLogo" width="30" height="auto">
+<img src="/webLKG/img/LogoLynxSight.png" alt="LynxSightLogo" width="30" height="auto">
 # LynxSight
 > LynxSight is a web-based visualisation tool that allows to organise legal information (more specifically legal events) in a way that it makes sense for the user, targeted at both specialised and non-specialised public.
 
