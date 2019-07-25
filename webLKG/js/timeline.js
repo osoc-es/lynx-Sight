@@ -44,6 +44,10 @@ var svgNamespaceURI ="http://www.w3.org/2000/svg" ;
 let zoomFactor = 1;
 let prevDimWindow  = {width:window.innerWidth,height:window.innerHeight};
 
+let originalmargin;
+let svgShown = false;
+
+
 hardcodedJSON = "[ \
   {    \
     \"ATTRIBUTES\": [    \
@@ -322,31 +326,14 @@ class Levent  {
 
 
 
+
+
 /* Function to run when the page is completely loaded */
 function onPageLoad(){
 	
+	originalmargin =(document.querySelector("#mainContent").style.marginTop!= "") ? document.querySelector("#mainContent").style.marginTop : "0px" ;
+	
 	let sentenceContent =  document.querySelector("#texto");
-	
-
-	function annotateInDOMinnerHTML(text,id,DOMElem,className="highlighter_def"){
-	
-	if(typeof(text)!== typeof("")){return null;}	
-	
-	//Obtain the position within the inner HTML of the DOMelem within which we need to include a new tag, so that highlighting can be performed
-	let first_ocurrence = DOMElem.innerHTML.indexOf(text);
-	let last_ocurrence = first_ocurrence + text.length;
-		
-	let stringTag = `<span class='${className}' id='${id}'>`
-	
-	//Replace innerHTML content to annotate
-	DOMElem.innerHTML = DOMElem.innerHTML.slice(0,first_ocurrence).concat(stringTag).concat(DOMElem.innerHTML.slice(first_ocurrence,last_ocurrence)).concat("</span>").concat(DOMElem.innerHTML.slice(last_ocurrence));
-		
-		return DOMElem.querySelector(`#${id}`);
-		
-	}
-	
-	
-	
 	
 	console.log("%c[X] %c Page Loaded already!","background: #078f07; color: #bada55 ", "background: #006fb0 ; color: #FFFFFF ");
 	let domSvgcontainerDiv = document.getElementById("svg"); //<div> that contains the <svg> canvas 
@@ -356,8 +343,26 @@ function onPageLoad(){
 	
 	document.querySelector("#btntimex").addEventListener("click", function(){ 
 		domSvgcontainerDiv.classList.toggle("hide"); 
-		printSVGLines(hardcodedJSON, null, true, false);
+		if(!svgShown) printSVGLines(hardcodedJSON, null, true, true);
+		let dimTopHead = computeHTMLElemDimensions(document.querySelector("#topContentContainer"));
+		svgShown = !svgShown;
+		//console.log(`${dimTopHead.height}px`);
+		if(svgShown) document.querySelector("#mainContent").style.marginTop = `${dimTopHead.height}px`;
+		else  document.querySelector("#mainContent").style.marginTop = originalmargin;
+		
 	});
+	
+	
+	document.querySelector("#closeTimeline").addEventListener("click",function(){ 
+		domSvgcontainerDiv.classList.toggle("hide"); 
+		if(!svgShown) printSVGLines(hardcodedJSON, null, true, false);
+		let dimTopHead = computeHTMLElemDimensions(document.querySelector("#topContentContainer"));
+		svgShown = !svgShown;
+		//console.log(`${dimTopHead.height}px`);
+		if(svgShown) document.querySelector("#mainContent").style.marginTop = `${dimTopHead.height}px`;
+		else  document.querySelector("#mainContent").style.marginTop = originalmargin;
+	});
+	
 	
 	console.log("\t %c [L!] %c Adding zooming functionality on scroll event", "background-color:red;color:white","text-decoration:underline;");
 	
@@ -369,39 +374,48 @@ function onPageLoad(){
 		console.log(event.deltaY);
 		
 		wheeldY = event.deltaY;
-		console.log(zoomFactor);
+		console.log("Zoom factor:",zoomFactor);
 		
-		if(zoomFactor>2.5 ) zoomFactor =2.5;
+		if(zoomFactor>3 ) zoomFactor =3;
 		if(zoomFactor<1) zoomFactor =1;
 		//the greater the zoom factor, the bigger everything looks
-		if(zoomFactor<=2.5 && zoomFactor>=1){
+		if(zoomFactor<=3 && zoomFactor>=1){
 			event.preventDefault();
-			console.log("clientCoords:",event.clientX,event.clientY);
-			console.log("screenCoords:", event.screenX,event.screenY);
+			//console.log("clientCoords:",event.clientX,event.clientY);
+			//console.log("screenCoords:", event.screenX,event.screenY);
 			zoomFactor  = (zoomFactor - Math.sign(wheeldY)* 0.10);
 
-			let navElem =  document.getElementById("navadmin");
+			let navElem =  document.querySelector("nav");
 			let dimPrevDim = computeHTMLElemDimensions(navElem);
-
 
 			if(event.clientY > dimPrevDim.height && event.clientY <= (dim.height+dimPrevDim.height)){
 			//The lower the new height and width, the bigger things become
-			this.setAttributeNS(null,"viewBox", `${event.clientX} ${event.clientY-dimPrevDim.height} ${dim.width/zoomFactor} ${dim.height/zoomFactor} `);
+				this.setAttributeNS(null,"viewBox", `${event.clientX} ${event.clientY-dimPrevDim.height} ${dim.width/zoomFactor} ${dim.height/zoomFactor} `);
 		
-		} 
+			} 
 		}
 	
 	});
 	
+	
+	/* FUTURE WORK  
+	window.addEventListener("mousemove",function(ev){
+		svgElem =  document.querySelector("svg");
+		let pointFollowMouse = createSVGTag("circle", {cx:ev.})
+		 
+	 });
+	*/
+	
+	
 	//@REVISIT --> used to repaint the timeline on window dimensions change.
-	window.addEventListener("resize", checkSizeChanges);
-	function checkSizeChanges(){
+	//window.addEventListener("resize", checkSizeChanges);
+	//function checkSizeChanges(){
 		
 		
 		//let lastDims = computeHTMLElemDimensions(window.);
 		
 		//if(lastDims.height!= prevDimWindow.height ||lastDims.width != prevDimWindow.width){
-			printSVGLines(hardcodedJSON,svgElem,false,false);
+			//printSVGLines(hardcodedJSON,svgElem,false,false);
 		//}
 		
 		/*prevDimWindow.height =  lastDims.height;
@@ -412,7 +426,7 @@ function onPageLoad(){
 		D' w:${lastDims.width} \
 		h:${lastDims.height}`);
 		*/
-	}
+	//}
 	
 	//svgElem.addEventListener("click",  function(){ resize(svgElem)}); 
 
@@ -425,6 +439,7 @@ function onPageLoad(){
 		// - Check type of arguments, in order to make the function call more robust 
 		if(svgInDOM == undefined || svgInDOM === null){
 			svgInDOM = document.querySelector("svg");
+			if(svgInDOM.childElementCount>0) return null;
 			
 			}
 		if(svgInDOM.childElementCount >0 && overwrite){
@@ -442,6 +457,7 @@ function onPageLoad(){
 		}
 		
 		// - Allows randomization of input data (TEST PURPOSES)  [@REVISIT]
+		console.log("RANDOMIZED DATA!");
 		if(randomizeTest)randomizeTestData(lEventArray);
 		
 		
@@ -463,7 +479,7 @@ function onPageLoad(){
 			for(attr in lEventArray[event]["ATTRIBUTES"]){
 
 				if(logsOn){
-					console.log(`\t\t Event [${event}][${attr}]: \"${lEventArray[event]["ATTRIBUTES"][attr].INFO}\" is temporal? \n \t\t ${lEventArray[event]["ATTRIBUTES"][attr].INFO === "when"}`);
+					//console.log(`\t\t Event [${event}][${attr}]: \"${lEventArray[event]["ATTRIBUTES"][attr].INFO}\" is temporal? \n \t\t ${lEventArray[event]["ATTRIBUTES"][attr].INFO === "when"}`);
 				}
 
 				if(lEventArray[event]["ATTRIBUTES"][attr].INFO === "when"){
@@ -504,19 +520,26 @@ function onPageLoad(){
 		console.log("EXECUTING annotation");
 		for(event of lEventArray){
 			if(event.inTextAnnotationNode == undefined){
-				 event.inTextAnnotationNode = annotateInDOMinnerHTML(event.TEXT,`annotate_${event._evID}`,document.querySelector("#texto"));
+				 event.inTextAnnotationNode = annotateInDOMinnerHTML(event.TEXT,`annotate_${event._evID}`, event.TYPE,document.querySelector("#texto")/*pending class*/);
 			}
 		}
 		
-		/*for(event of lEventArray){
-			event.inTextAnnotationNode.innerHTML = "ME PARTO EL CULO";
-		}*/
 		
-		
+		//Obtenemos el número de eventos temporales y no temporales
 		let svgDim = computeHTMLElemDimensions(svgInDOM);
-		/* Distance made among elements displayed in the screen */
+		
+		/* Distance made among elements displayed on the screen */
 		let marginTime_line = ((totalTimedEvents%3)+1)* 20/100 * svgDim.width; // @REVISIT --> to be handled better
-		let eventTimelineConstantSeparation = (svgDim.width -2*marginTime_line)/(totalTimedEvents-1);
+		let eventTimelineConstantSeparation = (svgDim.width-2*marginTime_line)/(totalTimedEvents-1);
+		
+		let marginNon_timeline = 2/100 * (svgDim.width - (2/3)*svgDim.width) ;
+		let totalNon_timedEvents  =lEventArray.length - totalTimedEvents;
+		let eventNonTimeline_ConstantSeparation = ((svgDim.width - ((2/3)*svgDim.width)-2*marginNon_timeline)) / totalNon_timedEvents;
+		
+		console.log("marginNon_timeline",marginNon_timeline);
+		console.log("(svgDim.width - ((2/3)*svgDim.width)",svgDim.width - (2/3*svgDim.width) );
+		console.log("eventNonTimeline_ConstantSeparation",eventNonTimeline_ConstantSeparation);
+		console.log("totalNon_timedEvents",totalNon_timedEvents);
 		
 		if(logsOn) console.groupCollapsed("%c[MA] %c Creating lines ", "color: #0e4a75; font-weight:bold;", "text-decoration:underline;");
 		
@@ -525,23 +548,33 @@ function onPageLoad(){
 		//- Draw auxiliar line if tere are non-temporal events
 		let nonTempLine = createCenterHlineSVG((2/3)*svgDim.width,(2/3)*svgDim.height,svgDim.width,svgDim.height,svgInDOM,"nonTmpLine");
 		
+		
+		
 		if(logsOn) console.groupEnd();
 		
 		if(logsOn)console.groupCollapsed("%c[MA] %c Creating event nodes ", "color: #0e4a75; font-weight:bold;", "text-decoration:underline;");
 		let markerDirAlternating = true;
 		
+		let non_timed_currentSeparation = 0 ;
+		
+		
+
 		//- Create a group of <g> nodes to contain all the graphical elements associated to an event 
 			for(let iEv= 0; iEv < lEventArray.length; iEv++){
+				let radiusMainNode_BasedOnRelevance  = ((lEventArray[iEv].RELEVANCE)? (1/lEventArray[iEv].RELEVANCE) : 1/3 ) * 20 ;
+				console.log(`%c Creando outermost node ; Event: ${iEv}; Relevance${lEventArray[iEv].RELEVANCE}; radiusMainNode: ${radiusMainNode_BasedOnRelevance}`, "color:red;");
+				
 					// a) -CREATE TIMED EVENTS GRAPHICALLY 
 					if( lEventArray[iEv].hasTime >0 && typeof lEventArray[iEv].timeStamp !== undefined ){
-						console.log(`\t Processing Event ${iEv}:`,lEventArray[iEv]) ;
-						createEventNodeGroup(lEventArray[iEv]._evID,/*cx!*/marginTime_line+iEv*eventTimelineConstantSeparation,/*cy!*/svgDim.height/2,lEventArray[iEv],20,svgInDOM,markerDirAlternating);
+						//console.log(`\t Processing Event ${iEv}:`,lEventArray[iEv]) ;
+						createEventNodeGroup(lEventArray[iEv]._evID,/*cx!*/marginTime_line+iEv*eventTimelineConstantSeparation,/*cy!*/svgDim.height/2,lEventArray[iEv],radiusMainNode_BasedOnRelevance,svgInDOM,markerDirAlternating);
 						markerDirAlternating = !markerDirAlternating;
 						
 					}
 					else{// b) -CREATE NON-TIMED EVENTS GRAPHICALLY 
-						//@complete
-						createEventNodeGroup(lEventArray[iEv]._evID,0.2*iEv + (2/3)*svgDim.width, (svgDim.height - (2/3)*svgDim.height)/2 +(2/3)*svgDim.height,lEventArray[iEv],20,svgInDOM   );
+						console.log(`cx:${marginNon_timeline + non_timed_currentSeparation + (2/3)*svgDim.width}`);
+						createEventNodeGroup(lEventArray[iEv]._evID, /*cx*/ marginNon_timeline + non_timed_currentSeparation + (2/3)*svgDim.width, /*cy*/ (svgDim.height - (2/3)*svgDim.height)/2 +(2/3)*svgDim.height ,lEventArray[iEv],radiusMainNode_BasedOnRelevance,svgInDOM, markerDirAlternating);
+						non_timed_currentSeparation += eventNonTimeline_ConstantSeparation;
 					}
 				}
 		
@@ -613,14 +646,33 @@ function onPageLoad(){
 			if(logsOn) console.groupCollapsed(`%c[MA] %c Main group creation ${_id}`, "color: #0e4a75; font-weight:bold;", "text-decoration:underline;");
 			// Creamos un grupo <svg> para contener too lo relacionado a un evento (e.g. <svg id="event_1" ...>) 
 			let newG = createSVGTag("g", {id:_id});
-			buildGraph ("graph_"+lEvent._evID, lEvent, 40,10, newG, 20 );
+			buildGraph ("graph_"+lEvent._evID, lEvent, 2*radius, (50/100)* radius, newG, radius );
+													
 			//-------------------- CLOSE console group #2
 			if(logsOn) console.groupEnd();
 			
 			oSVG.append(newG);
 			//creamos los markers para cada evento
 			
-			oSVG.append(createMarker(lEvent, dirMarker, (svgDim.height/2)/2, 20));
+			
+			/* MAKING MARKERS BIGGER OR SMALLER DEPENDING ON RELEVANCE */
+			let maxRadiusMarker = 20;
+			
+			let maxDistanceMarker = (svgDim.height/2)/2;
+			let propFactor;
+			
+			if(lEvent.RELEVANCE <= 1){
+				propFactor = 1;
+			} 
+			else if(lEvent.RELEVANCE >1){
+				propFactor = 1/lEvent.RELEVANCE;
+			} 
+			else{ propFactor = 1/3; }
+			
+			
+			console.log(`PROP FACTOR: Event:${lEvent.ID} Relevance:${lEvent.RELEVANCE} PropFactor:${propFactor}`);
+			
+			oSVG.append(createMarker(lEvent, dirMarker, propFactor*maxDistanceMarker, propFactor*maxRadiusMarker));
 		
 		}
 		
@@ -638,7 +690,7 @@ function onPageLoad(){
 
 			let _markerInnerCircle = createSVGTag("circle", {cx:lEvent.cMx ,cy:lEvent.cMy,r:radiusMarker ,class:"innerMarkerCircle"});
 
-			let _markerOuterCircle= createSVGTag("circle", {cx:lEvent.cMx ,cy:lEvent.cMy,r:radiusMarker+10,class:lEvent.getMainNodeStylingClass()});
+			let _markerOuterCircle= createSVGTag("circle", {cx:lEvent.cMx ,cy:lEvent.cMy,r:radiusMarker+(15/100*radiusMarker),class:lEvent.getMainNodeStylingClass()});
 
 			//We obtain the coordinates and lenght of the square side that allows to fit an image perfectly centered in our marker.
 			let fitCircleCoords = { fcx:lEvent.cMx-(Math.sqrt(Math.pow(radiusMarker,2)/2)),
@@ -719,16 +771,27 @@ function onPageLoad(){
 		}
 		
 
-		/* [PENDING DESCRIPTION] Creamos todos los componentes internos a un grupo <g id="graphEv_X" ...>  y los  añadimos al grupo del evento (appentTo obj)*/
-		function buildGraph(idGraph, lEvent, maxNodeDistance, maxNodeRadius, appendTo, radius =15){
+		/* [PENDING DESCRIPTION] Creamos todos los componentes internos a un grupo <g id="graphEv_X" ...>  y los  añadimos al grupo del evento (appentTo obj)
+		* outNodeRadius: es el radio que tendrán los atributos (nodos más externos del grafo)
+		* outNodeDistance: es el radio de separación máximo entre el nodo principal y los nodos atributo.
+		* radiusMN: radio que tendrá el nodo principal
+		*/
+		function buildGraph(idGraph, lEvent, outNodeDistance, outNodeRadius, appendTo, radiusMN =15){
 
 			/* Creamos un círculo svg con que representará un evento y que tendrá un color concreto dependiendo del tipo de evento que estemos evaluando : Procedural, Background procedural o Facts under judgement */
-			let eventCircle = createSVGTag("circle", {cx:lEvent.cnx,cy:lEvent.cny,r:radius, class:lEvent.getMainNodeStylingClass()});
+			let eventCircle = createSVGTag("circle", {cx:lEvent.cnx,cy:lEvent.cny,r:radiusMN, class:lEvent.getMainNodeStylingClass()});
 			if(logsOn) console.log(`\t Creating main node ${idGraph}`);
 			/* Creamos un nodo de texto con los datos del grafo*/
-			let textNodeMain = createSVGTag("text", {x:lEvent.cnx,y:lEvent.cny,class:"mainNodeText"});
+			let textNodeMain = createSVGTag("text", {x:lEvent.cnx,y:lEvent.cny,class:"mainNodeText",style:`font-size:${(radiusMN/20*8)}px`});
 			//textNodeMain.textContent = lEvent.TEXT;
 			textNodeMain.textContent = lEvent._evID.toUpperCase();
+			
+			//Add on click zooming functionality
+			//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx
+			eventCircle.addEventListener("dblclick",function(e){
+										 	zoomPercentage(lEvent.cnx,lEvent.cny,10);
+								 });
+			
 				
 			/* Creamos un title que muestre la fecha exacta al hacer mouseover (Only temporal events) */
 			let newTitle;
@@ -738,8 +801,6 @@ function onPageLoad(){
 			}
 
 			if(logsOn) console.log("\t %c [L!] %c Adding annotation functionality on click event", "background-color:red;color:white","text-decoration:underline;");
-			
-			
 			
 			//eventCircle.addEventListener("click", function(){alert("on click event properly added");}/*annotateInText*/); // @Pending
 
@@ -764,25 +825,22 @@ function onPageLoad(){
 
 
 			// - For each attribute, we create a circular node and a connecting line from the center of the main node towards
-			//	 the center of the new circular node, with a length given by the provided radius
+			//	 the center of the new circular node, with a length given by the provided outNodeDistance
 			let evCount = 1 ;
 			// - Create new group of svg branches for the graph
 			let groupBranches = createSVGTag("g",{id:`${lEvent._evID}`+"_Braches"});
+			console.log("CREANDO BRANCHES DEL EVENTO" , lEvent._evID);
 			for(lAttr in lEvent["ATTRIBUTES"]){
-
-				/*console.log("cnx" ,lEvent.cnx );
-				console.log( "maxNodebe", maxNodeDistance  );
-				console.log( "sin", Math.sin(alpha.rad) );*/
-
+				
 				// -Create coordinates as attributes for each event attribute that will require a node
-				lEvent["ATTRIBUTES"][lAttr].cAx = lEvent.cnx +  maxNodeDistance * Math.sin(evCount*alpha.rad)/Math.tan(evCount*alpha.rad) ;
-				lEvent["ATTRIBUTES"][lAttr].cAy = lEvent.cny +  maxNodeDistance * Math.sin(evCount*alpha.rad) ;
+				lEvent["ATTRIBUTES"][lAttr].cAx = lEvent.cnx +  outNodeDistance * Math.sin(evCount*alpha.rad)/Math.tan(evCount*alpha.rad) ;
+				lEvent["ATTRIBUTES"][lAttr].cAy = lEvent.cny +  outNodeDistance * Math.sin(evCount*alpha.rad) ;
 
 				if(logsOn) console.log(`\t Creating Graph for ${lEvent._evID}["ATTRIBUTES"][${lAttr}] at (${lEvent["ATTRIBUTES"][lAttr].cAx,lEvent["ATTRIBUTES"][lAttr].cAy}`);
 
 				let connectLine_i = createSVGTag("path", {d:`M ${lEvent.cnx} ${lEvent.cny} L ${lEvent["ATTRIBUTES"][lAttr].cAx} ${lEvent["ATTRIBUTES"][lAttr].cAy}`,class:"interNodeLine"});
 
-				let outerNode_i = createSVGTag("circle", {cx:lEvent["ATTRIBUTES"][lAttr].cAx ,cy:lEvent["ATTRIBUTES"][lAttr].cAy, r:maxNodeRadius, class:"outerNodeGraph"});
+				let outerNode_i = createSVGTag("circle", {cx:lEvent["ATTRIBUTES"][lAttr].cAx ,cy:lEvent["ATTRIBUTES"][lAttr].cAy, r:outNodeRadius, class:"outerNodeGraph"});
 				
 				//Event Listerners @REVISIT --> right now they only resize on mouse over.
 			/*	outerNode_i.addEventListener("mouseover",function(e){
@@ -796,18 +854,67 @@ function onPageLoad(){
 					e.target.classList.toggle("zoomOuterNode");
 				}); */
 
-				let textOuterNode = createSVGTag("text",{x:lEvent["ATTRIBUTES"][lAttr].cAx,y:lEvent["ATTRIBUTES"][lAttr].cAy,dy:-(maxNodeRadius/2),class:"outerNodeTextLabel"});
+				let textOuterNode = createSVGTag("text",{x:lEvent["ATTRIBUTES"][lAttr].cAx,y:lEvent["ATTRIBUTES"][lAttr].cAy,dy:-(outNodeRadius/2),class:"outerNodeTextLabel", style:`font-size:${(outNodeRadius/10*6)}px`});
 				textOuterNode.textContent =  lEvent["ATTRIBUTES"][lAttr].INFO;
-				let textOuterNodeDesc = createSVGTag("text",{x:lEvent["ATTRIBUTES"][lAttr].cAx,y:lEvent["ATTRIBUTES"][lAttr].cAy,dy:0,class:"outerNodeTextDesc"});
-				textOuterNodeDesc.textContent = lEvent["ATTRIBUTES"][lAttr].TEXT;
+				
+				
+				
+				let arrayWholeDesc = lEvent["ATTRIBUTES"][lAttr].TEXT.split(" ");
+
+				console.log("arrayWholeDesc", arrayWholeDesc);
+				
+				
+				
+				/* REVISIT (BARE BONES SOLUTION) */
+				let arrayOfDescFragments = [];
+				
+				let processedCount = 0;
+				let startIndex = 0;
+				let fragmentString = "";
+				let positionHandler= 0;
+				while(startIndex < arrayWholeDesc.length ){
+					
+					if(processedCount > 1 || arrayWholeDesc.length<1) { //Cada 3 palabras añadimos un fragmento al array de nodos de texto.
+						let textOuterNodeDesc_i = createSVGTag("text",{x:lEvent["ATTRIBUTES"][lAttr].cAx,y:lEvent["ATTRIBUTES"][lAttr].cAy,dy:positionHandler*outNodeRadius/10*6,class:"outerNodeTextDesc",style:`font-size:${(outNodeRadius/10*6)}px`});
+						textOuterNodeDesc_i.textContent = fragmentString;
+						arrayOfDescFragments.push(textOuterNodeDesc_i);
+						console.log("PUSHING AN ELEM :",textOuterNodeDesc_i );
+						fragmentString = "";
+						processedCount= 0;
+					}
+						fragmentString+=" "+arrayWholeDesc[startIndex];//Añadimos una palabra al fragmento
+					
+						processedCount++;
+						startIndex++;
+						positionHandler++;
+				}
+				
+				
+				
+				/*let textOuterNodeDesc = createSVGTag("text",{x:lEvent["ATTRIBUTES"][lAttr].cAx,y:lEvent["ATTRIBUTES"][lAttr].cAy,dy:0,class:"outerNodeTextDesc",style:`font-size:${(outNodeRadius/10*4)}px`});*/
+				
+				//textOuterNodeDesc.textContent = lEvent["ATTRIBUTES"][lAttr].TEXT;
 
 				groupBranches.appendChild(connectLine_i);
 				groupBranches.appendChild(outerNode_i);
 				groupBranches.appendChild(textOuterNode);
-				groupBranches.appendChild(textOuterNodeDesc);
+				console.log("DESC FRAGMENTS: ",arrayOfDescFragments);
+				for(let descElem of arrayOfDescFragments){
+					groupBranches.appendChild(descElem);
+				}
 				evCount++;
 			}
 			if(appendTo != 'undefined')
+			groupBranches.classList.toggle("display-hide");
+
+			eventCircle.addEventListener("click",function(e){
+				if(zoomFactor >2){
+					groupBranches.classList.toggle("display-hide");
+					
+				}
+										 	
+								 });
+			
 			appendTo.prepend(groupBranches);
 
 			if(logsOn) console.groupEnd();
@@ -847,235 +954,76 @@ function createCenterHlineSVG(minX=0,minY=0,maxX,maxY,appendTo,id ="temporalLine
 }
 
 
+function zoomPercentage(cx,cy, pctg, svgNode = document.querySelector("svg")){
+	dim = computeHTMLElemDimensions(svgNode);
+	
+	zoom(svgNode,cx-((pctg/100)*dim.width/2),cy-((pctg/100)*dim.height/2),dim.width*(pctg/100), dim.height*(pctg/100));
+}
+	
+	
 
-
-function zoom(svgNode,x,y,width,height){
-	
-	
-	
-	
+function zoom(svgNode = document.querySelector("svg") ,x,y,width,height){
 	svgNode.setAttribute("viewBox",`${x} ${y} ${width} ${height}`);
-	
-	
 }
 
-
-
-
-
-
-/* ON CLICK  ON THE SVG  @coredamnwork */
-function resize(elemToResize){
-	
-	let svgDim = computeHTMLElemDimensions(elemToResize);
-	//1.Creamos línea central sobre la que se apoyarán todos los círculos representando eventos.
-	//createCenterLine(0, 0, svgDim.width,svgDim.height,elemToResize, svgNamespaceURI);
-	
-	createEventNodeGroup(elemToResize);
-	zoom(elemToResize,100-30,100-30,svgDim.width/3,svgDim.height/3);
-	
-	
-	
-	
-	
-	
-	
-	//Extraemos los eventos del array de eventos proporcionado como string; para cada evento, creamos un círculo en la línea temporal
-	var eventArray = JSON.parse(hardcodedJSON);
-	
-	//Pasa por todos los eventos y los genera (pendiente)
-	//eventArray.forEach(generateEventCircles)
-	
-	
-	var date = new Date('11 september 2005');
-	var date2 = new Date('14 february 2008');
-	
-	var date3 = new Date('14 february 2019');
-	var date4 = new Date('26 may 1996');
-	
-	var arrayDates = [date,date2,date3,date4];
-	//Ordenamos las fechas
-	var orderedDates = arrayDates.sort(function(a,b){return (a.getTime() - b.getTime());})
-	
-	//orderedDates y arrayDates deberían ser iguales.
-	
-	var objectCustomInline = { 
-		nombre : "Alejandro",
-		apellido : "Rey"
-		};
-	
-	console.log("objectCustomInline: ", objectCustomInline);
-	objectCustomInline["atributo inventado"] = "puta mierda";
-	objectCustomInline.newAttr = "caca de vacuno";
-	console.log("objectCustomInline POST : ", objectCustomInline);
-	
-	
-	console.table("arrayDates" +arrayDates);
-	console.table("orderedDates: " +orderedDates);
-	
-	
-	console.log("date is older than date2: "+((date.getFullYear()-date2.getFullYear())>=0 ? "false" :"true")  );
-	
-	
-	function generateEventCircles (item, index, array){
-		//Categorise event
-		if(item.TYPE.toUpperCase() === "procedural".toUpperCase()){
-			console.log("%c <Procedural event>  %c found at " + index, procEventColor, white);
-		}
-		else if(item.TYPE.toUpperCase() === "background procedural".toUpperCase()){
-			console.log("%c <Background procedural> event found at " + index, backProcEventColor, white);
-		}
-		else if(item.TYPE.toUpperCase() === "facts under judgement".toUpperCase() || item.TYPE.toUpperCase() === "facts under judgment".toUpperCase()){
-			console.log("%c <Facts under judgement> event found at "+ index,factsUJEventColor ,white);
-		}
-		else{
-			console.log("Nothing found at " + index);
-		}
-	}
-
-	
-	
-	var circleNode = document.createElement("circle");
-	printProgressInfo("CircleNode being generated after new viewBox", circleNode)
-	circleNode.setAttribute("cx","0");
-	circleNode.setAttribute("cy","0");
-	circleNode.setAttribute("r","30");
-	circleNode.classList.add("circleBackProcedural");
-	
-	elemToResize.appendChild(circleNode);
-	
-	
-	
-}
-
-
-
-
-
-
-
-
-function printProgressInfo(message, optObj ){
-	
-	var endMsg = "%c [!] %c --> "+ message;
-	
-	if(optObj == undefined){
-		console.log(endMsg, "background:#c27b00; color:#FFFFFF","color:#c27b00" );
-	}
-	else{
-		console.log(endMsg + "Related Object:", "background:#c27b00; color:#FFFFFF","color:#c27b00", optObj );
-	}
-	
-}
-
-
-
-
-function jsBasics(){
-	
-	//FUNCTIONS HOW TO
-		// 3 WAYS TO DEFINE FUNCTIONS:
-		//Function expression (Not hoisted)
-		var functionVar = function(x){
-			return x*x;
-		};
-		//Named function; Function declaration (hoisted) Doesn't require a semicolon after the declaration
-		function squareFunct(x){
-			return x*x;
-		}
-		//Arrow expression function (Not hoisted) There are two variants:
-		var functionVar2 = (x)=> { return x*x; } // x es el parámetro usado y el código entre {} es el cuerpo de la funcion
-		var functionVar2v2 = x => x*x;  // En este caso si solo tenemos un parámetro y un solo statement para hacer return, podemos escribir el parámetro sin paréntesis y el cuerpo de la función como una expresión fuera de llaves
-		var functNoParams = ()  => "Fuck I just do this!";
-	
-		console.log("functionVar Result: ",functionVar(12)); //Result function expression
-		console.log("squareFunct Result: ", squareFunct(12)); //Result named function
-		console.log("functionVar2 Result: ",functionVar2(12)); //Result arrow function expression
-		console.log("functionVar2v2 Result: ",functionVar2v2(12)); //Result arrow function expression shortest way
-		console.log("functNoParams says:" +functNoParams());
-		//SPECIAL USES OF FUNCTIONS; FUNCTIONS AS PARAMETERS
-		//Callback function
-		var printCallback = (result) =>{ alert("Callback function executed; result:"+result) ; return result;};
-
-		//Higher level function
-		function higherLevelFunctPow (base, power, callback){
-
-			if(power===0){
-				return printCallback(1) ;
-			}
-			else if(power === 1){
-				return printCallback(base);
-			}
-			var i= 0 ;
-			var result = base ;
-			while(i < power){
-				result *= base;
-				i++;
-			}
-			return printCallback(result);
-
-		}
-	
-		higherLevelFunctPow(1,4, printCallback);
-		higherLevelFunctPow(2,4, printCallback);
-	
-	
-		//SCOPES (ALCANCES)
-	
-		//This function should create a vector of n elements generated randomly, which should be in the range [min,max]
-		var printSthAndCreateVectorNRandom = (msg, min, max, n) => { 
-				let i; //Local variable within this block (the function)
-				for( i= 0; i<n ; i++){
-					var vect = [] ;
-					max = Math.floor(max);
-					min = Math.ceil(min);
-					let randInRange = Math.random() * (max-min +1) + min;
-					vect.push(randInRange);
-				}
-				console.log("%c MSG: "+ msg, procEventColor, vect);
-				
-			return vect;
-		};
-		
-		if( printSthAndCreateVectorNRandom("MESSAGE",0,0,10) != undefined ){
-			console.log("var was accessible outside the for block!");
-		}
-	
-	
-	
-	function findSolution2Path( targetNumber){
-		
-			function find (startAt,opHistory){
-				if(startAt===targetNumber){
-					return opHistory;
-				}
-				else if(startAt>targetNumber){
-					return null;
-				}
-				else{
-					return find(startAt+5, '(${opHistory}+5)') || find(startAt*3, '(${opHistory}*3)');
-				}
-			}
-
-		find(1,"1");
-		
-	}
-	
-	
-	console.log(findSolution2Path(13));	
-	
-	
-	
-	
-	
-}
-
-
-
-/*NAMED FUNCTIONS*/
 
 
 /*
+* randomizeTestData(lEventArray)
+* @params:
+* lEventArray: array de eventos de prueba de los cuales algunos no incluyen por defecto atributos temporales.
+* @return undefined
+*/
+
+function randomizeTestData(lEventArray){
+	
+	let max = 2, min = 0;
+	
+	//console.groupCollapsed("%c CALL randomizeTestData()--> Events:","background-color:black; color:white;");
+	
+	for(ev in lEventArray){
+		//console.log(`Ev[${ev}]: ${lEventArray[ev].TYPE}`);
+		
+		let randType = Math.random()* (max-min+1) + min;
+		//Randomize assignment of type of event
+		switch (randType){
+			case 0 : lEventArray[ev].TYPE = "procedural";
+			 	break;
+			case 1: lEventArray[ev].TYPE = "background procedural";
+				break;
+			case 2: lEventArray[ev].TYPE = "facts under judgement";
+				break;
+		}
+		let randRelevance = (Math.random()* ((max+1)-min+2)) + min;
+		lEventArray[ev].RELEVANCE = Math.round(randRelevance);
+		
+		let countWhenAttr = 0;
+		if(lEventArray[ev]["ATTRIBUTES"] == undefined){ continue; }
+		//console.group("Attributes:");
+		for(attr in lEventArray[ev]["ATTRIBUTES"]){
+			
+			if(lEventArray[ev]["ATTRIBUTES"][attr].INFO == "when"){
+				countWhenAttr++;
+			}
+			//console.log(`Ev[${ev}][ATTRIBUTES][${attr}]:`,lEventArray[ev]["ATTRIBUTES"][attr]);
+		}
+		//console.groupEnd();
+		
+		if(countWhenAttr==0){
+			lEventArray[ev]["ATTRIBUTES"][0].INFO = "when";
+				lEventArray[ev]["ATTRIBUTES"][0].TEXT = (new Date()).getTime().toString();
+		}
+	
+	}
+	
+	//console.groupEnd()
+	
+}
+
+
+
+
+/* 
 * [ computeHTMLElemDimensions(domElem)
 * Computes the height and with of a given DOM node passed as argument;
 * If it is not able to do so, returns the dimensions of the whole window.
@@ -1119,7 +1067,7 @@ function computeHTMLElemDimensions(domElem) {
 
 
 
-/*
+/* [TESTED]
 * [ createSVGTag(tagType, jsonTagAttributes) ]
 * Crea un nodo SVG del tipo que se indica a través del tagType (e.g. "g") y cuyos atributos vienen dados por un objeto pasado 
 * como argumento
@@ -1138,66 +1086,131 @@ function createSVGTag(tagType, jsonTagAttributes){
 	//Por cada atributo del objeto pasado, obtenemos el nombre y asignamos el valor de cada atributo
 	// E.g. {"x":100, "y":200} --> newSVG_node.setAttribute("x",100); newSVG_node.setAttribute("x",200); 
 	for( let attr in jsonTagAttributes){
-		console.log(`attr: ${attr}`);
-		console.log(`jsonTagAttributes[${attr}]: ${jsonTagAttributes[attr]}`);
+		//console.log(`attr: ${attr}`);
+		//console.log(`jsonTagAttributes[${attr}]: ${jsonTagAttributes[attr]}`);
 		newSVG_node.setAttributeNS(null,attr, jsonTagAttributes[attr]);
 	}
 	return newSVG_node;
 }
 
 
-
-
-
-
-
-
-
-function randomizeTestData(lEventArray){
+/* [TESTED]
+* [ annotateInDOMinnerHTML ]
+* @params:
+* text: texto a ser buscado en dentro del DOMELem proporcionado
+* id: identificador para darle al elemento <span> que rodeará el texto como parámetro.
+* label: texto a introducir seguidamente del texto resaltado.
+* DOMElem: elemento del DOM dentro del cual se desea buscar la coincidencia exacta con de texto
+* className: nombreDe la clase de css a utilizar para el estilo del resaltado.
+* @ return elemento <span> que contiene la anotación.
+*/
+function annotateInDOMinnerHTML(text, id, label, DOMElem = document.querySelector("html"), className="highlighter_def"){
 	
-	let max = 2, min = 0;
-	
-	console.groupCollapsed("%c CALL randomizeTestData()--> Events:","background-color:black; color:white;");
-	
-	for(ev in lEventArray){
-		console.log(`Ev[${ev}]: ${lEventArray[ev].TYPE}`);
-		
-		let randType = Math.random()* (max-min+1) + min;
-		//Randomize assignment of type of event
-		switch (randType){
-			case 0 : lEventArray[ev].TYPE = "procedural";
-			 	break;
-			case 1: lEventArray[ev].TYPE = "background procedural";
-				break;
-			case 2: lEventArray[ev].TYPE = "facts under judgement";
-				break;
-		}
-		
-		let countWhenAttr = 0;
-		if(lEventArray[ev]["ATTRIBUTES"] == undefined){ continue; }
-		console.group("Attributes:");
-		for(attr in lEventArray[ev]["ATTRIBUTES"]){
-			
-			if(lEventArray[ev]["ATTRIBUTES"][attr].INFO == "when"){
-				countWhenAttr++;
-			}
-			console.log(`Ev[${ev}][ATTRIBUTES][${attr}]:`,lEventArray[ev]["ATTRIBUTES"][attr]);
-		}
-		console.groupEnd();
-		
-		if(countWhenAttr==0){
-			lEventArray[ev]["ATTRIBUTES"][0].INFO = "when";
-				lEventArray[ev]["ATTRIBUTES"][0].TEXT = (new Date()).getTime().toString();
-		}
-	
-	}
-	
-	console.groupEnd()
-	
+	if(typeof(text)!== typeof("")){return null;}	
+	//Obtain the position within the inner HTML of the DOMelem within which we need to include a new tag, so that highlighting can be performed
+	let first_ocurrence = DOMElem.innerHTML.indexOf(text);
+	let last_ocurrence = first_ocurrence + text.length;
+
+	let stringTag = `<span class='${className}' id='${id}'>`; //Elemento que será usado para dar estilo al subrayado
+	let typeOfEventTag = `<span class="matchingEvTag">${label}</span>`;
+
+	//Replace innerHTML content to annotate
+	DOMElem.innerHTML = DOMElem.innerHTML.slice(0,first_ocurrence).concat(stringTag).concat(DOMElem.innerHTML.slice(first_ocurrence,last_ocurrence)).concat(typeOfEventTag).concat("</span>").concat(DOMElem.innerHTML.slice(last_ocurrence));
+
+	return DOMElem.querySelector(`#${id}`);
+
 }
 
 
+function setStyle(cssRules, aSelector, aStyle){
+    for(var i = 0; i < cssRules.length; i++) {
+        if(cssRules[i].selectorText && cssRules[i].selectorText.toLowerCase() == aSelector.toLowerCase()) {
+            cssRules[i].style.cssText = aStyle;
+            return true;
+        }
+    }
+    return false;
+}
 
+function createCSSSelector(selector, style) {
+    var doc = document;
+    var allSS = doc.styleSheets;
+    if(!allSS) return;
+
+    var headElts = doc.getElementsByTagName("head");
+    if(!headElts.length) return;
+
+    var styleSheet, media, iSS = allSS.length; // scope is global in a function
+    /* 1. search for media == "screen" */
+    while(iSS){ --iSS;
+        if(allSS[iSS].disabled) continue; /* dont take into account the disabled stylesheets */
+        media = allSS[iSS].media;
+        if(typeof media == "object")
+            media = media.mediaText;
+        if(media == "" || media=='all' || media.indexOf("screen") != -1){
+            styleSheet = allSS[iSS];
+            iSS = -1;   // indication that media=="screen" was found (if not, then iSS==0)
+            break;
+        }
+    }
+
+    /* 2. if not found, create one */
+    if(iSS != -1) {
+        var styleSheetElement = doc.createElement("style");
+        styleSheetElement.type = "text/css";
+        headElts[0].appsvgendChild(styleSheetElement);
+        styleSheet = doc.styleSheets[allSS.length]; /* take the new stylesheet to add the selector and the style */
+    }
+
+    /* 3. add the selector and style */
+    switch (typeof styleSheet.media) {
+    case "string":
+        if(!setStyle(styleSheet.rules, selector, style));
+            styleSheet.addRule(selector, style);
+        break;
+    case "object":
+        if(!setStyle(styleSheet.cssRules, selector, style));
+            styleSheet.insertRule(selector + "{" + style + "}", styleSheet.cssRules.length);
+        break;
+    }
+}
+
+
+/*function handleMouseMove(event,) {
+      var svgCircle, eventDoc, doc, body, pageX, pageY;
+      
+      event = event || window.event; // IE-ism
+      
+      // If pageX/Y aren't available and clientX/Y
+      // are, calculate pageX/Y - logic taken from jQuery
+			// Calculate pageX/Y if missing and clientX/Y available
+      if (event.pageX == null && event.clientX != null) {
+        eventDoc = (event.target && event.target.ownerDocument) || document;
+        doc = eventDoc.documentElement;
+        body = eventDoc.body;
+
+        event.pageX = event.clientX +
+          (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+          (doc && doc.clientLeft || body && body.clientLeft || 0);
+        event.pageY = event.clientY +
+          (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+          (doc && doc.clientTop  || body && body.clientTop  || 0 );
+      }
+
+	  let svg;
+	  if(! (svg = document.querySelector("svg")) ){ return;}
+      // Add a dot to follow the cursor
+      svgCircle = createSVGTag("circle", {cx:event.pageX,cy:event.pageY, r:"2",fill:"red"});
+      dot.style.left = event.pageX + "px";
+      dot.style.top = event.pageY + "px";
+      svg.appendChild(dot);
+    }
+  })();
+
+*/
+
+
+/* PENDING */
 
 /* LEGEND CODE @REVISIT 
 function drawTimeline(eventList,svgElem){
@@ -1260,3 +1273,4 @@ function drawTimeline(eventList,svgElem){
 	
 }
 */
+

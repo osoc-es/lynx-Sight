@@ -8,17 +8,21 @@ $graphTitles:#1B3D50;
 
 //Timeline Color Codes
 $lineStroke: #FFFFFF ;//CBD9EF
-$svgBackground:#999999;
+$svgBackground:#CBCBCB;
 
 //Main nodes colors by typology
 $proceduralEvent:#4d6ba7;
 $backgroundProceduralEvent:#9a9457;
 $underJudgementEvent:#82b69b;
 
-
-
 $heightTopContainer:50px;
 $maxHeightTopContainer:600px;
+
+
+.showBelowFixedTop{
+	margin-top:$maxHeightTopContainer;
+}
+
 
 
 %flexRow{
@@ -57,7 +61,7 @@ $maxHeightTopContainer:600px;
 	#flex2ColHeader{
 		@extend %flexCol;
 		flex-basis: 100%;
-		background-color:firebrick; 
+		//background-color:firebrick; 
 	}
 	
 	/* Navigation menu */
@@ -97,21 +101,34 @@ $maxHeightTopContainer:600px;
 		flex-basis: 100%;
 		flex-grow: 0;
 		flex-shrink: 0;
-		background-color: darkorange;
+		flex-wrap: wrap;
+		//background-color: darkorange;
+		justify-content: center;
 		svg{
 			width: 100%;
 			height:300px;//Usar este valor para mover contenido de la página
-			background-color: #009045;
+			//background-color: #009045;
+		
+		}
+		div{
+			flex-basis: 100%;
+			text-align: center;
+			background-color: #9a9457;
+			
 		}
 		
 	}
 	
 }
 
-
 //Set to have main content of the page below nav header
 #mainContent{
 	padding-top: $heightTopContainer;
+	line-height: 1.8;
+	/*display:flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 0% 5%;*/
 }
 
 
@@ -127,15 +144,23 @@ $maxHeightTopContainer:600px;
 	text-anchor:middle;
 	text-weight:bold;
 	fill: white;
-	font-size: 5px;
+	//font-size: 5px;
 	text-decoration: underline;
 }
 
 .outerNodeTextDesc{
 	text-anchor:middle;
 		fill: #FFFFFF;
-	font-size: 4px;
+	//font-size: 4px;
 }
+
+
+
+[class^="circle"]:hover {
+  cursor: pointer;
+}
+
+
 
 
 
@@ -158,18 +183,37 @@ $maxHeightTopContainer:600px;
   fill: $underJudgementEvent;
 }
 
+
+
 .outerNodeGraph{
 	fill:$graphInfo;
 	stroke:white;
-	r:20 ;
+	//r:20 ;
 	-webkit-transition: r 2s; /* For Safari 3.1 to 6.0 */
   	transition: r 2s;
+	
 }
 
+/*OUTER NODES ON HOVER */
 .outerNodeGraph:hover{
 	fill:#962f3e;
 	stroke:white;
-	r:40;
+	//r:15;
+	
+	/*.outerNodeTextLabel{
+		text-anchor:middle;
+		text-weight:bold;
+		fill: white;
+		font-size: 5px;
+		text-decoration: underline;
+	}
+
+	.outerNodeTextDesc{
+		text-anchor:middle;
+		fill: #FFFFFF;
+		font-size: 6px;
+	}*/
+	
 	
 }
 /*.zoomOuterNode{
@@ -224,9 +268,22 @@ $maxHeightTopContainer:600px;
 
 
 .highlighter_def{
+	padding: 6px;
+	
+	border-radius: 3px;
 	background-color: #009AA7;
 	color:#FFFFFF;
 	
+}
+
+
+.matchingEvTag{
+	margin-left: 3px;
+	padding:3px;
+	border-radius: 2px;
+	background-color: #FFF;
+	color:black;
+	font-weight:bold;
 }
 
 
@@ -275,7 +332,9 @@ body{
 
 
 
-
+.display-hide{
+	display:none;
+}
 
 
 
