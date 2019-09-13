@@ -1,46 +1,84 @@
 /* TIMELINE CIRCLE COLORS*/
-/*Top div style*/
+.showBelowFixedTop {
+  margin-top: 600px;
+}
+
+#topContentContainer #svg, #topContentContainer nav, #topContentContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+#topContentContainer #flex2ColHeader {
+  display: flex;
+  flex-direction: column;
+}
+
+/*Top div style [WORKS]*/
 #topContentContainer {
-  height: 50px;
+  background-color: #094f92;
+  max-height: 600px;
+  min-height: 50px;
   width: 100%;
   margin: 0;
+  padding: 5px 0px;
+  align-items: center;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
+  /* Navigation menu */
+  /*SVG DIV*/
 }
-
-/*nav icons*/
-nav {
-  display: flex;
-  flex-direction: row;
-  background-color: #094f92;
-  height: 100%;
+#topContentContainer #flex2ColHeader {
+  flex-basis: 100%;
 }
-nav a {
-  flex: 0 0 5%;
+#topContentContainer nav {
+  flex-basis: 100%;
 }
-nav a .icon_h {
-  vertical-align: middle;
-  overflow: hidden;
+#topContentContainer nav a {
+  font-size: 9px;
+  flex: 1 1 5%;
+  margin: 10px;
 }
-nav a .icon_h img {
+#topContentContainer nav a img {
+  width: 20px;
+  height: 20px;
+}
+#topContentContainer nav #lynxLogoTop {
+  flex: 0 0 10%;
   max-height: 50px;
-  margin-right: 5px;
 }
-nav a #lynxLogoTop {
-  flex: 1 0 15%;
+#topContentContainer nav #lynxLogoTop img {
+  margin: 3px;
+  width: 90%;
+  height: 90%;
+  max-width: 100%;
+  max-height: 100%;
 }
-
-#svg {
-  display: flex;
+#topContentContainer #svg {
+  flex-basis: 100%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-#svg svg {
-  flex: 0 0 100%;
+#topContentContainer #svg svg {
+  width: 100%;
+  height: 300px;
+}
+#topContentContainer #svg div {
+  flex-basis: 100%;
+  text-align: center;
+  background-color: #9a9457;
 }
 
 #mainContent {
   padding-top: 50px;
+  line-height: 1.8;
+  /*display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0% 5%;*/
 }
 
 .mainNodeText {
@@ -54,14 +92,16 @@ nav a #lynxLogoTop {
   text-anchor: middle;
   text-weight: bold;
   fill: white;
-  font-size: 5px;
   text-decoration: underline;
 }
 
 .outerNodeTextDesc {
   text-anchor: middle;
   fill: #FFFFFF;
-  font-size: 4px;
+}
+
+[class^=circle]:hover {
+  cursor: pointer;
 }
 
 .centerLineColor {
@@ -83,16 +123,28 @@ nav a #lynxLogoTop {
 .outerNodeGraph {
   fill: #9DC4D2;
   stroke: white;
-  r: 20;
   -webkit-transition: r 2s;
   /* For Safari 3.1 to 6.0 */
   transition: r 2s;
 }
 
+/*OUTER NODES ON HOVER */
 .outerNodeGraph:hover {
   fill: #962f3e;
   stroke: white;
-  r: 40;
+  /*.outerNodeTextLabel{
+  	text-anchor:middle;
+  	text-weight:bold;
+  	fill: white;
+  	font-size: 5px;
+  	text-decoration: underline;
+  }
+
+  .outerNodeTextDesc{
+  	text-anchor:middle;
+  	fill: #FFFFFF;
+  	font-size: 6px;
+  }*/
 }
 
 /*.zoomOuterNode{
@@ -113,7 +165,7 @@ nav a #lynxLogoTop {
 }
 
 .timelineBackground {
-  background-color: #999999;
+  background-color: #CBCBCB;
 }
 
 .innerMarkerCircle {
@@ -126,8 +178,19 @@ nav a #lynxLogoTop {
 }
 
 .highlighter_def {
+  padding: 6px;
+  border-radius: 3px;
   background-color: #009AA7;
   color: #FFFFFF;
+}
+
+.matchingEvTag {
+  margin-left: 3px;
+  padding: 3px;
+  border-radius: 2px;
+  background-color: #FFF;
+  color: black;
+  font-weight: bold;
 }
 
 body {
@@ -159,6 +222,10 @@ body {
   top: 0;
   left: 0;
   clear: both;
+}
+
+.display-hide {
+  display: none;
 }
 
 .hide {

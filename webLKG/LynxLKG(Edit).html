@@ -257,29 +257,30 @@
 	<!-- https://stackoverflow.com/questions/17054381/placing-4-html-elements-in-every-corner-of-a-div-->
 	<div id="topContentContainer" class="rounded" >
 		<!-- Button holder (Includes all the buttons) -->
+		<div id="flex2ColHeader"> 
 			<nav>
 				<!-- Lynx logo (may change redirection to Home page) -->
-				<a id="lynxLogoTop" href="#" target="_self" >
-					<span class="icon_h">
+				<div id="lynxLogoTop"> 
+					<a href="#" target="_self" >
 						<img  src="img/logoLynx.png" alt="logoLynx" />
-					</span>
-				</a>
+					</a>
+				</div>
 
 				
-				 <a href="http://lkg.lynx-project.eu/" class="btn btn-primary btn-sm" role="button" >
+				 <a href="http://lkg.lynx-project.eu/" class="btn btn-primary btn-sm buttonsCustomColor " role="button" >
 					<span class="icon_h">
 						<img src="img/Home.png" alt="HomeIcon" /> Home
 					</span>
 				</a>
 
-				 <a onclick="testdelete();" class="btn btn-primary btn-sm" role="button" >
+				 <a onclick="testdelete();" class="btn btn-primary btn-sm buttonsCustomColor" role="button" >
 					 <span class="icon_h">
 					 	<img alt="DeleteIcon" src="img/Delete.png"/> Delete
 					 </span>
 				</a> 
 				
 				<!-- "New" icon -->
-				<a href="http://lkg.lynx-project.eu/new.html" class="btn btn-primary btn-sm" role="button">
+				<a href="http://lkg.lynx-project.eu/new.html" class="btn btn-primary btn-sm buttonsCustomColor" role="button">
 					<span class="ladda-label icon_h" > 
 						<img src="img/New.png" alt="NewIcon" /> New
 					</span>
@@ -287,50 +288,55 @@
 
 				<!-- Timeline functionality button -->
 
-				<a id="btntimex" class="btn btn-primary btn-sm ladda-button"  data-style="zoom-in" role="button" >
+				<a id="btntimex" class="btn btn-primary btn-sm ladda-button buttonsCustomColor"  data-style="zoom-in" role="button" >
 					<!--Prev functionality onclick="testtimex();" -->
-					<span class="ladda-label icon_h" onclick="testtimex();" > 
+					<span class="ladda-label icon_h" > 
 						<img src="img/Time.png" alt="timeIcon" />  Time 
 					</span>
 				</a>
 
 				<!-- Terminology functionality button -->
 
-				<a class="btn btn-primary btn-sm ladda-button" onclick="testannotate();" data-style="zoom-in" role="button" >
+				<a class="btn btn-primary btn-sm ladda-button buttonsCustomColor" onclick="testannotate();" data-style="zoom-in" role="button" >
 					<span class="ladda-label icon_h"> 
 						<img src="img/Terminologia.png" alt="termIcon" /> Annotate 
 					</span>
 				</a>
 
-				<a id="btnrecommend" onclick="testrecommend();" class="btn btn-primary btn-sm ladda-button" data-style="zoom-in" role="button" >
+				<a id="btnrecommend" onclick="testrecommend();" class="btn btn-primary btn-sm ladda-button buttonsCustomColor" data-style="zoom-in" role="button" >
 					<span class="ladda-label icon_h">
 						<img src="img/Recommend.png" alt="recommendIcon"/>Recommend 
 					</span>
 				</a>
 
-				<a id="btntranslate" onclick="testtranslate();" class="btn btn-primary btn-sm ladda-button" data-style="zoom-in" role="button">
+				<a id="btntranslate" onclick="testtranslate();" class="btn btn-primary btn-sm ladda-button buttonsCustomColor" data-style="zoom-in" role="button">
 					<span class="ladda-label icon_h">
 						<img src="img/Translate.png" alt="translateIcon"/>Translate
 					</span> 
 				</a>
 
-				<a href="http://lkg.lynx-project.eu/status" class="btn btn-primary btn-sm" role="button" >
+				<a href="http://lkg.lynx-project.eu/status" class="btn btn-primary btn-sm buttonsCustomColor" role="button" >
 					<span class="icon_h" >
 						<img src="img/Admin.png" alt="adminIcon"/> Admin
 					</span>
 				</a>
 
-				<a onclick="testlogout();" class="btn btn-primary btn-sm" role="button" >
+				<a onclick="testlogout();" class="btn btn-primary btn-sm buttonsCustomColor" role="button" >
 					<span class="icon_h" >
 						<img src="img/LogIn.png" alt="logInIcon">Log out
 					</span>
 				</a>
 			</nav>
 
-		<div id="svg" width="100%" class="hide" >
-			<svg id="svgCanvas"  width="100%" height="300px" class="timelineBackground" >
-
-			</svg>
+			<div id="svg" class="hide" >
+				<svg id="svgCanvas" class="timelineBackground" >
+					
+				</svg>
+				<div id="closeTimeline">
+				 	Close Timeline
+				</div>
+			</div>
+			
 		</div>
 	</div>
 
@@ -351,6 +357,9 @@
 			   </div>
 			-->
 		
+	
+
+	
 	<div id="mainContent">
 			<div class="panel panel-info">
 				<div class="panel-heading">
